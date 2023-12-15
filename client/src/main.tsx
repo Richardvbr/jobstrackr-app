@@ -1,10 +1,11 @@
-// Vendor
+// Vendors
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Routes
 import * as Routes from "@/routes";
+import { Providers } from "@/providers";
 
 const router = createBrowserRouter([
   {
@@ -41,10 +42,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <React.StrictMode>
+    <Providers>
       <RouterProvider router={router} />
-    </React.StrictMode>
+    </Providers>
   </React.StrictMode>
 );

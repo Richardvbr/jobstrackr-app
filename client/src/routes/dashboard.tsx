@@ -1,5 +1,17 @@
+import { Header } from "@/components";
+import { trpc } from "@/lib/trpc";
+
 const DashboardPage = () => {
-  return <h1>Hello </h1>;
+  const { data } = trpc.user.getUsers.useQuery();
+
+  console.log(data);
+
+  return (
+    <>
+      <Header />
+      <h1>{`Hello, user list: ${JSON.stringify(data)}`} </h1>
+    </>
+  );
 };
 
 export default DashboardPage;

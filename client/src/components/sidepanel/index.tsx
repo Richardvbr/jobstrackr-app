@@ -1,7 +1,7 @@
 import cn from "clsx";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { useAppContext } from "@/contexts/AppContext";
 import supabaseBrowserClient from "@/lib/supabase";
@@ -51,7 +51,7 @@ const SidePanel = ({ data }: SidePanelProps) => {
     <aside className={sidePanelStyles}>
       <div className={styles.container}>
         <div className={styles.logoContainer}>
-          <Link href='/dashboard' onClick={() => setSidePanelOpen(false)}>
+          <Link to='/dashboard' onClick={() => setSidePanelOpen(false)}>
             <img
               src='/assets/images/logo_cropped_transparent.svg'
               alt='JobsTrackr logo'

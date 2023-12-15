@@ -1,14 +1,20 @@
+// Vendors
 import express, { Request, Response, type Express } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import * as trpcExpress from "@trpc/server/adapters/express";
+
+// trpc
+import { appRouter } from "@/trpc/router";
+import { createContext } from "@/trpc/context";
 
 dotenv.config();
 
 const app: Express = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT ?? 4000;
 
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:3000",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
@@ -16,10 +22,16 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(
+  "/trpc",
+  trpcExpress.createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  })
+);
 
-// routes
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("Server running, hello World!");
 });
 
 app.listen(PORT, () => {
