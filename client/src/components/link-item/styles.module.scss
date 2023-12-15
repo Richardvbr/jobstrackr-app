@@ -1,0 +1,55 @@
+.linkItem {
+  list-style: none;
+
+  &Active {
+    background: $gray-100;
+    border-radius: 8px;
+  }
+
+  a,
+  > div {
+    text-decoration: none;
+    color: $secondary;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all;
+    transition-duration: 200ms;
+
+    &:hover {
+      cursor: pointer;
+      background: $gray-100;
+    }
+
+    .icon,
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    p {
+      @include font-semibold;
+    }
+  }
+
+  [data-theme="dark"] & {
+    a,
+    > div {
+      color: $gray-300;
+
+      &:hover {
+        cursor: pointer;
+        background: $gray-700;
+        color: $gray-100;
+      }
+    }
+
+    &Active a,
+    &Active div {
+      background: $gray-700;
+      color: $gray-100;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+.table {
+  position: relative;
+
+  table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+    position: relative;
+
+    thead {
+      border: none;
+      tr {
+        border: none;
+      }
+
+      th {
+        @include font-bold;
+        padding: 15px 5px;
+        font-size: 14px;
+        line-height: 16px;
+        cursor: pointer;
+
+        div {
+          display: flex;
+          align-items: center;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          width: 30px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $gray-200;
+        border-top: 1px solid $gray-200;
+      }
+
+      td {
+        @include font-medium;
+        line-height: 20px;
+        padding: 10px 5px;
+        font-size: 14px;
+
+        span,
+        p {
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+
+      .activeCell {
+        transition: all 0.2s ease;
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    @media screen and (min-width: $breakpoint-m) {
+      thead {
+        th {
+          padding: 20px 15px;
+        }
+      }
+      tbody {
+        td {
+          padding: 20px 15px;
+        }
+      }
+    }
+  }
+}
+
+.interactive {
+  table {
+    cursor: pointer;
+
+    tbody {
+      tr {
+        &:hover,
+        .activeRow {
+          background-color: $gray-100;
+        }
+      }
+      td {
+        &:hover,
+        .activeRow {
+          background-color: $gray-100;
+        }
+      }
+    }
+  }
+}
+
+.stickyHeader {
+  table {
+    height: 100%;
+
+    thead {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      background-color: $white;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $gray-200;
+      }
+    }
+  }
+}

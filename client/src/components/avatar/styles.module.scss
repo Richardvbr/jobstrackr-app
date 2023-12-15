@@ -1,0 +1,50 @@
+.container {
+  @include font-semibold;
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  position: relative;
+  width: 30px;
+  height: 30px;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.placeholder {
+  border-radius: 50%;
+  background: $gray-200;
+  display: grid;
+  place-items: center;
+  color: $black;
+}
+
+.s {
+  width: 28px;
+  height: 28px;
+
+  span {
+    font-size: 16px;
+  }
+}
+
+.m {
+  width: 50px;
+  height: 50px;
+
+  span {
+    font-size: 22px;
+  }
+}
+
+.l {
+  width: 85px;
+  height: 85px;
+
+  span {
+    font-size: 36px;
+  }
+}

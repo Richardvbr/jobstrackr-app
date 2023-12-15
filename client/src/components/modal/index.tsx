@@ -1,0 +1,90 @@
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+
+import useClickOutside from "@/hooks/useClickOutside";
+import styles from "./styles.module.scss";
+import { Close } from "@/components/icons";
+
+type ModalProps = {
+  children: React.ReactNode;
+  opened: boolean;
+  handleClose: () => void;
+  modalTitle: string;
+  [key: string]: any;
+};
+
+const Modal = ({
+  children,
+  opened = false,
+  handleClose,
+  modalTitle,
+  ...props
+}: ModalProps) => {
+  const modalRef = useRef(null);
+
+  // Close when clicked outside modal
+  useClickOutside(modalRef, () => opened && handleClose());
+
+  // Disable scroll, close when ESC is pressed
+  useEffect(() => {
+    if (opened) {
+      document.body.className += styles.hideOverflow;
+    }
+
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (opened && event.code === "Escape") {
+        handleClose();
+      }
+    }
+
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
+  }, [opened]);
+
+  const animVariants: Variants = {
+    open: { opacity: 1 },
+    collapsed: { opacity: 0 },
+  };
+
+  // Next prerenders components on the server where "document.body" is not available thus throwing an error, hence the browser window check
+  if (typeof window === "object") {
+    return createPortal(
+      <AnimatePresence>
+        {opened && (
+          <motion.div
+            initial='collapsed'
+            animate='open'
+            exit='collapsed'
+            variants={animVariants}
+            transition={{ duration: 0.2 }}
+            className={styles.backdrop}
+          >
+            <motion.dialog
+              initial='collapsed'
+              animate='open'
+              exit='collapsed'
+              variants={animVariants}
+              transition={{ duration: 0.2 }}
+              {...props}
+              open={opened}
+              className={styles.modal}
+              ref={modalRef}
+            >
+              <header>
+                <h1>{modalTitle}</h1>
+                <div className={styles.close} onClick={handleClose}>
+                  <Close />
+                </div>
+              </header>
+              {children}
+            </motion.dialog>
+          </motion.div>
+        )}
+      </AnimatePresence>,
+      document.body
+    );
+  }
+};
+
+export default Modal;

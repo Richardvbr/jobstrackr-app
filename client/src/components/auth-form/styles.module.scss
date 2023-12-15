@@ -1,0 +1,105 @@
+.form {
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid $gray-300;
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  box-shadow: $shadow-m;
+
+  input[type="email"],
+  input[type="password"] {
+    margin-bottom: 10px;
+  }
+
+  form button {
+    margin-top: 10px;
+  }
+}
+
+.header {
+  margin-bottom: 30px;
+
+  img {
+    max-width: 150px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $secondary;
+  }
+}
+
+.providers {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: $gray-500;
+  margin: 10px 0;
+  font-size: 12px;
+
+  &:before,
+  &:after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid $gray-300;
+  }
+
+  &:not(:empty):before {
+    margin-right: 1rem;
+  }
+
+  &:not(:empty):after {
+    margin-left: 1rem;
+  }
+}
+
+.error {
+  color: $accent-red;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  max-width: 30ch;
+}
+
+.terms {
+  color: $secondary;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 2rem;
+  line-height: 1.25rem;
+
+  a {
+    @include font-semibold;
+    color: $secondary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.guestLogin {
+  margin: 30px auto 0;
+  font-size: 14px;
+  color: $gray-500;
+  border: none;
+  background: none;
+  &:hover {
+    cursor: pointer;
+    color: $secondary;
+  }
+}
+
+@media screen and (min-width: $breakpoint-s) {
+  .form {
+    padding: 40px;
+    width: auto;
+  }
+}

@@ -1,0 +1,37 @@
+.card {
+  padding: 25px 20px;
+  border-radius: 20px;
+  background-color: white;
+  overflow-x: auto;
+  z-index: 3;
+  max-width: max-content;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 7px 0;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: $gray-500;
+    margin: 0 0 20px 0;
+  }
+}
+
+.shadow {
+  box-shadow: $shadow-s;
+}
+
+@media screen and (min-width: $breakpoint-m) {
+  .card {
+    padding: 30px;
+  }
+}
+
+[data-theme="dark"] {
+  .card {
+    background-color: $gray-800;
+    color: $gray-300;
+  }
+}

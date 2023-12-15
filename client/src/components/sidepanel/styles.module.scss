@@ -1,0 +1,142 @@
+.hideOverflow {
+  overflow: hidden;
+}
+
+.sidepanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background: $white;
+  width: 100%;
+  transform: translateX(-100%);
+  transition: all 0.3s;
+
+  &Open {
+    transform: translateX(0);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 12px;
+
+  a {
+    order: 2;
+    margin: 0;
+
+    img {
+      max-width: 110px;
+    }
+  }
+}
+
+.menuTrigger {
+  order: 1;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.newApplication {
+  box-shadow: inset 0 10px 10px -10px rgba($color: $gray-300, $alpha: 1);
+  padding: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  padding: 20px 10px;
+  gap: 5px;
+}
+
+.footer {
+  @include font-semibold;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: auto;
+  width: 100%;
+  border-top: 2px solid $gray-200;
+  padding: 10px;
+
+  a {
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-left: -3px;
+    align-items: center;
+    transition: all;
+    transition-duration: 200ms;
+
+    &:hover {
+      background: $gray-100;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-m) {
+  .sidepanel {
+    height: 100vh;
+    width: 275px;
+    transform: translateX(0);
+    transition: unset;
+  }
+
+  .logoContainer {
+    padding: 28px 40px 24px 40px;
+    border-bottom: 2px solid $gray-200;
+    box-shadow: unset;
+
+    a {
+      margin: 0 auto;
+
+      img {
+        max-width: 140px;
+        min-height: 50px;
+      }
+    }
+  }
+
+  .newApplication {
+    box-shadow: none;
+    padding: 15px 17px 25px;
+  }
+
+  .menuTrigger {
+    display: none;
+  }
+
+  .list {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .footer {
+    gap: 10px;
+    padding: 20px;
+
+    a {
+      padding: 12px;
+      margin-left: -3px;
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .sidepanel {
+    background: $gray-800;
+  }
+}

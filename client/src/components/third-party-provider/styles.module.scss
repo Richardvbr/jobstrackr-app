@@ -1,0 +1,36 @@
+.thirdPartyProvider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 50%;
+  border-radius: 5px;
+  padding: 13px 25px;
+  margin-bottom: 10px;
+  transition: 0.2s ease;
+  background-color: $gray-100;
+  width: 100%;
+  color: $white;
+  box-shadow: $shadow-s;
+  font-size: 15px;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: $shadow-m;
+  }
+}
+
+.google {
+  background: $white;
+  color: $secondary;
+}
+
+.discord {
+  background: $discord;
+}
+
+.logo {
+  position: relative;
+  flex-shrink: 0;
+  height: 20px;
+  width: 20px;
+}

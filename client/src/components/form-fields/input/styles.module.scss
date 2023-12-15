@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  input {
+    @include input-base;
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  label {
+    @include font-semibold;
+    font-size: 14px;
+  }
+}

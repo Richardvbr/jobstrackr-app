@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &Items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 15px;
+    margin: 30px auto 0;
+  }
+
+  @media screen and (min-width: $breakpoint-m) {
+    &Items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

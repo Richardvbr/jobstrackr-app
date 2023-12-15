@@ -1,0 +1,34 @@
+@mixin font-light {
+  font-weight: 300;
+  font-style: normal;
+}
+
+@mixin font-normal {
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin font-medium {
+  font-weight: 500;
+  font-style: normal;
+}
+
+@mixin font-semibold {
+  font-weight: 600;
+  font-style: normal;
+}
+
+@mixin font-bold {
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin font-extrabold {
+  font-weight: 800;
+  font-style: normal;
+}
+
+@mixin font-black {
+  font-weight: 900;
+  font-style: normal;
+}

@@ -1,0 +1,45 @@
+.status {
+  p {
+    font-weight: 600;
+    display: inline;
+    padding: 8px 16px;
+    border-radius: 25px;
+    background: $gray-200;
+    color: $gray-700;
+  }
+}
+
+// yellow
+.applied,
+.processing {
+  p {
+    background: $yellow-100;
+    color: $yellow-600;
+  }
+}
+
+// blue
+.offered {
+  p {
+    background: $blue-200;
+    color: $blue-800;
+  }
+}
+
+// green
+.accepted {
+  p {
+    background: $green-200;
+    color: $green-800;
+  }
+}
+
+// red
+.denied,
+.withdrawn,
+.ghosted {
+  p {
+    background: $red-200;
+    color: $red-800;
+  }
+}

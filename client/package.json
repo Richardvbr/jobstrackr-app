@@ -1,0 +1,51 @@
+{
+  "name": "jobstrackr-fe",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "gen-db-types": "npx supabase gen types typescript --project-id azadwvhsjwteoftabouw --schema public > src/types/supabase.ts",
+    "check-npm-updates": "npx npm-check-updates",
+    "apply-npm-updates": "npx npm-check-updates -u && npm i"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "@tanstack/react-query": "^5.14.0",
+    "@tanstack/react-table": "^8.10.7",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "framer-motion": "^10.16.16",
+    "graphql-request": "^6.1.0",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.21.0",
+    "recharts": "^2.10.3",
+    "sass": "^1.69.5",
+    "sort-by": "^1.2.0",
+    "uuid": "^9.0.1",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-tsconfig-paths": "^4.2.2"
+  }
+}

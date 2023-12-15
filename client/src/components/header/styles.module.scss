@@ -1,0 +1,25 @@
+.header {
+  padding: 15px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  img {
+    max-width: 110px;
+  }
+
+  svg {
+    width: 25px;
+    height: 25px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-m) {
+  .header {
+    display: none;
+  }
+}
