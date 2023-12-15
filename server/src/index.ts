@@ -15,6 +15,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 // routes
 app.get("/", (req: Request, res: Response) => {
