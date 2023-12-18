@@ -4,7 +4,7 @@ type RequestProps = {
   query: any;
 };
 
-export function cmsRequest({ query }: RequestProps) {
+export function cmsRequest<T>({ query }: RequestProps): Promise<T> {
   const headers = {
     authorization: `Bearer ${process.env.DATOCMS_API_KEY}`,
   };
