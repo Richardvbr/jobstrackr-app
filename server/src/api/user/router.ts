@@ -1,9 +1,8 @@
 import { z } from "zod";
 
 import { router, publicProcedure } from "@/trpc";
-
 import { users } from "./db";
-import { User } from "./types";
+import type { User } from "./types";
 
 export const userRouter = router({
   getUsers: publicProcedure.query(() => {

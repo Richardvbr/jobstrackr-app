@@ -1,12 +1,12 @@
 // Vendors
 import express, { Request, Response, type Express } from "express";
+import * as trpcExpress from "@trpc/server/adapters/express";
 import cors from "cors";
 import dotenv from "dotenv";
-import * as trpcExpress from "@trpc/server/adapters/express";
 
 // trpc
-import { appRouter } from "@/trpc/router";
-import { createContext } from "@/trpc/context";
+import { appRouter } from "./trpc/router";
+import { createContext } from "./trpc";
 
 dotenv.config();
 

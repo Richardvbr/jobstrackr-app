@@ -1,5 +1,5 @@
-import { router } from ".";
-import { userRouter } from "../api/user/router";
+import { userRouter } from "@/api/user/router";
+import { router } from "./index";
 
 export const appRouter = router({
   user: userRouter,

@@ -1,12 +1,15 @@
 {
-  "name": "server",
+  "name": "jobstrackr-server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.ts",
+  "private": true,
+  "author": "Richard van Brunschot",
+  "repository": "https://github.com/Richardvbr/jobstrackr-vite-express",
+  "main": "dist/server.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon src/server.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -16,6 +19,7 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "tsconfig-paths": "^4.2.0",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
@@ -27,5 +31,18 @@
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/server.ts",
+    "ext": "ts, js"
   }
 }

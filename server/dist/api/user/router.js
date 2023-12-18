@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRouter = void 0;
 const zod_1 = require("zod");
-const trpc_1 = require("../../trpc/trpc");
+const trpc_1 = require("@/trpc");
 const db_1 = require("./db");
 exports.userRouter = (0, trpc_1.router)({
     getUsers: trpc_1.publicProcedure.query(() => {
