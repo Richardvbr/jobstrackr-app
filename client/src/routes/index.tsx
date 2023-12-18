@@ -6,6 +6,7 @@ import ApplicationsPage from "./applications";
 import DocumentsPage from "./documents";
 import FeedbackPage from "./feedback";
 import TipsPage from "./tips";
+import PrivateRoutes from "./private-routes";
 
 export {
   DashboardPage,
@@ -16,4 +17,5 @@ export {
   DocumentsPage,
   FeedbackPage,
   TipsPage,
+  PrivateRoutes,
 };

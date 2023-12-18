@@ -9,36 +9,46 @@ import { Providers } from "@/providers";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Routes.DashboardPage />,
-  },
-  {
     path: "/sign-up",
     element: <Routes.SignUpPage />,
   },
   {
-    path: "/sin-in",
+    path: "/sign-in",
     element: <Routes.SignInPage />,
   },
   {
-    path: "/applications",
-    element: <Routes.ApplicationsPage />,
-  },
-  {
-    path: "/documents",
-    element: <Routes.DocumentsPage />,
-  },
-  {
-    path: "/tips",
-    element: <Routes.TipsPage />,
-  },
-  {
-    path: "/feedback",
-    element: <Routes.FeedbackPage />,
-  },
-  {
-    path: "/account",
-    element: <Routes.AccountPage />,
+    path: "/",
+    element: <Routes.PrivateRoutes />,
+    children: [
+      {
+        path: "/",
+        element: <Routes.DashboardPage />,
+      },
+      {
+        path: "/dashboard",
+        element: <Routes.DashboardPage />,
+      },
+      {
+        path: "/applications",
+        element: <Routes.ApplicationsPage />,
+      },
+      {
+        path: "/documents",
+        element: <Routes.DocumentsPage />,
+      },
+      {
+        path: "/tips",
+        element: <Routes.TipsPage />,
+      },
+      {
+        path: "/feedback",
+        element: <Routes.FeedbackPage />,
+      },
+      {
+        path: "/account",
+        element: <Routes.AccountPage />,
+      },
+    ],
   },
 ]);
 

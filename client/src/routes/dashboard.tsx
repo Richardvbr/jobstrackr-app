@@ -8,7 +8,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <h1>{`Hello, user list: ${JSON.stringify(data)}`} </h1>
     </>
   );
