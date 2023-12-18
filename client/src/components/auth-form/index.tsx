@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { useRouter } from "next/navigation";
 
-import supabaseBrowserClient from "@/lib/supabase/client";
 import { ThirdPartyProvider, Button, Input } from "@/components";
+import supabase from "@/lib/supabase";
 import styles from "./styles.module.scss";
 
 type AuthFormProps = {
@@ -21,12 +20,10 @@ type AuthFormInput = {
 
 // Refactor to use react-hook-form
 const AuthForm = ({ type }: AuthFormProps) => {
-  const router = useRouter();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const formMethods = useForm<AuthFormInput>();
 
-  const supabase = supabaseBrowserClient();
   const { handleSubmit, reset, register } = formMethods;
 
   const isLoginForm = type === "sign-in";
@@ -52,7 +49,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
     } finally {
       reset();
       setLoading(false);
-      router.push(window.location.origin + "/auth/callback");
     }
   };
 
@@ -94,7 +90,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
       });
       reset();
       setLoading(false);
-      router.push(window.location.origin + "/auth/callback");
     }
   };
 
@@ -110,7 +105,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
       setError("Failed to login as guest.");
     } finally {
       setLoading(false);
-      router.push(window.location.origin + "/auth/callback");
     }
   };
 

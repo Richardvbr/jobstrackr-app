@@ -1,18 +1,17 @@
 "use client";
 
 import cn from "clsx";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import { useAppContext } from "@/contexts/AppContext";
-import supabaseBrowserClient from "@/lib/supabase/client";
 import useWindowSize from "@/hooks/useWindowSize";
 import type { UserData } from "@/types/user";
 import { Icons, Avatar, LinkItem } from "@/components";
 import { links } from "./links";
 import { breakpoints } from "@/styles/variables";
 import styles from "./styles.module.scss";
+import supabase from "@/lib/supabase";
+import { Link } from "react-router-dom";
 
 type SidePanelProps = {
   data: UserData;
@@ -21,21 +20,20 @@ type SidePanelProps = {
 const SidePanel = ({ data }: SidePanelProps) => {
   const { sidePanelOpen, setSidePanelOpen } = useAppContext();
   const { width } = useWindowSize();
-  const pathName = usePathname();
-  const router = useRouter();
-  const supabase = supabaseBrowserClient();
+  // const pathName = usePathname();
+  // const router = useRouter();
 
-  const isAuthPage = pathName === "/sign-in" || pathName === "/sign-up";
+  // const isAuthPage = pathName === "/sign-in" || pathName === "/sign-up";
 
   const sidePanelStyles = cn({
     [styles.sidepanel]: true,
     [styles.sidepanelOpen]: sidePanelOpen,
   });
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/sign-in");
-  };
+  // const handleSignOut = async () => {
+  //   await supabase.auth.signOut();
+  //   router.push("/sign-in");
+  // };
 
   // Disable body scroll when mobile menu is open
   useEffect(() => {
@@ -44,13 +42,13 @@ const SidePanel = ({ data }: SidePanelProps) => {
     }
   }, [sidePanelOpen, width]);
 
-  if (isAuthPage) return null;
+  // if (isAuthPage) return null;
 
   return (
     <aside className={sidePanelStyles}>
       <div className={styles.container}>
         <div className={styles.logoContainer}>
-          <Link href='/dashboard' onClick={() => setSidePanelOpen(false)}>
+          <Link to='/dashboard' onClick={() => setSidePanelOpen(false)}>
             <img
               src='/assets/images/logo_cropped_transparent.svg'
               alt='JobsTrackr logo'
@@ -101,9 +99,9 @@ const SidePanel = ({ data }: SidePanelProps) => {
             Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}
           />
-          <div onClick={() => handleSignOut()} style={{ marginLeft: "-3px" }}>
+          {/* <div onClick={() => handleSignOut()} style={{ marginLeft: "-3px" }}>
             <LinkItem label='Logout' Icon={<Icons.Logout />} />
-          </div>
+          </div> */}
         </footer>
       </div>
     </aside>

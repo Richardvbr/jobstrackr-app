@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import cn from "clsx";
 import type { LinkItemProps } from "@/types/links";
 import styles from "./styles.module.scss";
+import { Link, useLocation } from "react-router-dom";
 
 const LinkItem = ({
   href,
@@ -14,8 +13,8 @@ const LinkItem = ({
   customLink,
   children,
 }: LinkItemProps) => {
-  const pathName = usePathname();
-  const isActive = pathName.includes(href as string);
+  const { pathname } = useLocation();
+  const isActive = pathname.includes(href as string);
 
   const linkItemStyles = cn({
     [styles.linkItem]: true,
@@ -29,7 +28,7 @@ const LinkItem = ({
   return (
     <li className={linkItemStyles} onClick={handleClick}>
       {href ? (
-        <Link passHref href={`/${href}`}>
+        <Link to={`/${href}`}>
           {customLink ? (
             <>{children}</>
           ) : (

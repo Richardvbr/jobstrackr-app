@@ -1,4 +1,9 @@
 @use "./_fonts.scss";
+@use "@fontsource-variable/inter";
+
+body {
+  font-family: "Inter Variable", sans-serif;
+}
 
 h1,
 h2,

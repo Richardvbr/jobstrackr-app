@@ -1,9 +1,8 @@
-import Image from "next/image";
 import cn from "clsx";
-
-import supabaseBrowserClient from "@/lib/supabase/client";
 import { Provider } from "@supabase/supabase-js/dist/module";
+
 import { capitalizeFirstLetter } from "@/utils/text";
+import supabase from "@/lib/supabase";
 import styles from "./styles.module.scss";
 
 type ThirdPartyProviderProps = {
@@ -11,7 +10,6 @@ type ThirdPartyProviderProps = {
 };
 
 const ThirdPartyProvider = ({ provider }: ThirdPartyProviderProps) => {
-  const supabase = supabaseBrowserClient();
   const providerName = capitalizeFirstLetter(provider);
 
   const handleSignIn = async () => {
@@ -31,10 +29,9 @@ const ThirdPartyProvider = ({ provider }: ThirdPartyProviderProps) => {
   return (
     <div onClick={handleSignIn} className={providerClasses}>
       <div className={styles.logo}>
-        <Image
+        <img
           src={`/assets/images/${provider}.svg`}
           alt={`${providerName} logo`}
-          fill
         />
       </div>
       <span>{`Continue with ${providerName}`}</span>
