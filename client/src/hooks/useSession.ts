@@ -1,9 +1,9 @@
-import supabaseBrowserClient from "@/lib/supabase";
+import supabase from "@/lib/supabase";
+import type { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
-const useUser = () => {
-  const supabase = supabaseBrowserClient();
-  const [userData, setUserData] = useState<any>("");
+const useSession = () => {
+  const [sessionData, setSessionData] = useState<Session | null>(null);
 
   useEffect(() => {
     const getSession = async () => {
@@ -11,7 +11,7 @@ const useUser = () => {
         const session = await supabase.auth.getSession();
 
         if (session.data) {
-          setUserData(session.data.session?.user);
+          setSessionData(session.data.session);
         }
       } catch (error) {
         console.log("error", error);
@@ -19,9 +19,9 @@ const useUser = () => {
     };
 
     getSession();
-  }, [supabase]);
+  }, []);
 
-  return userData;
+  return sessionData;
 };
 
-export default useUser;
+export default useSession;

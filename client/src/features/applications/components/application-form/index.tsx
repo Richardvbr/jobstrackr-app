@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { toast } from "react-hot-toast";
 
-import useUser from "@/hooks/useUser";
+import useUser from "@/hooks/useSession";
 import supabaseBrowserClient from "@/lib/supabase/client";
 import {
   formItems,

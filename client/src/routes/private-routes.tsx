@@ -1,16 +1,11 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useSession } from "@/contexts/AuthContext";
 
 const PrivateRoutes = () => {
   const location = useLocation();
-  //   const { authLogin } = /* some auth state provider */;
+  const session = useSession();
 
-  //   if (authLogin === undefined) {
-  //     return null; // or loading indicator/spinner/etc
-  //   }
-
-  const loggedIn = true;
-
-  return loggedIn ? (
+  return session ? (
     <Outlet />
   ) : (
     <Navigate to='/sign-in' replace state={{ from: location }} />

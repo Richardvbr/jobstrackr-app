@@ -9,7 +9,7 @@ import {
   useMemo,
 } from "react";
 
-type AppProviderProps = {
+type AppContextProviderProps = {
   children?: React.ReactNode;
 };
 
@@ -23,7 +23,7 @@ const Context = createContext<AppContext>({
   setSidePanelOpen: () => null,
 });
 
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [sidePanelOpen, setSidePanelOpen] = useState<boolean>(false);
 
   const value = useMemo(

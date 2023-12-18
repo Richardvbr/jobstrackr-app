@@ -1,9 +1,7 @@
-// Vendors
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// Routes
 import * as Routes from "@/routes";
 import { Providers } from "@/providers";
 
