@@ -38,6 +38,7 @@ const Input = ({
       <input
         type={type}
         id={name}
+        value={value}
         placeholder={placeholder}
         disabled={disabled}
         required={required}
