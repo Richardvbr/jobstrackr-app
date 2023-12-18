@@ -1,19 +1,18 @@
+"use client";
+
 import cn from "clsx";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import { useAppContext } from "@/contexts/AppContext";
-import supabaseBrowserClient from "@/lib/supabase";
+import supabaseBrowserClient from "@/lib/supabase/client";
 import useWindowSize from "@/hooks/useWindowSize";
 import type { UserData } from "@/types/user";
-import { Close, Logout, Plus, Feedback } from "@/components/icons";
-import LinkItem from "@/components/link-item/LinkItem";
-import Avatar from "@/components/avatar";
+import { Icons, Avatar, LinkItem } from "@/components";
 import { links } from "./links";
 import { breakpoints } from "@/styles/variables";
 import styles from "./styles.module.scss";
-import ThemeToggle from "../theme-toggle";
 
 type SidePanelProps = {
   data: UserData;
@@ -51,7 +50,7 @@ const SidePanel = ({ data }: SidePanelProps) => {
     <aside className={sidePanelStyles}>
       <div className={styles.container}>
         <div className={styles.logoContainer}>
-          <Link to='/dashboard' onClick={() => setSidePanelOpen(false)}>
+          <Link href='/dashboard' onClick={() => setSidePanelOpen(false)}>
             <img
               src='/assets/images/logo_cropped_transparent.svg'
               alt='JobsTrackr logo'
@@ -62,7 +61,7 @@ const SidePanel = ({ data }: SidePanelProps) => {
             className={styles.menuTrigger}
             onClick={() => setSidePanelOpen(false)}
           >
-            <Close />
+            <Icons.Close />
           </div>
         </div>
         <div
@@ -72,7 +71,7 @@ const SidePanel = ({ data }: SidePanelProps) => {
           <LinkItem
             label='New application'
             href='applications?action=new-application'
-            Icon={<Plus />}
+            Icon={<Icons.Plus />}
           />
         </div>
         <ul className={styles.list}>
@@ -99,11 +98,11 @@ const SidePanel = ({ data }: SidePanelProps) => {
           <LinkItem
             href='feedback'
             label='Feedback'
-            Icon={<Feedback />}
+            Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}
           />
           <div onClick={() => handleSignOut()} style={{ marginLeft: "-3px" }}>
-            <LinkItem label='Logout' Icon={<Logout />} />
+            <LinkItem label='Logout' Icon={<Icons.Logout />} />
           </div>
         </footer>
       </div>

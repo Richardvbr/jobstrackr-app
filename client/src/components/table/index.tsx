@@ -1,3 +1,5 @@
+"use client";
+
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   Row,
@@ -10,7 +12,7 @@ import {
 } from "@tanstack/react-table";
 import cn from "clsx";
 
-import { Sort, SortDown, SortUp } from "@/components/icons";
+import { Icons } from "@/components";
 import styles from "./styles.module.scss";
 
 type TableProps = {
@@ -90,9 +92,11 @@ const Table = ({
                       {header.column.columnDef.enableSorting && (
                         <span>
                           {{
-                            asc: <SortUp />,
-                            desc: <SortDown />,
-                          }[header.column.getIsSorted() as string] ?? <Sort />}
+                            asc: <Icons.SortUp />,
+                            desc: <Icons.SortDown />,
+                          }[header.column.getIsSorted() as string] ?? (
+                            <Icons.Sort />
+                          )}
                         </span>
                       )}
                     </div>

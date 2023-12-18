@@ -1,3 +1,4 @@
+import type { SelectInputItem } from "@/types/elements";
 import type { HTMLInputTypeAttribute } from "react";
 
 type FormItem = {
@@ -14,15 +15,6 @@ type FormItem = {
   label: string;
   required?: boolean;
   type: HTMLInputTypeAttribute;
-};
-
-export type SelectInputItem = {
-  name: string;
-  label: string;
-  options: {
-    value: string | undefined;
-    label: string;
-  }[];
 };
 
 export const formItems: FormItem[] = [
@@ -81,31 +73,31 @@ export const statusInput: SelectInputItem = {
   label: "Status",
   options: [
     {
-      value: "Applied",
+      value: "applied",
       label: "Applied",
     },
     {
-      value: "Processing",
+      value: "processing",
       label: "Processing",
     },
     {
-      value: "Denied",
+      value: "denied",
       label: "Denied",
     },
     {
-      value: "Accepted",
+      value: "accepted",
       label: "Accepted",
     },
     {
-      value: "Offered",
+      value: "offered",
       label: "Offered",
     },
     {
-      value: "Withdrawn",
+      value: "withdrawn",
       label: "Withdrawn",
     },
     {
-      value: "Ghosted",
+      value: "ghosted",
       label: "Ghosted",
     },
   ],
@@ -116,15 +108,15 @@ export const employmentTypeInput: SelectInputItem = {
   label: "Employment type",
   options: [
     {
-      value: "Office",
+      value: "office",
       label: "Office",
     },
     {
-      value: "Remote",
+      value: "remote",
       label: "Remote",
     },
     {
-      value: "Hybrid",
+      value: "hybrid",
       label: "Hybrid",
     },
   ],
@@ -135,23 +127,23 @@ export const workModelInput: SelectInputItem = {
   label: "Work model",
   options: [
     {
-      value: "Full-time",
+      value: "full-time",
       label: "Full-time",
     },
     {
-      value: "Part-time",
+      value: "part-time",
       label: "Part-time",
     },
     {
-      value: "Freelance",
+      value: "freelance",
       label: "Freelance",
     },
     {
-      value: "Internship",
+      value: "internship",
       label: "Internship",
     },
     {
-      value: "Other",
+      value: "other",
       label: "Other",
     },
   ],

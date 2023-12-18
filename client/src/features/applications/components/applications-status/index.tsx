@@ -1,7 +1,8 @@
-import { ApplicationStatus as ApplicationStatusType } from "@/types/application";
 import cn from "clsx";
-import styles from "./styles.module.scss";
+
+import { ApplicationStatus as ApplicationStatusType } from "@/types/application";
 import { capitalizeFirstLetter } from "@/utils/text";
+import styles from "./styles.module.scss";
 
 type ApplicationStatusProps = {
   status: ApplicationStatusType;
@@ -10,14 +11,8 @@ type ApplicationStatusProps = {
 export const ApplicationStatus = ({ status }: ApplicationStatusProps) => {
   const lowercaseStatus = status?.toLowerCase();
 
-  const classes = cn([styles.status], {
-    [styles.denied]: lowercaseStatus === "denied",
-    [styles.accepted]: lowercaseStatus === "accepted",
-    [styles.applied]: lowercaseStatus === "applied",
-    [styles.ghosted]: lowercaseStatus === "ghosted",
-    [styles.offered]: lowercaseStatus === "offered",
-    [styles.processing]: lowercaseStatus === "processing",
-    [styles.withdrawn]: lowercaseStatus === "withdrawn",
+  const classes = cn(styles.status, {
+    [styles[lowercaseStatus]]: lowercaseStatus && lowercaseStatus !== "status",
   });
 
   return (

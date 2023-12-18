@@ -1,7 +1,7 @@
 import Image from "next/image";
 import cn from "clsx";
 
-import supabaseBrowserClient from "@/lib/supabase";
+import supabaseBrowserClient from "@/lib/supabase/client";
 import { Provider } from "@supabase/supabase-js/dist/module";
 import { capitalizeFirstLetter } from "@/utils/text";
 import styles from "./styles.module.scss";

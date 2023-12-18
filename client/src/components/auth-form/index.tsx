@@ -1,12 +1,12 @@
+"use client";
+
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-import supabaseBrowserClient from "@/lib/supabase";
-import ThirdPartyProvider from "@/components/third-party-provider";
-import Button from "@/components/button";
+import supabaseBrowserClient from "@/lib/supabase/client";
+import { ThirdPartyProvider, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
-import Input from "../form-fields/input";
 
 type AuthFormProps = {
   type: "sign-up" | "sign-in";

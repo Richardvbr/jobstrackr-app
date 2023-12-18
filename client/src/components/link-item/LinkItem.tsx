@@ -1,7 +1,8 @@
-import { usePathname } from "next/navigation";
-import { Link } from "react-router-dom";
-import cn from "clsx";
+"use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import cn from "clsx";
 import type { LinkItemProps } from "@/types/links";
 import styles from "./styles.module.scss";
 
@@ -28,7 +29,7 @@ const LinkItem = ({
   return (
     <li className={linkItemStyles} onClick={handleClick}>
       {href ? (
-        <Link to={`/${href}`}>
+        <Link passHref href={`/${href}`}>
           {customLink ? (
             <>{children}</>
           ) : (

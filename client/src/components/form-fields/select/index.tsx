@@ -1,4 +1,4 @@
-import { SelectInputItem } from "@/features/applications/components/application-form/formItems";
+import type { SelectInputItem } from "@/types/elements";
 import styles from "./styles.module.scss";
 import { useFormContext } from "react-hook-form";
 

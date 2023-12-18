@@ -21,7 +21,7 @@ export const SHARED = gql`
 
 export const APPLICATIONS = gql`
   query {
-    applications {
+    applicationsPage {
       title
       newApplication
       applicationSearch
@@ -31,8 +31,11 @@ export const APPLICATIONS = gql`
 
 export const DOCUMENTS = gql`
   query {
-    documents {
+    documentsPage {
       title
+      addNewDocument
+      allDocumentsTitle
+      allDocumentsSubtitle
     }
   }
 `;

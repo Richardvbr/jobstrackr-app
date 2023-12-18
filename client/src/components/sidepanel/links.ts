@@ -1,30 +1,30 @@
 import { LinkItemProps } from "@/types/links";
-import { Dashboard, List, Question, Document, Bulb } from "@/components/icons";
+import { Icons } from "@/components";
 
 export const links: LinkItemProps[] = [
   {
     href: "dashboard",
     label: "Dashboard",
-    Icon: Dashboard,
+    Icon: Icons.Dashboard,
   },
   {
     href: "applications",
     label: "Applications",
-    Icon: List,
+    Icon: Icons.List,
   },
   {
     href: "questions",
     label: "Questions",
-    Icon: Question,
+    Icon: Icons.Question,
   },
   {
     href: "documents",
     label: "Documents",
-    Icon: Document,
+    Icon: Icons.Document,
   },
   {
     href: "prepare",
     label: "Tips and prepare",
-    Icon: Bulb,
+    Icon: Icons.Bulb,
   },
 ];

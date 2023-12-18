@@ -16,7 +16,7 @@ export type SharedContent = {
 };
 
 export type ApplicationsContent = {
-  applications: {
+  applicationsPage: {
     title: string;
     newApplication: string;
     applicationSearch: string;
@@ -24,7 +24,10 @@ export type ApplicationsContent = {
 };
 
 export type DocumentsContent = {
-  documents: {
+  documentsPage: {
     title: string;
+    addNewDocument: string;
+    allDocumentsTitle: string;
+    allDocumentsSubtitle: string;
   };
 };

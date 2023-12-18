@@ -1,9 +1,10 @@
+"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import supabaseBrowserClient from "@/lib/supabase";
+import supabaseBrowserClient from "@/lib/supabase/client";
 import type { Application } from "@/types/application";
 
 import { Modal, Input, Button, SelectInput } from "@/components";

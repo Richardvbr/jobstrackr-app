@@ -1,10 +1,12 @@
+"use client";
+
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 import useClickOutside from "@/hooks/useClickOutside";
+import { Icons } from "@/components";
 import styles from "./styles.module.scss";
-import { Close } from "@/components/icons";
 
 type ModalProps = {
   children: React.ReactNode;
@@ -74,7 +76,7 @@ const Modal = ({
               <header>
                 <h1>{modalTitle}</h1>
                 <div className={styles.close} onClick={handleClose}>
-                  <Close />
+                  <Icons.Close />
                 </div>
               </header>
               {children}

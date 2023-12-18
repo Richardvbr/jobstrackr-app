@@ -1,58 +1,56 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useShallow } from "zustand/react/shallow";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { toast } from "react-hot-toast";
 
 import useUser from "@/hooks/useUser";
-import supabaseBrowserClient from "@/lib/supabase";
+import supabaseBrowserClient from "@/lib/supabase/client";
 import {
   formItems,
   statusInput,
   workModelInput,
   employmentTypeInput,
 } from "./formItems";
-import Input from "@/components/form-fields/input";
-import SelectInput from "@/components/form-fields/select";
-import Button from "@/components/button";
+import { Input, SelectInput, Button } from "@/components";
+import { useApplicationStore } from "@/features/applications";
+import { Application } from "@/types/application";
 import styles from "./styles.module.scss";
-import { useApplicationStore } from "../..";
 
-type ApplicationFormInput = {
-  company: string;
-  position: string;
-  applied_at: string;
-};
+type ApplicationFormInput = Application;
 
 type ApplicationForm = {
   handleCloseForm: (askConfirm?: boolean) => void;
 };
 
 export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
-  const applicationData = useApplicationStore(
-    (state) => state.activeApplication
+  const { applicationData, isEditing } = useApplicationStore(
+    useShallow((state) => ({
+      applicationData: state.activeApplication,
+      isEditing: state.applicationModalOpened === "edit",
+    }))
   );
 
+  // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
-    defaultValues: {
-      company: "hello",
+    // @ts-ignore
+    defaultValues: isEditing && {
+      ...applicationData,
+      applied_at: format(
+        new Date(applicationData?.applied_at as string),
+        "yyyy-MM-dd"
+      ),
     },
   });
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
-  const { handleSubmit, reset } = formMethods;
+  const { handleSubmit, reset, getValues } = formMethods;
   const router = useRouter();
   const supabase = supabaseBrowserClient();
-
-  useEffect(() => {
-    // you can do async server request and fill up form
-    setTimeout(() => {
-      reset({
-        company: "bill",
-      });
-    }, 2000);
-  }, [reset]);
 
   // const { id: userId } = useUser();
 
@@ -102,7 +100,7 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
         </div>
         <div className={styles.buttons}>
           <Button disabled={submitLoading} type='submit'>
-            Edit application
+            {isEditing ? "Edit application" : "Add application"}
           </Button>
           <Button
             disabled={submitLoading}

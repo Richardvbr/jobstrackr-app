@@ -1,6 +1,6 @@
-import { ChangeEvent, HTMLInputTypeAttribute, forwardRef } from "react";
-import { useFormContext } from "react-hook-form";
+import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 import cn from "clsx";
+import { useFormContext } from "react-hook-form";
 
 import styles from "./styles.module.scss";
 
@@ -17,22 +17,19 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    name,
-    label,
-    type = "text",
-    value,
-    placeholder,
-    error,
-    disabled,
-    required,
-    handleChange,
-    className,
-    ...props
-  },
-  ref
-) {
+const Input = ({
+  name,
+  label,
+  type = "text",
+  value,
+  placeholder,
+  error,
+  disabled,
+  required,
+  handleChange,
+  className,
+  ...props
+}: InputProps) => {
   const { register } = useFormContext() || {};
 
   return (
@@ -40,18 +37,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       <label htmlFor={label}>{label}</label>
       <input
         type={type}
-        id={label}
-        value={value}
+        id={name}
         placeholder={placeholder}
         disabled={disabled}
         required={required}
         {...(register && register(name))}
         onChange={handleChange}
-        ref={ref}
         {...props}
       />
     </div>
   );
-});
+};
 
 export default Input;

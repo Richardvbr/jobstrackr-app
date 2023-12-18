@@ -1,9 +1,11 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
 
 import { useDocumentStore, DocumentUploadModal } from "@/features/documents";
 import type { Application } from "@/types/application";
 import type { Document } from "@/types/document";
-import { SharedContent } from "@/features/cms";
+import { DocumentsContent, SharedContent } from "@/features/cms";
 
 import { Card, Icons, Button } from "@/components";
 import styles from "./styles.module.scss";
@@ -12,6 +14,7 @@ type DocumentsPageProps = {
   groupedDocuments: GroupedDocuments[];
   applications: Application[];
   documents: Document[];
+  content: DocumentsContent;
 };
 
 type GroupedDocuments = {
@@ -23,28 +26,32 @@ export const DocumentsPage = ({
   documents,
   applications,
   groupedDocuments,
+  content,
 }: DocumentsPageProps) => {
   const { openDocumentModal } = useDocumentStore();
 
-  const { data, error, isLoading } = useQuery<SharedContent, Error>({
-    queryKey: ["cms-shared"],
+  const { data, error, isLoading } = useQuery<DocumentsContent, Error>({
+    queryKey: ["cms-documents"],
     refetchOnWindowFocus: false,
+    initialData: content,
     queryFn: async () => {
-      const data = await fetch("/api/cms/shared");
+      const data = await fetch("/api/cms/documents");
       return data.json();
     },
   });
+
+  const labels = data?.documentsPage;
 
   return (
     <section>
       <Button onClick={() => openDocumentModal()}>
         <Icons.Plus />
-        Upload a new document
+        {labels.addNewDocument}
       </Button>
       <Card
         shadow
-        title={`All documents`}
-        subtitle={`These are all the documents you've uploaded`}
+        title={labels.allDocumentsTitle}
+        subtitle={labels.allDocumentsSubtitle}
       >
         <p>test</p>
       </Card>

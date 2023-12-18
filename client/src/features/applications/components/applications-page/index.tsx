@@ -1,20 +1,22 @@
+"use client";
+
 import { useState } from "react";
 
 import useDebounce from "@/hooks/useDebounce";
 
+import type { ApplicationsContent } from "@/features/cms";
 import type { Application } from "@/types/application";
 import {
   ApplicationsTable,
   ApplicationModal,
   useApplicationStore,
 } from "@/features/applications";
-import { Plus } from "@/components/icons";
-import Button from "@/components/button";
-import Input from "@/components/form-fields/input";
+import { Icons, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
 
 type ApplicationsPageProps = {
   data: Application[];
+  content: ApplicationsContent;
 };
 
 export const ApplicationsPage = ({ data }: ApplicationsPageProps) => {
@@ -28,7 +30,7 @@ export const ApplicationsPage = ({ data }: ApplicationsPageProps) => {
   return (
     <section>
       <Button onClick={openModal}>
-        <Plus />
+        <Icons.Plus />
         Add a new application
       </Button>
       <Input
