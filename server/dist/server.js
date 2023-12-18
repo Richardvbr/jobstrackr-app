@@ -29,12 +29,12 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 // Vendors
 const express_1 = __importDefault(require("express"));
+const trpcExpress = __importStar(require("@trpc/server/adapters/express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const trpcExpress = __importStar(require("@trpc/server/adapters/express"));
 // trpc
-const router_1 = require("@/trpc/router");
-const context_1 = require("@/trpc/context");
+const router_1 = require("./trpc/router");
+const trpc_1 = require("./trpc");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 4000;
@@ -48,7 +48,7 @@ app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json());
 app.use("/trpc", trpcExpress.createExpressMiddleware({
     router: router_1.appRouter,
-    createContext: context_1.createContext,
+    createContext: trpc_1.createContext,
 }));
 app.get("/", (req, res) => {
     res.send("Server running, hello World!");
