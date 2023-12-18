@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";

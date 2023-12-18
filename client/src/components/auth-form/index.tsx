@@ -1,10 +1,8 @@
-"use client";
-
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 
-import { ThirdPartyProvider, Button, Input } from "@/components";
 import supabase from "@/lib/supabase";
+import { ThirdPartyProvider, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
 
 type AuthFormProps = {

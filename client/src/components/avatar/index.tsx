@@ -1,9 +1,8 @@
-import Image from "next/image";
 import cn from "clsx";
 
 import { getFirstCharacterCapitalized } from "@/utils/text";
-import styles from "./styles.module.scss";
 import { UserData } from "@/types/user";
+import styles from "./styles.module.scss";
 
 type AvatarProps = {
   data: UserData;
@@ -18,7 +17,7 @@ const Avatar = ({ data, onClick, size = "s" }: AvatarProps) => {
     <div className={styles.container} onClick={onClick}>
       {picture ? (
         <div className={cn(styles.image, styles[size])}>
-          <Image alt='user image' fill src={picture} />
+          <img alt='user image' src={picture} />
         </div>
       ) : (
         <div className={cn(styles.placeholder, styles[size])}>

@@ -1,9 +1,8 @@
-"use client";
-
 import cn from "clsx";
+import { Link, useLocation } from "react-router-dom";
+
 import type { LinkItemProps } from "@/types/links";
 import styles from "./styles.module.scss";
-import { Link, useLocation } from "react-router-dom";
 
 const LinkItem = ({
   href,

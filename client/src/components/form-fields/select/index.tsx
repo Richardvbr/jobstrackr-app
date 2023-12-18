@@ -1,6 +1,7 @@
+import { useFormContext } from "react-hook-form";
+
 import type { SelectInputItem } from "@/types/elements";
 import styles from "./styles.module.scss";
-import { useFormContext } from "react-hook-form";
 
 type SelectInputProps = React.ComponentPropsWithoutRef<"select"> & {
   item: SelectInputItem;
