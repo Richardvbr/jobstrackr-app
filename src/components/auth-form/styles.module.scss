@@ -7,8 +7,7 @@
   width: 85vw;
   box-shadow: $shadow-m;
 
-  input[type="email"],
-  input[type="password"] {
+  input[type="email"] {
     margin-bottom: 10px;
   }
 
@@ -63,8 +62,17 @@
 .error {
   color: $accent-red;
   font-size: 0.8rem;
-  margin-bottom: 10px;
-  max-width: 30ch;
+  margin: 10px auto;
+  max-width: 275px;
+  text-align: center;
+}
+
+.notification {
+  color: $accent-green;
+  font-size: 0.8rem;
+  margin: 10px auto;
+  max-width: 275px;
+  text-align: center;
 }
 
 .terms {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 import supabase from "@/lib/supabase";
 import { ThirdPartyProvider, Button, Input } from "@/components";
@@ -13,18 +14,17 @@ type AuthFormProps = {
 type AuthFormInput = {
   username: string;
   email: string;
-  password: string;
-  passwordConfirm?: string;
 };
 
 // Refactor to use react-hook-form
 const AuthForm = ({ type }: AuthFormProps) => {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [emailSent, setEmailSent] = useState<string>("");
   const formMethods = useForm<AuthFormInput>();
   const navigate = useNavigate();
 
-  const { handleSubmit, reset, register } = formMethods;
+  const { handleSubmit, register } = formMethods;
 
   const isLoginForm = type === "sign-in";
 
@@ -36,9 +36,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
     setLoading(true);
 
     try {
-      await supabase.auth.signInWithPassword({
+      await supabase.auth.signInWithOtp({
         email: formData.email,
-        password: formData.password,
+        options: {
+          shouldCreateUser: true,
+          emailRedirectTo: "http://localhost:3000/dashboard",
+        },
       });
     } catch (error) {
       console.log(error);
@@ -47,51 +50,13 @@ const AuthForm = ({ type }: AuthFormProps) => {
         "Failed to login. Please check your email address and password."
       );
     } finally {
-      reset();
       setLoading(false);
-      navigate("/dashboard");
-    }
-  };
-
-  const submitSignup: SubmitHandler<AuthFormInput> = async (formData) => {
-    setLoading(true);
-
-    if (!formData.email) {
-      setLoading(false);
-      return setError(
-        "Email address can't be empty. Please enter a valid email address."
+      toast.success(
+        "Check your email on this device for a single-use link to sign in."
       );
-    }
-
-    if (!formData.password || !formData.passwordConfirm) {
-      setLoading(false);
-      return setError(
-        "Password can't be empty, please use at least 7 characters."
+      setEmailSent(
+        "Check your email on this device for a single-use link to sign in."
       );
-    }
-
-    if (formData.password !== formData.passwordConfirm) {
-      setLoading(false);
-      return setError("Passwords do not match");
-    }
-
-    try {
-      await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-      });
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-      setError("Failed to create an account");
-    } finally {
-      await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
-      reset();
-      setLoading(false);
-      navigate("/dashboard");
     }
   };
 
@@ -126,30 +91,29 @@ const AuthForm = ({ type }: AuthFormProps) => {
       </div>
       <div className={styles.divider}>Or</div>
       <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(isLoginForm ? submitLogin : submitSignup)}>
+        <form onSubmit={handleSubmit(submitLogin)}>
           {error && <p className={styles.error}>{error}</p>}
+          {emailSent && <p className={styles.notification}>{emailSent}</p>}
           <Input
             type='email'
             label='Email'
             autoComplete='email'
+            disabled={loading || !!emailSent}
             {...register("email", { required: true })}
           />
-          <Input
-            type='password'
-            label='Password'
-            autoComplete='new-password'
-            {...register("password", { required: true, minLength: 7 })}
-          />
-          {!isLoginForm && (
-            <Input
-              type='password'
-              label='Confirm password'
-              autoComplete='new-password'
-              {...register("passwordConfirm", { required: true })}
-            />
-          )}
-          <Button variant='primary' type='submit' disabled={loading} fullWidth>
-            {loading ? "Loading..." : isLoginForm ? "Sign in" : "Sign up"}
+          <Button
+            variant='primary'
+            type='submit'
+            disabled={loading || !!emailSent}
+            fullWidth
+          >
+            {loading
+              ? "Loading..."
+              : emailSent
+              ? "Check your email"
+              : isLoginForm
+              ? "Sign in"
+              : "Sign up"}
           </Button>
         </form>
       </FormProvider>

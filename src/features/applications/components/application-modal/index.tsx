@@ -19,7 +19,6 @@ export const ApplicationModal = () => {
   const [searchParams] = useSearchParams();
 
   const action = searchParams.get("action");
-  const newSearchParams = new URLSearchParams(searchParams.toString());
 
   // Open modal if query param matches
   useEffect(() => {
@@ -40,8 +39,6 @@ export const ApplicationModal = () => {
     }
 
     closeModal();
-    newSearchParams.delete("action");
-    // router.replace(`${pathname}?${newSearchParams}`);
   };
 
   return (
