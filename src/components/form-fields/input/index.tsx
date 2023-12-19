@@ -34,7 +34,7 @@ const Input = ({
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <label htmlFor={label}>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <input
         type={type}
         id={name}
