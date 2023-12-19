@@ -6,7 +6,6 @@ import { format } from "date-fns";
 import { toast } from "react-hot-toast";
 
 import supabase from "@/lib/supabase";
-import { useUser } from "@/contexts/AuthContext";
 import { Application } from "@/types/application";
 import { useApplicationStore } from "@/features/applications";
 import {
@@ -48,9 +47,7 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
-  const { handleSubmit, reset, getValues } = formMethods;
-
-  const user = useUser();
+  const { handleSubmit, reset } = formMethods;
 
   // Form submission
   const onSubmit: SubmitHandler<ApplicationFormInput> = async (formData) => {
@@ -60,7 +57,7 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
       const { error } = await supabase
         .from("applications")
         .upsert(formData)
-        .eq("id", applicationData.id);
+        .eq("id", "application_id");
 
       toast.success(`Your application was changed`);
 
@@ -80,7 +77,7 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
 
   return (
     <FormProvider {...formMethods}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formItems}>
           {formItems.map(({ label, name, type, required }) => (
             <Input

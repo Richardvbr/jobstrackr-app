@@ -5,16 +5,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "@/contexts/AppContext";
 import supabase from "@/lib/supabase";
 import useWindowSize from "@/hooks/useWindowSize";
-import type { UserData } from "@/types/user";
+// import type { UserData } from "@/types/user";
 import { Icons, Avatar, LinkItem } from "@/components";
 import { links } from "./links";
 import { breakpoints } from "@/styles/variables";
 import styles from "./styles.module.scss";
 import { useGetUser } from "@/features/user/api";
 
-type SidePanelProps = {
-  data: UserData;
-};
+// type SidePanelProps = {
+//   data: UserData;
+// };
 
 const SidePanel = () => {
   const { sidePanelOpen, setSidePanelOpen } = useAppContext();

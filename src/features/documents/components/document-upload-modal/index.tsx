@@ -40,6 +40,7 @@ export const DocumentUploadModal = ({
   // Form submission
   const onSubmit: SubmitHandler<any> = async (formData) => {
     setSubmitLoading(true);
+    console.log(formData);
 
     try {
       console.log("Submitting...");
