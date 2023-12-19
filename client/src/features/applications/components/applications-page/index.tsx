@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import useDebounce from "@/hooks/useDebounce";
+import { useGetApplicationsContent } from "@/features/cms";
 import {
   ApplicationsTable,
   ApplicationModal,
@@ -9,7 +10,6 @@ import {
 } from "@/features/applications";
 import { Icons, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
-import { useGetApplicationsContent } from "@/features/cms";
 
 export const ApplicationsPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");

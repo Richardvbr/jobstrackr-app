@@ -14,9 +14,9 @@ export const useQueryParam = (query: string) => {
 export const useQueryParams = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  let params: Params = {};
+  const params: Params = {};
 
-  for (let param of searchParams) {
+  for (const param of searchParams) {
     params[param[0]] = param[1];
   }
 
