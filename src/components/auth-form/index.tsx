@@ -45,9 +45,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
     } catch (error) {
       console.log(error);
       setLoading(false);
-      setError(
-        "Failed to login. Please check your email address and password."
-      );
+      // setError(
+      //   "Failed to login. Please check your email address and password."
+      // );
     } finally {
       setLoading(false);
       setEmailSent(
@@ -114,8 +114,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
         </form>
       </FormProvider>
       <p className={styles.otp}>
-        * JobsTrackr uses passwordless sign in, meaning a single-use link will
-        be sent to your email adress. Clicking the link will sign you in and
+        * JobsTrackr uses passwordless sign-in, meaning a single-use link will
+        be sent to your email address. Clicking the link will sign you in and
         redirect you to JobsTrackr.
       </p>
       <button
