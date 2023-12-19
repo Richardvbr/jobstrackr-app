@@ -1,13 +1,3 @@
-import { trpc } from "@/lib/trpc";
-
-const DashboardPage = () => {
-  const { data } = trpc.user.getUsers.useQuery();
-
-  return (
-    <>
-      <h1>{`Hello, user list: ${JSON.stringify(data)}`} </h1>
-    </>
-  );
-};
+const DashboardPage = () => <h1>Hello from dashboard</h1>;
 
 export default DashboardPage;

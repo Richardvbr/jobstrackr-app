@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import supabase from "@/lib/supabase";
 import { ThirdPartyProvider, Button, Input } from "@/components";
@@ -21,6 +22,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const formMethods = useForm<AuthFormInput>();
+  const navigate = useNavigate();
 
   const { handleSubmit, reset, register } = formMethods;
 
@@ -47,6 +49,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
     } finally {
       reset();
       setLoading(false);
+      navigate("/dashboard");
     }
   };
 
@@ -88,6 +91,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       });
       reset();
       setLoading(false);
+      navigate("/dashboard");
     }
   };
 
@@ -103,6 +107,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       setError("Failed to login as guest.");
     } finally {
       setLoading(false);
+      navigate("/dashboard");
     }
   };
 

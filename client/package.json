@@ -1,16 +1,17 @@
 {
   "name": "jobstrackr-clint",
-  "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "description": "JobsTrackr's front-end",
   "author": "Richard van Brunschot",
   "repository": "https://github.com/Richardvbr/jobstrackr-vite-express",
+  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "gen-db-types": "npx supabase gen types typescript --project-id azadwvhsjwteoftabouw --schema public > src/types/supabase.ts",
+    "generate-db-types": "npx supabase gen types typescript --project-id azadwvhsjwteoftabouw --schema public > src/types/supabase.ts",
     "check-npm-updates": "npx npm-check-updates",
     "apply-npm-updates": "npx npm-check-updates -u && npm i"
   },

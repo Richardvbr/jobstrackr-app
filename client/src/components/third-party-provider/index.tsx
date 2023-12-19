@@ -16,7 +16,7 @@ const ThirdPartyProvider = ({ provider }: ThirdPartyProviderProps) => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: window.location.origin + "/auth/callback",
+        redirectTo: "/dashboard",
       },
     });
   };

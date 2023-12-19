@@ -1,12 +1,18 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useSession } from "@/contexts/AuthContext";
+
+import { useSessionContext } from "@/contexts/AuthContext";
+import { AppLayout } from "@/components/layout";
 
 const PrivateRoutes = () => {
   const location = useLocation();
-  const session = useSession();
+  const { isLoading, session } = useSessionContext();
+
+  if (isLoading) return null;
 
   return session ? (
-    <Outlet />
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
   ) : (
     <Navigate to='/sign-in' replace state={{ from: location }} />
   );

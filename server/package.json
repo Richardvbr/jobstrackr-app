@@ -1,10 +1,10 @@
 {
   "name": "jobstrackr-server",
   "version": "1.0.0",
-  "description": "",
-  "private": true,
+  "description": "JobsTrackr's server",
   "author": "Richard van Brunschot",
   "repository": "https://github.com/Richardvbr/jobstrackr-vite-express",
+  "private": true,
   "main": "dist/server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",

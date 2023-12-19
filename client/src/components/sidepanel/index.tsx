@@ -15,7 +15,7 @@ type SidePanelProps = {
   data: UserData;
 };
 
-const SidePanel = ({ data }: SidePanelProps) => {
+const SidePanel = () => {
   const { sidePanelOpen, setSidePanelOpen } = useAppContext();
   const { width } = useWindowSize();
   const { pathname } = useLocation();
@@ -88,7 +88,7 @@ const SidePanel = ({ data }: SidePanelProps) => {
             customLink
             onClick={() => setSidePanelOpen(false)}
           >
-            <Avatar data={data} />
+            {/* <Avatar data={data} /> */}
             <p>Account</p>
           </LinkItem>
           <LinkItem
