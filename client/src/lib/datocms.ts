@@ -6,7 +6,7 @@ type RequestProps = {
 
 export function cmsRequest<T>({ query }: RequestProps): Promise<T> {
   const headers = {
-    authorization: `Bearer ${process.env.DATOCMS_API_KEY}`,
+    authorization: `Bearer ${import.meta.env.VITE_DATOCMS_API_KEY}`,
   };
 
   const client = new GraphQLClient("https://graphql.datocms.com", { headers });

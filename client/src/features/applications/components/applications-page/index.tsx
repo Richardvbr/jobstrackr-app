@@ -10,32 +10,37 @@ import {
 } from "@/features/applications";
 import { Icons, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
+import { useGetApplicationsContent } from "@/features/cms";
 
 export const ApplicationsPage = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   const openModal = useApplicationStore(
     (state) => state.openNewApplicationModal
   );
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const { data: applications } = useGetApplications();
+  const { data: labels } = useGetApplicationsContent();
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-  const { data } = useGetApplications();
-
   return (
     <section>
-      <h1>Applications</h1>
+      <h1>{labels?.title}</h1>
       <Button onClick={openModal}>
         <Icons.Plus />
-        Add a new application
+        {labels?.newApplication}
       </Button>
       <Input
         className={styles.search}
         label='Search for an application'
         name='application-search-table'
-        placeholder='Enter your search query'
+        placeholder={labels?.applicationSearch}
         handleChange={(e) => setSearchQuery(e.target.value)}
       />
-      <ApplicationsTable data={data ?? []} searchQuery={debouncedSearchQuery} />
+      <ApplicationsTable
+        data={applications ?? []}
+        searchQuery={debouncedSearchQuery}
+      />
       <ApplicationModal />
     </section>
   );

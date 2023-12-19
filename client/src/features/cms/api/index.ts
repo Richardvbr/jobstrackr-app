@@ -7,23 +7,41 @@ import {
   APPLICATIONS,
   DOCUMENTS,
 } from "@/features/cms";
+import { useQuery } from "@tanstack/react-query";
 
-export async function getSharedContent() {
-  const response = await cmsRequest<SharedContent>({ query: SHARED });
+export const useGetSharedContent = () => {
+  return useQuery({
+    queryKey: ["get-cms-shared"],
+    queryFn: async () => {
+      const { shared } = await cmsRequest<SharedContent>({ query: SHARED });
 
-  return response;
-}
-
-export async function getApplicationsContent() {
-  const response = await cmsRequest<ApplicationsContent>({
-    query: APPLICATIONS,
+      return shared;
+    },
   });
+};
 
-  return response;
-}
+export const useGetApplicationsContent = () => {
+  return useQuery({
+    queryKey: ["get-cms-applications"],
+    queryFn: async () => {
+      const { applicationsPage } = await cmsRequest<ApplicationsContent>({
+        query: APPLICATIONS,
+      });
 
-export async function getDocumentsContent() {
-  const response = await cmsRequest<DocumentsContent>({ query: DOCUMENTS });
+      return applicationsPage;
+    },
+  });
+};
 
-  return response;
-}
+export const useGetDocumentsContent = () => {
+  return useQuery({
+    queryKey: ["get-cms-documents"],
+    queryFn: async () => {
+      const { documentsPage } = await cmsRequest<DocumentsContent>({
+        query: DOCUMENTS,
+      });
+
+      return documentsPage;
+    },
+  });
+};
