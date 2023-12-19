@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import useDebounce from "@/hooks/useDebounce";
-
 import {
   ApplicationsTable,
   ApplicationModal,

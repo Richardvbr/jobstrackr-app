@@ -10,6 +10,7 @@ import { Icons, Avatar, LinkItem } from "@/components";
 import { links } from "./links";
 import { breakpoints } from "@/styles/variables";
 import styles from "./styles.module.scss";
+import { useGetUser } from "@/features/user/api";
 
 type SidePanelProps = {
   data: UserData;
@@ -22,6 +23,8 @@ const SidePanel = () => {
   const navigate = useNavigate();
 
   const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
+
+  const { data } = useGetUser();
 
   const sidePanelStyles = cn({
     [styles.sidepanel]: true,
@@ -88,7 +91,7 @@ const SidePanel = () => {
             customLink
             onClick={() => setSidePanelOpen(false)}
           >
-            {/* <Avatar data={data} /> */}
+            <Avatar data={data} />
             <p>Account</p>
           </LinkItem>
           <LinkItem

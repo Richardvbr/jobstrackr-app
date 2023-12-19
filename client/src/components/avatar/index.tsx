@@ -5,7 +5,7 @@ import { UserData } from "@/types/user";
 import styles from "./styles.module.scss";
 
 type AvatarProps = {
-  data: UserData;
+  data: UserData | undefined;
   onClick?: () => void;
   size?: "s" | "m" | "l";
 };

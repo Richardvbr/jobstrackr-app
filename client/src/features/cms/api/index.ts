@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { cmsRequest } from "@/lib/datocms";
 import {
   type SharedContent,
@@ -7,7 +9,6 @@ import {
   APPLICATIONS,
   DOCUMENTS,
 } from "@/features/cms";
-import { useQuery } from "@tanstack/react-query";
 
 export const useGetSharedContent = () => {
   return useQuery({
