@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
 
 import supabase from "@/lib/supabase";
 import { ThirdPartyProvider, Button, Input } from "@/components";
@@ -51,9 +50,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
       );
     } finally {
       setLoading(false);
-      toast.success(
-        "Check your email on this device for a single-use link to sign in."
-      );
       setEmailSent(
         "Check your email on this device for a single-use link to sign in."
       );
@@ -96,7 +92,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           {emailSent && <p className={styles.notification}>{emailSent}</p>}
           <Input
             type='email'
-            label='Email'
+            label='Email *'
             autoComplete='email'
             disabled={loading || !!emailSent}
             {...register("email", { required: true })}
@@ -117,6 +113,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
           </Button>
         </form>
       </FormProvider>
+      <p className={styles.otp}>
+        * JobsTrackr uses passwordless sign in, meaning a single-use link will
+        be sent to your email adress. Clicking the link will sign you in and
+        redirect you to JobsTrackr.
+      </p>
       <button
         onClick={handleGuestLogin}
         disabled={loading}
