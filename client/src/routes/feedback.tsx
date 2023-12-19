@@ -1,5 +1,5 @@
 const Feedback = () => {
-  return <h1>Hello </h1>;
+  return <h1>Feedback</h1>;
 };
 
 export default Feedback;

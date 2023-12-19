@@ -23,7 +23,7 @@ export const links: LinkItemProps[] = [
     Icon: Icons.Document,
   },
   {
-    href: "prepare",
+    href: "tips",
     label: "Tips and prepare",
     Icon: Icons.Bulb,
   },

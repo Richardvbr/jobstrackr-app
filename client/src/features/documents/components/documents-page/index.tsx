@@ -20,18 +20,12 @@ type GroupedDocuments = {
   documents: Document[] | undefined;
 };
 
-export const DocumentsPage = ({
-  documents,
-  applications,
-  groupedDocuments,
-  content,
-}: DocumentsPageProps) => {
+export const DocumentsPage = () => {
   const { openDocumentModal } = useDocumentStore();
 
   const { data, error, isLoading } = useQuery<DocumentsContent, Error>({
     queryKey: ["cms-documents"],
     refetchOnWindowFocus: false,
-    initialData: content,
     queryFn: async () => {
       const data = await fetch("/api/cms/documents");
       return data.json();
@@ -42,14 +36,15 @@ export const DocumentsPage = ({
 
   return (
     <section>
+      <h1>Documents</h1>
       <Button onClick={() => openDocumentModal()}>
         <Icons.Plus />
-        {labels.addNewDocument}
+        {labels?.addNewDocument}
       </Button>
       <Card
         shadow
-        title={labels.allDocumentsTitle}
-        subtitle={labels.allDocumentsSubtitle}
+        title={labels?.allDocumentsTitle}
+        subtitle={labels?.allDocumentsSubtitle}
       >
         <p>test</p>
       </Card>
@@ -60,7 +55,7 @@ export const DocumentsPage = ({
       >
         <p>test</p>
       </Card>
-      <DocumentUploadModal applications={applications} />
+      <DocumentUploadModal applications={[]} />
     </section>
   );
 };

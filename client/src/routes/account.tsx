@@ -1,5 +1,5 @@
 const Account = () => {
-  return <h1>Hello </h1>;
+  return <h1>Account</h1>;
 };
 
 export default Account;

@@ -27,6 +27,7 @@ export const ApplicationsPage = () => {
 
   return (
     <section>
+      <h1>Applications</h1>
       <Button onClick={openModal}>
         <Icons.Plus />
         Add a new application

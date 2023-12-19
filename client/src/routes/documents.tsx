@@ -1,5 +1,7 @@
+import { DocumentsPage } from "@/features/documents";
+
 const Documents = () => {
-  return <h1>Hello </h1>;
+  return <DocumentsPage />;
 };
 
 export default Documents;
