@@ -2,20 +2,14 @@ import { useState } from "react";
 
 import useDebounce from "@/hooks/useDebounce";
 
-import type { ApplicationsContent } from "@/features/cms";
-import type { Application } from "@/types/application";
 import {
   ApplicationsTable,
   ApplicationModal,
   useApplicationStore,
+  useGetApplications,
 } from "@/features/applications";
 import { Icons, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
-
-type ApplicationsPageProps = {
-  data: Application[];
-  content: ApplicationsContent;
-};
 
 export const ApplicationsPage = () => {
   const openModal = useApplicationStore(
@@ -24,6 +18,8 @@ export const ApplicationsPage = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
+
+  const { data } = useGetApplications();
 
   return (
     <section>
@@ -39,7 +35,7 @@ export const ApplicationsPage = () => {
         placeholder='Enter your search query'
         handleChange={(e) => setSearchQuery(e.target.value)}
       />
-      <ApplicationsTable data={[]} searchQuery={debouncedSearchQuery} />
+      <ApplicationsTable data={data ?? []} searchQuery={debouncedSearchQuery} />
       <ApplicationModal />
     </section>
   );

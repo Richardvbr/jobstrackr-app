@@ -3,16 +3,16 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import cors from "cors";
 import dotenv from "dotenv";
 
+dotenv.config();
+
 import { appRouter } from "./trpc/router";
 import { createContext } from "./trpc";
-
-dotenv.config();
 
 const app: Express = express();
 const PORT = process.env.PORT ?? 4000;
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
