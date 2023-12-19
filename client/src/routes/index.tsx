@@ -1,21 +1,19 @@
-import DashboardPage from "./dashboard";
-import SignInPage from "./sign-in";
-import SignUpPage from "./sign-up";
-import AccountPage from "./account";
-import ApplicationsPage from "./applications";
-import DocumentsPage from "./documents";
-import FeedbackPage from "./feedback";
-import TipsPage from "./tips";
-import PrivateRoutes from "./private-routes";
+import Dashboard from "./dashboard";
+import SignIn from "./sign-in";
+import SignUp from "./sign-up";
+import Account from "./account";
+import Applications from "./applications";
+import Documents from "./documents";
+import Feedback from "./feedback";
+import Tips from "./tips";
 
 export {
-  DashboardPage,
-  SignInPage,
-  SignUpPage,
-  AccountPage,
-  ApplicationsPage,
-  DocumentsPage,
-  FeedbackPage,
-  TipsPage,
-  PrivateRoutes,
+  Dashboard,
+  SignIn,
+  SignUp,
+  Account,
+  Applications,
+  Documents,
+  Feedback,
+  Tips,
 };

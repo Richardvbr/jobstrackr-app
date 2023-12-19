@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import * as Routes from "@/routes";
 import { Providers } from "@/providers";
-import { AuthLayout } from "./components/layout";
+import { AppLayout, AuthLayout } from "./components/layout";
 import "@/styles/index.scss";
 
 const router = createBrowserRouter([
@@ -13,45 +13,45 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/sign-up",
-        element: <Routes.SignUpPage />,
+        element: <Routes.SignUp />,
       },
       {
         path: "/sign-in",
-        element: <Routes.SignInPage />,
+        element: <Routes.SignIn />,
       },
     ],
   },
   {
     path: "/",
-    element: <Routes.PrivateRoutes />,
+    element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <Routes.DashboardPage />,
+        element: <Routes.Dashboard />,
       },
       {
         path: "/dashboard",
-        element: <Routes.DashboardPage />,
+        element: <Routes.Dashboard />,
       },
       {
         path: "/applications",
-        element: <Routes.ApplicationsPage />,
+        element: <Routes.Applications />,
       },
       {
         path: "/documents",
-        element: <Routes.DocumentsPage />,
+        element: <Routes.Documents />,
       },
       {
         path: "/tips",
-        element: <Routes.TipsPage />,
+        element: <Routes.Tips />,
       },
       {
         path: "/feedback",
-        element: <Routes.FeedbackPage />,
+        element: <Routes.Feedback />,
       },
       {
         path: "/account",
-        element: <Routes.AccountPage />,
+        element: <Routes.Account />,
       },
     ],
   },

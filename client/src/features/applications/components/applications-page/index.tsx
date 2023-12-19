@@ -17,7 +17,7 @@ type ApplicationsPageProps = {
   content: ApplicationsContent;
 };
 
-export const ApplicationsPage = ({ data }: ApplicationsPageProps) => {
+export const ApplicationsPage = () => {
   const openModal = useApplicationStore(
     (state) => state.openNewApplicationModal
   );
@@ -38,7 +38,7 @@ export const ApplicationsPage = ({ data }: ApplicationsPageProps) => {
         placeholder='Enter your search query'
         handleChange={(e) => setSearchQuery(e.target.value)}
       />
-      <ApplicationsTable data={data || []} searchQuery={debouncedSearchQuery} />
+      <ApplicationsTable data={[]} searchQuery={debouncedSearchQuery} />
       <ApplicationModal />
     </section>
   );

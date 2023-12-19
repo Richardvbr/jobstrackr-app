@@ -1,5 +1,7 @@
-const ApplicationsPage = () => {
-  return <h1>Hello from applications </h1>;
+import { ApplicationsPage } from "@/features/applications";
+
+const Applications = () => {
+  return <ApplicationsPage />;
 };
 
-export default ApplicationsPage;
+export default Applications;

@@ -1,15 +1,11 @@
 import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 import { ApplicationForm, useApplicationStore } from "@/features/applications";
 import { Modal } from "@/components";
+import { useSearchParams } from "react-router-dom";
 
 export const ApplicationModal = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams(); // readonly
-
   const { applicationModalOpened, closeModal, openModal, isEditing } =
     useApplicationStore(
       useShallow((state) => ({
@@ -19,6 +15,8 @@ export const ApplicationModal = () => {
         isEditing: state.applicationModalOpened === "edit",
       }))
     );
+
+  const [searchParams] = useSearchParams();
 
   const action = searchParams.get("action");
   const newSearchParams = new URLSearchParams(searchParams.toString());
@@ -43,7 +41,7 @@ export const ApplicationModal = () => {
 
     closeModal();
     newSearchParams.delete("action");
-    router.replace(`${pathname}?${newSearchParams}`);
+    // router.replace(`${pathname}?${newSearchParams}`);
   };
 
   return (

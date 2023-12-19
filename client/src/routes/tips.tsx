@@ -1,5 +1,5 @@
-const TipsPage = () => {
+const Tips = () => {
   return <h1>Hello </h1>;
 };
 
-export default TipsPage;
+export default Tips;

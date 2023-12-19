@@ -47,44 +47,41 @@ const Modal = ({
     collapsed: { opacity: 0 },
   };
 
-  // Next prerenders components on the server where "document.body" is not available thus throwing an error, hence the browser window check
-  if (typeof window === "object") {
-    return createPortal(
-      <AnimatePresence>
-        {opened && (
-          <motion.div
+  return createPortal(
+    <AnimatePresence>
+      {opened && (
+        <motion.div
+          initial='collapsed'
+          animate='open'
+          exit='collapsed'
+          variants={animVariants}
+          transition={{ duration: 0.2 }}
+          className={styles.backdrop}
+        >
+          <motion.dialog
             initial='collapsed'
             animate='open'
             exit='collapsed'
             variants={animVariants}
             transition={{ duration: 0.2 }}
-            className={styles.backdrop}
+            {...props}
+            open={opened}
+            className={styles.modal}
+            ref={modalRef}
           >
-            <motion.dialog
-              initial='collapsed'
-              animate='open'
-              exit='collapsed'
-              variants={animVariants}
-              transition={{ duration: 0.2 }}
-              {...props}
-              open={opened}
-              className={styles.modal}
-              ref={modalRef}
-            >
-              <header>
-                <h1>{modalTitle}</h1>
-                <div className={styles.close} onClick={handleClose}>
-                  <Icons.Close />
-                </div>
-              </header>
-              {children}
-            </motion.dialog>
-          </motion.div>
-        )}
-      </AnimatePresence>,
-      document.body
-    );
-  }
+            <header>
+              <h1>{modalTitle}</h1>
+              <div className={styles.close} onClick={handleClose}>
+                <Icons.Close />
+              </div>
+            </header>
+            {children}
+          </motion.dialog>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
+  );
 };
 
 export default Modal;

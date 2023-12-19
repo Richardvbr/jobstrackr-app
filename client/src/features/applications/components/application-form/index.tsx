@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/react/shallow";
-import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { toast } from "react-hot-toast";
 
-import useUser from "@/hooks/useSession";
-import supabaseBrowserClient from "@/lib/supabase/client";
+import supabase from "@/lib/supabase";
+import { useUser } from "@/contexts/AuthContext";
+import { Application } from "@/types/application";
+import { useApplicationStore } from "@/features/applications";
 import {
   formItems,
   statusInput,
@@ -14,8 +16,6 @@ import {
   employmentTypeInput,
 } from "./formItems";
 import { Input, SelectInput, Button } from "@/components";
-import { useApplicationStore } from "@/features/applications";
-import { Application } from "@/types/application";
 import styles from "./styles.module.scss";
 
 type ApplicationFormInput = Application;
@@ -32,6 +32,8 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
     }))
   );
 
+  const navigate = useNavigate();
+
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
     // @ts-ignore
@@ -47,36 +49,34 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const { handleSubmit, reset, getValues } = formMethods;
-  const router = useRouter();
-  const supabase = supabaseBrowserClient();
 
-  // const { id: userId } = useUser();
+  const user = useUser();
 
   // Form submission
-  // const onSubmit: SubmitHandler<ApplicationFormInput> = async (formData) => {
-  //   setSubmitLoading(true);
+  const onSubmit: SubmitHandler<ApplicationFormInput> = async (formData) => {
+    setSubmitLoading(true);
 
-  //   try {
-  //     const { error } = await supabase
-  //       .from("applications")
-  //       .upsert(formData)
-  //       .eq("id", applicationData.id);
+    try {
+      const { error } = await supabase
+        .from("applications")
+        .upsert(formData)
+        .eq("id", applicationData.id);
 
-  //     toast.success(`Your application was changed`);
+      toast.success(`Your application was changed`);
 
-  //     if (error) {
-  //       setSubmitLoading(false);
-  //       return console.log(error);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setSubmitLoading(false);
-  //     reset();
-  //     handleCloseForm(false);
-  //     router.refresh();
-  //   }
-  // };
+      if (error) {
+        setSubmitLoading(false);
+        return console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitLoading(false);
+      reset();
+      handleCloseForm(false);
+      navigate(".", { replace: true });
+    }
+  };
 
   return (
     <FormProvider {...formMethods}>

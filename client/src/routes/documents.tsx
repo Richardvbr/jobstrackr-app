@@ -1,5 +1,5 @@
-const DocumentsPage = () => {
+const Documents = () => {
   return <h1>Hello </h1>;
 };
 
-export default DocumentsPage;
+export default Documents;

@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
-import type { ReactNode } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
+import { useSessionContext } from "@/contexts/AuthContext";
+import { Header, SidePanel } from "@/components";
 import styles from "./layout.module.scss";
-import { Header, SidePanel } from "..";
 
 export const AuthLayout = () => (
   <main className={styles.authPage}>
@@ -10,10 +10,21 @@ export const AuthLayout = () => (
   </main>
 );
 
-export const AppLayout = ({ children }: { children: ReactNode }) => (
-  <div className={styles.appLayout}>
-    <Header />
-    <SidePanel />
-    <main className={styles.appPage}>{children}</main>
-  </div>
-);
+export const AppLayout = () => {
+  const location = useLocation();
+  const { isLoading, session } = useSessionContext();
+
+  if (isLoading) return null;
+
+  return session ? (
+    <div>
+      <Header />
+      <SidePanel />
+      <main className={styles.appPage}>
+        <Outlet />
+      </main>
+    </div>
+  ) : (
+    <Navigate to='/sign-in' replace state={{ from: location }} />
+  );
+};

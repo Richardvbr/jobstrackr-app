@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-import supabaseBrowserClient from "@/lib/supabase/client";
 import type { Application } from "@/types/application";
+import type { SelectInputItem } from "@/types/elements";
 
 import { Modal, Input, Button, SelectInput } from "@/components";
-import { SelectInputItem } from "@/features/applications/components/application-form/formItems";
 import { useDocumentStore } from "@/features/documents";
 import styles from "./styles.module.scss";
 
@@ -20,10 +19,10 @@ export const DocumentUploadModal = ({
 }: DocumentUploadModalProps) => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const formMethods = useForm<any>();
-  const router = useRouter();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
 
-  const supabase = supabaseBrowserClient();
+  const navigate = useNavigate();
+
   const { handleSubmit, reset } = formMethods;
 
   const applicationSelect: SelectInputItem = {
@@ -51,7 +50,7 @@ export const DocumentUploadModal = ({
       setSubmitLoading(false);
       reset();
       closeDocumentModal();
-      router.refresh();
+      navigate(".", { replace: true });
     }
   };
 
