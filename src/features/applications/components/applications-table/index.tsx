@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import { useApplicationStore } from "@/features/applications";
@@ -14,7 +14,7 @@ type ApplicationsTable = {
 
 export const ApplicationsTable = ({ data, searchQuery }: ApplicationsTable) => {
   const [shownResults, setShownResults] = useState<number | string>(
-    data.length
+    data?.length
   );
 
   const { openModal, setActiveApplication } = useApplicationStore(
@@ -25,10 +25,6 @@ export const ApplicationsTable = ({ data, searchQuery }: ApplicationsTable) => {
   );
 
   const totalResults = data?.length;
-
-  useEffect(() => {
-    setShownResults(data?.length);
-  }, [data]);
 
   return (
     <section className={styles.wrapper}>

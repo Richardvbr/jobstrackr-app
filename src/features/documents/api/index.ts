@@ -1,12 +1,12 @@
 import supabase from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 
-export const getApplicationsQuery = () => {
+export const getDocumentsQuery = () => {
   return useQuery({
-    queryKey: ["get-applications"],
+    queryKey: ["get-documents"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("applications")
+        .from("documents")
         .select()
         .order("created_at", { ascending: false });
 
@@ -19,14 +19,14 @@ export const getApplicationsQuery = () => {
   });
 };
 
-export const getApplicationQuery = (applicationId: string) => {
+export const getDocumentQuery = (documentId: string) => {
   return useQuery({
-    queryKey: [`get-application-${applicationId}`],
+    queryKey: [`get-document-${documentId}`],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("applications")
+        .from("documents")
         .select()
-        .eq("id", applicationId);
+        .eq("id", documentId);
 
       if (error) {
         throw new Error(error.message);

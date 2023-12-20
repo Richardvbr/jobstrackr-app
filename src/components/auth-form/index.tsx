@@ -106,7 +106,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
             {loading
               ? "Loading..."
               : emailSent
-              ? "Check your email"
+              ? "Email sent!"
               : isLoginForm
               ? "Sign in"
               : "Sign up"}

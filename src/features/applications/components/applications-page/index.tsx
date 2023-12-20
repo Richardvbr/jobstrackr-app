@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import useDebounce from "@/hooks/useDebounce";
-import { useGetApplicationsContent } from "@/features/cms";
+import { useApplicationsContentQuery } from "@/features/cms";
 import {
   ApplicationsTable,
   ApplicationModal,
   useApplicationStore,
-  useGetApplications,
+  getApplicationsQuery,
 } from "@/features/applications";
 import { Icons, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
@@ -17,8 +17,8 @@ export const ApplicationsPage = () => {
   const openModal = useApplicationStore(
     (state) => state.openNewApplicationModal
   );
-  const { data: applications } = useGetApplications();
-  const { data: labels } = useGetApplicationsContent();
+  const { data: applications } = getApplicationsQuery();
+  const { data: labels } = useApplicationsContentQuery();
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
