@@ -39,7 +39,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
         email: formData.email,
         options: {
           shouldCreateUser: true,
-          emailRedirectTo: "http://localhost:3000/dashboard",
+          emailRedirectTo: import.meta.env.VITE_OTP_EMAIL_REDIRECT,
         },
       });
     } catch (error) {

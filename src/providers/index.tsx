@@ -8,7 +8,15 @@ import { AppContextProvider } from "@/contexts/AppContext";
 import { toastOptions } from "@/utils/toastOptions";
 
 export const Providers = ({ children }: PropsWithChildren) => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // Always fresh data, clear cache after 5 mins
+        staleTime: 0,
+        cacheTime: 300000,
+      },
+    },
+  });
 
   return (
     <SessionContextProvider supabaseClient={supabase}>
