@@ -34,6 +34,11 @@
   &:hover {
     background-color: $secondary;
   }
+
+  &:disabled {
+    background-color: $gray-300;
+    color: $gray-500;
+  }
 }
 
 .secondary {
