@@ -4,7 +4,7 @@ import {
   // getDocumentsQuery,
 } from "@/features/documents";
 import { getDocumentsContentQuery } from "@/features/cms";
-// import { getApplicationsQuery } from "@/features/applications";
+import { getApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
 
 export const DocumentsPage = () => {
@@ -13,7 +13,7 @@ export const DocumentsPage = () => {
   const { data: labels } = getDocumentsContentQuery();
 
   // const { data: documentsData } = getDocumentsQuery();
-  // const { data: applicationsData } = getApplicationsQuery();
+  const { data: applicationsData } = getApplicationsQuery();
 
   // Group documents based on their corresponding application
   // const groupedDocuments = applicationsData?.map((application) => ({

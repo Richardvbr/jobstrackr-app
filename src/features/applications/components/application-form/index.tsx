@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useShallow } from "zustand/react/shallow";
 import { format } from "date-fns";
-import { toast } from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
+import { useUser } from "@/contexts/AuthContext";
 import supabase from "@/lib/supabase";
 import { Application } from "@/types/application";
 import { useApplicationStore } from "@/features/applications";
@@ -31,7 +31,9 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
     }))
   );
 
-  const navigate = useNavigate();
+  const user = useUser();
+
+  const queryClient = useQueryClient();
 
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
@@ -54,16 +56,26 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
     setSubmitLoading(true);
 
     try {
-      const { error } = await supabase
-        .from("applications")
-        .upsert(formData)
-        .eq("id", "application_id");
+      if (isEditing) {
+        const { error } = await supabase
+          .from("applications")
+          .update(formData)
+          .eq("id", formData.id);
 
-      toast.success(`Your application was changed`);
+        if (error) {
+          setSubmitLoading(false);
+          return console.log(error);
+        }
+      } else {
+        const { error } = await supabase.from("applications").insert({
+          ...formData,
+          user_id: user?.id,
+        });
 
-      if (error) {
-        setSubmitLoading(false);
-        return console.log(error);
+        if (error) {
+          setSubmitLoading(false);
+          return console.log(error);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -71,7 +83,7 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
       setSubmitLoading(false);
       reset();
       handleCloseForm(false);
-      navigate(".", { replace: true });
+      queryClient.invalidateQueries({ queryKey: ["get-applications"] });
     }
   };
 
