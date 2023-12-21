@@ -14,6 +14,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
         // Always fresh data, clear cache after 5 mins
         staleTime: 0,
         cacheTime: 300000,
+        refetchOnWindowFocus: false,
       },
     },
   });

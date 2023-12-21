@@ -16,6 +16,7 @@ import {
 } from "./formItems";
 import { Input, SelectInput, Button } from "@/components";
 import styles from "./styles.module.scss";
+import toast from "react-hot-toast";
 
 type ApplicationFormInput = Application;
 
@@ -24,6 +25,9 @@ type ApplicationForm = {
 };
 
 export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
+  const user = useUser();
+  const queryClient = useQueryClient();
+
   const { applicationData, isEditing } = useApplicationStore(
     useShallow((state) => ({
       applicationData: state.activeApplication,
@@ -31,20 +35,17 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
     }))
   );
 
-  const user = useUser();
-
-  const queryClient = useQueryClient();
-
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
-    // @ts-ignore
-    defaultValues: isEditing && {
-      ...applicationData,
-      applied_at: format(
-        new Date(applicationData?.applied_at as string),
-        "yyyy-MM-dd"
-      ),
-    },
+    defaultValues: isEditing
+      ? {
+          ...applicationData,
+          applied_at: format(
+            new Date(applicationData?.applied_at as string),
+            "yyyy-MM-dd"
+          ),
+        }
+      : {},
   });
 
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
@@ -58,13 +59,15 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
     try {
       if (isEditing) {
         const { error } = await supabase
-          .from("applications")
+          .from("applications ")
           .update(formData)
           .eq("id", formData.id);
 
         if (error) {
           setSubmitLoading(false);
-          return console.log(error);
+          const errMessage = "An error occured when updating the application.";
+          toast.error(errMessage);
+          throw errMessage;
         }
       } else {
         const { error } = await supabase.from("applications").insert({
@@ -74,14 +77,16 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
 
         if (error) {
           setSubmitLoading(false);
-          return console.log(error);
+          const errMessage = "An error occured when adding the application.";
+          toast.error(errMessage);
+          throw errMessage;
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error submitting form:", error);
     } finally {
-      setSubmitLoading(false);
       reset();
+      setSubmitLoading(false);
       handleCloseForm(false);
       queryClient.invalidateQueries({ queryKey: ["get-applications"] });
     }

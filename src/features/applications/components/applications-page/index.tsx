@@ -31,7 +31,7 @@ export const ApplicationsPage = () => {
       </Button>
       <Input
         className={styles.search}
-        label='Search for an application'
+        label={labels?.applicationSearch}
         name='application-search-table'
         placeholder={labels?.applicationSearch}
         handleChange={(e) => setSearchQuery(e.target.value)}

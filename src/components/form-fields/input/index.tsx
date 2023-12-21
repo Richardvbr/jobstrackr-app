@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   name: string;
-  label: string;
+  label?: string;
   type?: HTMLInputTypeAttribute;
   value?: string | number;
   placeholder?: string;
