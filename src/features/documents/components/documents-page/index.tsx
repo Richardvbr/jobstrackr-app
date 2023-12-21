@@ -1,42 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
-
-import { useDocumentStore, DocumentUploadModal } from "@/features/documents";
-// import type { Application } from "@/types/application";
-// import type { Document } from "@/types/document";
-import { DocumentsContent } from "@/features/cms";
-
+import {
+  useDocumentStore,
+  DocumentUploadModal,
+  // getDocumentsQuery,
+} from "@/features/documents";
+import { getDocumentsContentQuery } from "@/features/cms";
+// import { getApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
-// import styles from "./styles.module.scss";
-
-// type DocumentsPageProps = {
-//   groupedDocuments: GroupedDocuments[];
-//   applications: Application[];
-//   documents: Document[];
-//   content: DocumentsContent;
-// };
-
-// type GroupedDocuments = {
-//   application: Application;
-//   documents: Document[] | undefined;
-// };
 
 export const DocumentsPage = () => {
   const { openDocumentModal } = useDocumentStore();
 
-  const { data } = useQuery<DocumentsContent, Error>({
-    queryKey: ["get-cms-documents"],
-    refetchOnWindowFocus: false,
-    queryFn: async () => {
-      const data = await fetch("/api/cms/documents");
-      return data.json();
-    },
-  });
+  const { data: labels } = getDocumentsContentQuery();
 
-  const labels = data?.documentsPage;
+  // const { data: documentsData } = getDocumentsQuery();
+  // const { data: applicationsData } = getApplicationsQuery();
+
+  // Group documents based on their corresponding application
+  // const groupedDocuments = applicationsData?.map((application) => ({
+  //   application: {
+  //     ...application,
+  //   },
+  //   documents: documentsData?.filter(
+  //     (doc) => doc.application_id === application.id
+  //   ),
+  // }));
 
   return (
     <section>
-      <h1>Documents</h1>
+      <h1>{labels?.title}</h1>
       <Button onClick={() => openDocumentModal()}>
         <Icons.Plus />
         {labels?.addNewDocument}
@@ -46,16 +37,16 @@ export const DocumentsPage = () => {
         title={labels?.allDocumentsTitle}
         subtitle={labels?.allDocumentsSubtitle}
       >
-        <p>test</p>
+        <p>Placeholder</p>
       </Card>
       <Card
         shadow
         title={`Documents per application`}
         subtitle={`Your documents grouped based on your applications`}
       >
-        <p>test</p>
+        <p>Placeholder</p>
       </Card>
-      <DocumentUploadModal applications={[]} />
+      <DocumentUploadModal applications={applicationsData ?? []} />
     </section>
   );
 };
