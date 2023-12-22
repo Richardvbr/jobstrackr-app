@@ -35,7 +35,6 @@ export const DOCUMENTS = gql`
       title
       addNewDocument
       allDocumentsTitle
-      allDocumentsSubtitle
     }
   }
 `;

@@ -32,18 +32,10 @@ export const DocumentsPage = () => {
         <Icons.Plus />
         {labels?.addNewDocument}
       </Button>
-      <Card
-        shadow
-        title={labels?.allDocumentsTitle}
-        subtitle={labels?.allDocumentsSubtitle}
-      >
+      <Card shadow title={labels?.allDocumentsTitle}>
         <p>Placeholder</p>
       </Card>
-      <Card
-        shadow
-        title={`Documents per application`}
-        subtitle={`Your documents grouped based on your applications`}
-      >
+      <Card shadow title={`Documents per application`}>
         <p>Placeholder</p>
       </Card>
       <DocumentUploadModal applications={applicationsData ?? []} />

@@ -28,6 +28,5 @@ export type DocumentsContent = {
     title: string;
     addNewDocument: string;
     allDocumentsTitle: string;
-    allDocumentsSubtitle: string;
   };
 };

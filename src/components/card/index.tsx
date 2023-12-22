@@ -6,26 +6,17 @@ type CardProps = React.ComponentPropsWithoutRef<"div"> & {
   shadow?: boolean;
   className?: string;
   title?: string;
-  subtitle?: string;
 };
 
-const Card = ({
-  children,
-  shadow,
-  className,
-  title,
-  subtitle,
-  ...props
-}: CardProps) => {
+const Card = ({ children, shadow, className, title, ...props }: CardProps) => {
   const classes = cn([styles.card], className, {
     [styles.shadow]: shadow,
   });
 
   return (
     <div {...props} className={classes}>
-      <h2 className={styles.title}>{title}</h2>
-      <p className={styles.subtitle}>{subtitle}</p>
-      {children}
+      {title && <h2>{title}</h2>}
+      <div className={styles.children}>{children}</div>
     </div>
   );
 };
