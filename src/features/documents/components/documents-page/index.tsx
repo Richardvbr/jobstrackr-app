@@ -38,6 +38,7 @@ export const DocumentsPage = () => {
       <Card shadow title={`Documents per application`}>
         <p>Placeholder</p>
       </Card>
+
       <DocumentUploadModal applications={applicationsData ?? []} />
     </section>
   );

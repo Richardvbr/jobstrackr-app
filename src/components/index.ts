@@ -12,6 +12,7 @@ import SidePanel from "./sidepanel";
 import Table from "./table";
 import ThemeToggle from "./theme-toggle";
 import ThirdPartyProvider from "./third-party-provider";
+import DonutChart from "./charts/DonutChart";
 
 export {
   AuthForm,
@@ -28,4 +29,5 @@ export {
   Table,
   ThemeToggle,
   ThirdPartyProvider,
+  DonutChart,
 };
