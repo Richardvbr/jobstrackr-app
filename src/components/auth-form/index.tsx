@@ -25,13 +25,13 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
   const { handleSubmit, register } = formMethods;
 
-  const isLoginForm = type === "sign-in";
+  const isSignInform = type === "sign-in";
 
   const guestEmail = "guest.be4e3dfc.d8c6@gmail.com";
   const guestPassword = "r4nd0ms3cur3pw";
 
   // Form submission
-  const submitLogin: SubmitHandler<AuthFormInput> = async (formData) => {
+  const submitSignIn: SubmitHandler<AuthFormInput> = async (formData) => {
     setLoading(true);
 
     try {
@@ -46,7 +46,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       console.log(error);
       setLoading(false);
       // setError(
-      //   "Failed to login. Please check your email address and password."
+      //   "Failed to sign in. Please check your email address and password."
       // );
     } finally {
       setLoading(false);
@@ -56,7 +56,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
     }
   };
 
-  const handleGuestLogin = async () => {
+  const handleGuestSignIn = async () => {
     try {
       setLoading(true);
       await supabase.auth.signInWithPassword({
@@ -65,7 +65,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       });
     } catch {
       setLoading(false);
-      setError("Failed to login as guest.");
+      setError("Failed to sign in as guest.");
     } finally {
       setLoading(false);
       navigate("/dashboard");
@@ -87,7 +87,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       </div>
       <div className={styles.divider}>Or</div>
       <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(submitLogin)}>
+        <form onSubmit={handleSubmit(submitSignIn)}>
           {error && <p className={styles.error}>{error}</p>}
           {emailSent && <p className={styles.notification}>{emailSent}</p>}
           <Input
@@ -107,7 +107,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
               ? "Loading..."
               : emailSent
               ? "Email sent!"
-              : isLoginForm
+              : isSignInform
               ? "Sign in"
               : "Sign up"}
           </Button>
@@ -119,9 +119,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
         redirect you to JobsTrackr.
       </p>
       <button
-        onClick={handleGuestLogin}
+        onClick={handleGuestSignIn}
         disabled={loading}
-        className={styles.guestLogin}
+        className={styles.guestSignIn}
       >
         Continue as guest
       </button>

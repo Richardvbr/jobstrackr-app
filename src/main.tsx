@@ -38,20 +38,24 @@ const router = createBrowserRouter([
         element: <Routes.Applications />,
       },
       {
+        path: "/questions",
+        element: <Routes.Questions />,
+      },
+      {
         path: "/documents",
         element: <Routes.Documents />,
       },
+      // {
+      //   path: "/tips",
+      //   element: <Routes.Tips />,
+      // },
       {
-        path: "/tips",
-        element: <Routes.Tips />,
+        path: "/settings",
+        element: <Routes.Settings />,
       },
       {
         path: "/feedback",
         element: <Routes.Feedback />,
-      },
-      {
-        path: "/account",
-        element: <Routes.Account />,
       },
     ],
   },

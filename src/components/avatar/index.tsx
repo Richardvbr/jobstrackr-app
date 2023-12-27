@@ -11,18 +11,18 @@ type AvatarProps = {
 };
 
 const Avatar = ({ data, onClick, size = "s" }: AvatarProps) => {
-  const { picture, full_name } = data?.user_metadata || {};
+  const { picture, full_name } = data?.user_metadata ?? {};
 
   return (
     <div className={styles.container} onClick={onClick}>
       {picture ? (
         <div className={cn(styles.image, styles[size])}>
-          <img alt='user image' src={picture} />
+          <img alt='user avatar' src={picture} />
         </div>
       ) : (
         <div className={cn(styles.placeholder, styles[size])}>
           <span>
-            {getFirstCharacterCapitalized(full_name || (data?.email as string))}
+            {getFirstCharacterCapitalized(full_name ?? (data?.email as string))}
           </span>
         </div>
       )}

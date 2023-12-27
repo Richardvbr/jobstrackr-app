@@ -10,7 +10,7 @@ export const SHARED = gql`
       dashboard
       questions
       feedback
-      logout
+      signOut
       documents
       tips
       account

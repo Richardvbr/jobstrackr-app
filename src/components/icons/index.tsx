@@ -3,7 +3,7 @@ export {
   MdOutlineFeedback as Feedback,
 } from "react-icons/md";
 export { RxHamburgerMenu as Hamburger } from "react-icons/rx";
-export { MdOutlineLogout as Logout } from "react-icons/md";
+export { MdOutlineLogout as Signout } from "react-icons/md";
 export { IoMdClose as Close } from "react-icons/io";
 export {
   HiPlus as Plus,
@@ -17,5 +17,8 @@ export {
   FaSortDown as SortDown,
   FaRegLightbulb as Bulb,
 } from "react-icons/fa6";
-export { FiExternalLink as ExternalLink } from "react-icons/fi";
+export {
+  FiExternalLink as ExternalLink,
+  FiSettings as Settings,
+} from "react-icons/fi";
 export { FaRegEdit as Edit } from "react-icons/fa";

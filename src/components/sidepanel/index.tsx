@@ -5,16 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "@/contexts/AppContext";
 import supabase from "@/lib/supabase";
 import useWindowSize from "@/hooks/useWindowSize";
-// import type { UserData } from "@/types/user";
-import { Icons, Avatar, LinkItem } from "@/components";
+import { Icons, LinkItem } from "@/components";
 import { links } from "./links";
 import { breakpoints } from "@/styles/variables";
 import styles from "./styles.module.scss";
-import { useGetUser } from "@/features/user/api";
-
-// type SidePanelProps = {
-//   data: UserData;
-// };
 
 const SidePanel = () => {
   const { sidePanelOpen, setSidePanelOpen } = useAppContext();
@@ -23,8 +17,6 @@ const SidePanel = () => {
   const navigate = useNavigate();
 
   const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
-
-  const { data } = useGetUser();
 
   const sidePanelStyles = cn({
     [styles.sidepanel]: true,
@@ -86,13 +78,12 @@ const SidePanel = () => {
         </ul>
         <footer className={styles.footer}>
           <LinkItem
-            href='account'
-            label='Account'
+            href='settings'
             customLink
             onClick={() => setSidePanelOpen(false)}
           >
-            <Avatar data={data} />
-            <p>Account</p>
+            <Icons.Settings />
+            <p>Settings</p>
           </LinkItem>
           <LinkItem
             href='feedback'
@@ -100,8 +91,12 @@ const SidePanel = () => {
             Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}
           />
-          <div onClick={() => handleSignOut()} style={{ marginLeft: "-3px" }}>
-            <LinkItem label='Logout' Icon={<Icons.Logout />} />
+          <div
+            onClick={() => handleSignOut()}
+            style={{ marginLeft: "-3px" }}
+            aria-label='sign out'
+          >
+            <LinkItem label='Sign out' Icon={<Icons.Signout />} />
           </div>
         </footer>
       </div>

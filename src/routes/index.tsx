@@ -1,4 +1,4 @@
-import Account from "./account";
+import Settings from "./settings";
 import Applications from "./applications";
 import Dashboard from "./dashboard";
 import Documents from "./documents";
@@ -9,7 +9,7 @@ import SignUp from "./sign-up";
 import Tips from "./tips";
 
 export {
-  Account,
+  Settings,
   Applications,
   Dashboard,
   Documents,

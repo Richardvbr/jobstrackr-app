@@ -22,9 +22,9 @@ export const links: LinkItemProps[] = [
     label: "Documents",
     Icon: Icons.Document,
   },
-  {
-    href: "tips",
-    label: "Tips and prepare",
-    Icon: Icons.Bulb,
-  },
+  // {
+  //   href: "tips",
+  //   label: "Tips and prepare",
+  //   Icon: Icons.Bulb,
+  // },
 ];

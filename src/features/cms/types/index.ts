@@ -7,7 +7,7 @@ export type SharedContent = {
     dashboard: string;
     questions: string;
     feedback: string;
-    logout: string;
+    signOut: string;
     documents: string;
     tips: string;
     account: string;
