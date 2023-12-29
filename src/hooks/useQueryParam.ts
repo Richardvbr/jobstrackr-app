@@ -4,14 +4,14 @@ type Params = {
   [key: string]: string;
 };
 
-export const useQueryParam = (query: string) => {
+export function useQueryParam(query: string) {
   const [searchParams] = useSearchParams();
   const param = searchParams.get(query);
 
   return param;
-};
+}
 
-export const useQueryParams = () => {
+export function useQueryParams() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const params: Params = {};
@@ -21,4 +21,4 @@ export const useQueryParams = () => {
   }
 
   return params;
-};
+}

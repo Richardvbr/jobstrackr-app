@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useUser } from "@/contexts/AuthContext";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { Application } from "@/types/application";
 import { useApplicationStore } from "@/features/applications";
 import {
@@ -24,7 +24,7 @@ type ApplicationForm = {
   handleCloseForm: (askConfirm?: boolean) => void;
 };
 
-export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
+export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   const user = useUser();
   const queryClient = useQueryClient();
 
@@ -126,4 +126,4 @@ export const ApplicationForm = ({ handleCloseForm }: ApplicationForm) => {
       </form>
     </FormProvider>
   );
-};
+}

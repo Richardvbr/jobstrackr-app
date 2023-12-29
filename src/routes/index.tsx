@@ -1,21 +1,66 @@
-import Settings from "./settings";
-import Applications from "./applications";
-import Dashboard from "./dashboard";
-import Documents from "./documents";
-import Feedback from "./feedback";
-import Questions from "./questions";
-import SignIn from "./sign-in";
-import SignUp from "./sign-up";
-import Tips from "./tips";
+import { createBrowserRouter } from "react-router-dom";
 
-export {
-  Settings,
-  Applications,
-  Dashboard,
-  Documents,
-  Feedback,
-  Questions,
-  SignIn,
-  SignUp,
-  Tips,
-};
+import { AppLayout, AuthLayout } from "@/components/layout";
+import { ApplicationsRoute } from "./applications";
+import { DashboardRoute } from "./dashboard";
+import { DocumentsRoute } from "./documents";
+import { FeedbackRoute } from "./feedback";
+import { QuestionsRoute } from "./questions";
+import { SettingsRoute } from "./settings";
+import { SignInRoute } from "./sign-in";
+import { SignUpRoute } from "./sign-up";
+// import { TipsRoute } from "./tips";
+
+export const router = createBrowserRouter([
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/sign-up",
+        element: <SignUpRoute />,
+      },
+      {
+        path: "/sign-in",
+        element: <SignInRoute />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <DashboardRoute />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardRoute />,
+      },
+      {
+        path: "/applications",
+        element: <ApplicationsRoute />,
+      },
+      {
+        path: "/questions",
+        element: <QuestionsRoute />,
+      },
+      {
+        path: "/documents",
+        element: <DocumentsRoute />,
+      },
+      //   {
+      //     path: "/tips",
+      //     element: <TipsRoute />,
+      //  },
+      {
+        path: "/settings",
+        element: <SettingsRoute />,
+      },
+      {
+        path: "/feedback",
+        element: <FeedbackRoute />,
+      },
+    ],
+  },
+]);

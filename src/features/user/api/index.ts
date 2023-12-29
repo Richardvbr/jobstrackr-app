@@ -1,4 +1,4 @@
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { UserData } from "@/types/user";
 import { useQuery } from "@tanstack/react-query";
 

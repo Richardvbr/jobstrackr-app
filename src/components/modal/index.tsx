@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 
-import useClickOutside from "@/hooks/useClickOutside";
+import { useClickOutside } from "@/hooks/useClickOutside";
 import { Icons } from "@/components";
 import styles from "./styles.module.scss";
 
@@ -14,13 +14,13 @@ type ModalProps = {
   [key: string]: any;
 };
 
-const Modal = ({
+export function Modal({
   children,
   opened = false,
   handleClose,
   modalTitle,
   ...props
-}: ModalProps) => {
+}: ModalProps) {
   const modalRef = useRef(null);
 
   // Close when clicked outside modal
@@ -82,6 +82,4 @@ const Modal = ({
     </AnimatePresence>,
     document.body
   );
-};
-
-export default Modal;
+}

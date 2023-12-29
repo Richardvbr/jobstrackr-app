@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 
 const columnHelper = createColumnHelper<ApplicationTableRow>();
 
-const columns = [
+export const columns = [
   columnHelper.accessor("edit", {
     header: "Edit",
     cell: () => <Icons.Edit />,
@@ -86,5 +86,3 @@ const columns = [
     enableSorting: true,
   }),
 ];
-
-export default columns;

@@ -1,9 +1,9 @@
 import { RefObject, useEffect } from "react";
 
-const useClickOutside = (
+export function useClickOutside(
   ref: RefObject<any>,
   handler: (event: Event) => void
-) => {
+) {
   useEffect(() => {
     const listener = (event: Event) => {
       if (!ref.current || ref.current.contains(event.target)) {
@@ -20,6 +20,4 @@ const useClickOutside = (
       document.removeEventListener("touchstart", listener);
     };
   }, [ref, handler]);
-};
-
-export default useClickOutside;
+}

@@ -8,7 +8,7 @@ type ApplicationStatusProps = {
   status: ApplicationStatusType;
 };
 
-export const ApplicationStatus = ({ status }: ApplicationStatusProps) => {
+export function ApplicationStatus({ status }: ApplicationStatusProps) {
   const lowercaseStatus = status?.toLowerCase();
 
   const classes = cn(styles.status, {
@@ -20,4 +20,4 @@ export const ApplicationStatus = ({ status }: ApplicationStatusProps) => {
       <p>{capitalizeFirstLetter(lowercaseStatus || "None")}</p>
     </div>
   );
-};
+}

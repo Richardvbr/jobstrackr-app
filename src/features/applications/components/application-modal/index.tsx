@@ -5,7 +5,7 @@ import { ApplicationForm, useApplicationStore } from "@/features/applications";
 import { Modal } from "@/components";
 import { useSearchParams } from "react-router-dom";
 
-export const ApplicationModal = () => {
+export function ApplicationModal() {
   const { applicationModalOpened, closeModal, openModal, isEditing } =
     useApplicationStore(
       useShallow((state) => ({
@@ -50,4 +50,4 @@ export const ApplicationModal = () => {
       <ApplicationForm handleCloseForm={handleCloseForm} />
     </Modal>
   );
-};
+}

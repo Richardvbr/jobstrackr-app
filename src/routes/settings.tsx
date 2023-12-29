@@ -1,9 +1,8 @@
+import { SettingsPage } from "@/features/settings";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
-const Settings = () => {
+export function SettingsRoute() {
   useDocumentTitle("Settings | JobsTrackr");
 
-  return <h1>Settings</h1>;
-};
-
-export default Settings;
+  return <SettingsPage />;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 import { getApplicationsContentQuery } from "@/features/cms";
 import {
   ApplicationsTable,
@@ -11,7 +11,7 @@ import {
 import { Icons, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
 
-export const ApplicationsPage = () => {
+export function ApplicationsPage() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const openModal = useApplicationStore(
@@ -43,4 +43,4 @@ export const ApplicationsPage = () => {
       <ApplicationModal />
     </section>
   );
-};
+}

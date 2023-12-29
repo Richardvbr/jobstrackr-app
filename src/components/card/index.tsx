@@ -8,7 +8,13 @@ type CardProps = React.ComponentPropsWithoutRef<"div"> & {
   title?: string;
 };
 
-const Card = ({ children, shadow, className, title, ...props }: CardProps) => {
+export function Card({
+  children,
+  shadow,
+  className,
+  title,
+  ...props
+}: CardProps) {
   const classes = cn([styles.card], className, {
     [styles.shadow]: shadow,
   });
@@ -19,6 +25,4 @@ const Card = ({ children, shadow, className, title, ...props }: CardProps) => {
       <div className={styles.children}>{children}</div>
     </div>
   );
-};
-
-export default Card;
+}

@@ -1,29 +1,45 @@
 import { useEffect } from "react";
-import useLocalStorage from "@/hooks/useLocalStorage";
 
-type Theme = "light" | "dark";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import styles from "./styles.module.scss";
 
-const ThemeToggle = () => {
+export function ThemeToggle() {
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
     prefersDark ? "dark" : "light"
   );
 
-  const switchTheme = () => {
-    const newTheme: Theme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
-
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
 
-  return (
-    <div className='theme-toggle' onClick={switchTheme}>
-      Switch theme
-    </div>
-  );
-};
+  const options = [
+    {
+      name: "light",
+      label: "Light theme",
+    },
+    {
+      name: "dark",
+      label: "Dark theme",
+    },
+  ];
 
-export default ThemeToggle;
+  return (
+    <fieldset className={styles.fieldset}>
+      {options.map(({ name, label }) => (
+        <div className={styles.themeOption} key={name}>
+          <input
+            type='radio'
+            id={name}
+            value={name}
+            name='theme'
+            checked={name === theme}
+            onChange={(e) => setTheme(e.target.value)}
+          />
+          <label htmlFor={name}>{label}</label>
+        </div>
+      ))}
+    </fieldset>
+  );
+}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { ThirdPartyProvider, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
 
@@ -16,7 +16,7 @@ type AuthFormInput = {
 };
 
 // Refactor to use react-hook-form
-const AuthForm = ({ type }: AuthFormProps) => {
+export function AuthForm({ type }: AuthFormProps) {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<string>("");
@@ -127,6 +127,4 @@ const AuthForm = ({ type }: AuthFormProps) => {
       </button>
     </div>
   );
-};
-
-export default AuthForm;
+}

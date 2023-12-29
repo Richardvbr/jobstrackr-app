@@ -29,7 +29,7 @@ type TableProps = {
   setShownResults?: Dispatch<SetStateAction<number | string>>;
 };
 
-const Table = ({
+export function Table({
   data,
   columns,
   onRowClick,
@@ -39,7 +39,7 @@ const Table = ({
   stickyHeader,
   searchValue,
   setShownResults,
-}: TableProps) => {
+}: TableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState<string>("");
 
@@ -114,7 +114,6 @@ const Table = ({
               })}
             >
               {row.getVisibleCells().map((cell) => (
-                // Make "Edit" cell clickable
                 <td
                   key={cell.id}
                   onClick={
@@ -136,6 +135,4 @@ const Table = ({
       </table>
     </div>
   );
-};
-
-export default Table;
+}

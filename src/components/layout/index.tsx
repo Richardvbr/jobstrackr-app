@@ -4,13 +4,15 @@ import { useSessionContext } from "@/contexts/AuthContext";
 import { Header, SidePanel } from "@/components";
 import styles from "./layout.module.scss";
 
-export const AuthLayout = () => (
-  <main className={styles.authPage}>
-    <Outlet />
-  </main>
-);
+export function AuthLayout() {
+  return (
+    <main className={styles.authPage}>
+      <Outlet />
+    </main>
+  );
+}
 
-export const AppLayout = () => {
+export function AppLayout() {
   const location = useLocation();
   const { isLoading, session } = useSessionContext();
 
@@ -27,4 +29,4 @@ export const AppLayout = () => {
   ) : (
     <Navigate to='/sign-in' replace state={{ from: location }} />
   );
-};
+}

@@ -1,9 +1,7 @@
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
-const Dashboard = () => {
+export function DashboardRoute() {
   useDocumentTitle("Dashboard | JobsTrackr");
 
   return <h1>Dashboard</h1>;
-};
-
-export default Dashboard;
+}

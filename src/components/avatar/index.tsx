@@ -10,7 +10,7 @@ type AvatarProps = {
   size?: "s" | "m" | "l";
 };
 
-const Avatar = ({ data, onClick, size = "s" }: AvatarProps) => {
+export function Avatar({ data, onClick, size = "s" }: AvatarProps) {
   const { picture, full_name } = data?.user_metadata ?? {};
 
   return (
@@ -28,6 +28,4 @@ const Avatar = ({ data, onClick, size = "s" }: AvatarProps) => {
       )}
     </div>
   );
-};
-
-export default Avatar;
+}

@@ -2,14 +2,14 @@ import cn from "clsx";
 import { Provider } from "@supabase/supabase-js/dist/module";
 
 import { capitalizeFirstLetter } from "@/utils/text";
-import supabase from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 import styles from "./styles.module.scss";
 
 type ThirdPartyProviderProps = {
   provider: Provider;
 };
 
-const ThirdPartyProvider = ({ provider }: ThirdPartyProviderProps) => {
+export function ThirdPartyProvider({ provider }: ThirdPartyProviderProps) {
   const providerName = capitalizeFirstLetter(provider);
 
   const handleSignIn = async () => {
@@ -37,6 +37,4 @@ const ThirdPartyProvider = ({ provider }: ThirdPartyProviderProps) => {
       <span>{`Continue with ${providerName}`}</span>
     </div>
   );
-};
-
-export default ThirdPartyProvider;
+}

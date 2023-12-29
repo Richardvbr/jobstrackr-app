@@ -4,14 +4,14 @@ import { Link, useLocation } from "react-router-dom";
 import type { LinkItemProps } from "@/types/links";
 import styles from "./styles.module.scss";
 
-const LinkItem = ({
+export function LinkItem({
   href,
   label,
   Icon,
   onClick,
   customLink,
   children,
-}: LinkItemProps) => {
+}: LinkItemProps) {
   const { pathname } = useLocation();
   const isActive = pathname.includes(href as string);
 
@@ -45,6 +45,4 @@ const LinkItem = ({
       )}
     </li>
   );
-};
-
-export default LinkItem;
+}

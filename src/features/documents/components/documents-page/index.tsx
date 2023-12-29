@@ -7,7 +7,7 @@ import { getDocumentsContentQuery } from "@/features/cms";
 import { getApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
 
-export const DocumentsPage = () => {
+export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
 
   const { data: labels } = getDocumentsContentQuery();
@@ -38,8 +38,7 @@ export const DocumentsPage = () => {
       <Card shadow title={`Documents per application`}>
         <p>Placeholder</p>
       </Card>
-
       <DocumentUploadModal applications={applicationsData ?? []} />
     </section>
   );
-};
+}

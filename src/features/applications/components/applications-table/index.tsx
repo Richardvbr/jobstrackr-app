@@ -4,7 +4,7 @@ import { useShallow } from "zustand/react/shallow";
 import { useApplicationStore } from "@/features/applications";
 import type { Application } from "@/types/application";
 import { Table } from "@/components";
-import columns from "./columns";
+import { columns } from "./columns";
 import styles from "./styles.module.scss";
 
 type ApplicationsTable = {
@@ -12,7 +12,7 @@ type ApplicationsTable = {
   searchQuery: string;
 };
 
-export const ApplicationsTable = ({ data, searchQuery }: ApplicationsTable) => {
+export function ApplicationsTable({ data, searchQuery }: ApplicationsTable) {
   const [shownResults, setShownResults] = useState<number | string>(
     data?.length
   );
@@ -47,4 +47,4 @@ export const ApplicationsTable = ({ data, searchQuery }: ApplicationsTable) => {
       </div>
     </section>
   );
-};
+}

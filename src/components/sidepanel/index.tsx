@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppContext } from "@/contexts/AppContext";
-import supabase from "@/lib/supabase";
-import useWindowSize from "@/hooks/useWindowSize";
+import { supabase } from "@/lib/supabase";
+import { useWindowSize } from "@/hooks/useWindowSize";
 import { Icons, LinkItem } from "@/components";
 import { links } from "./links";
 import { breakpoints } from "@/styles/variables";
 import styles from "./styles.module.scss";
 
-const SidePanel = () => {
+export function SidePanel() {
   const { sidePanelOpen, setSidePanelOpen } = useAppContext();
   const { width } = useWindowSize();
   const { pathname } = useLocation();
@@ -102,6 +102,4 @@ const SidePanel = () => {
       </div>
     </aside>
   );
-};
-
-export default SidePanel;
+}

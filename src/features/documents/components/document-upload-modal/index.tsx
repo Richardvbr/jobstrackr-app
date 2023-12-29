@@ -14,9 +14,9 @@ type DocumentUploadModalProps = {
   applications: Application[];
 };
 
-export const DocumentUploadModal = ({
+export function DocumentUploadModal({
   applications,
-}: DocumentUploadModalProps) => {
+}: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const formMethods = useForm<any>();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
@@ -86,4 +86,4 @@ export const DocumentUploadModal = ({
       </FormProvider>
     </Modal>
   );
-};
+}

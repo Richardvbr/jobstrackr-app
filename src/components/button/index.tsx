@@ -13,7 +13,7 @@ type ButtonProps = React.ComponentPropsWithoutRef<"button"> & {
   iconOnly?: boolean;
 };
 
-const Button = ({
+export function Button({
   children,
   variant = "primary",
   btnSize = "s",
@@ -22,7 +22,7 @@ const Button = ({
   onClick,
   iconOnly,
   ...props
-}: ButtonProps) => {
+}: ButtonProps) {
   const handleClick = () => {
     onClick && onClick();
   };
@@ -44,6 +44,4 @@ const Button = ({
       <span className={styles.inner}>{children}</span>
     </button>
   );
-};
-
-export default Button;
+}

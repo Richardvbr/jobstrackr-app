@@ -17,7 +17,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
 };
 
-const Input = ({
+export function Input({
   name,
   label,
   type = "text",
@@ -29,7 +29,7 @@ const Input = ({
   handleChange,
   className,
   ...props
-}: InputProps) => {
+}: InputProps) {
   const { register } = useFormContext() || {};
 
   return (
@@ -48,6 +48,4 @@ const Input = ({
       />
     </div>
   );
-};
-
-export default Input;
+}

@@ -9,7 +9,12 @@ type SelectInputProps = React.ComponentPropsWithoutRef<"select"> & {
   value?: string;
 };
 
-const SelectInput = ({ item, disabled, value, ...props }: SelectInputProps) => {
+export function SelectInput({
+  item,
+  disabled,
+  value,
+  ...props
+}: SelectInputProps) {
   const { register } = useFormContext() || {};
 
   const { name, label, options } = item;
@@ -32,6 +37,4 @@ const SelectInput = ({ item, disabled, value, ...props }: SelectInputProps) => {
       </select>
     </div>
   );
-};
-
-export default SelectInput;
+}

@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Icons } from "@/components";
 import styles from "./styles.module.scss";
 
-const Header = () => {
+export function Header() {
   const { setSidePanelOpen } = useAppContext();
   const { pathname } = useLocation();
 
@@ -23,6 +23,4 @@ const Header = () => {
       </Link>
     </header>
   );
-};
-
-export default Header;
+}

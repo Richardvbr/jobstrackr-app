@@ -1,9 +1,7 @@
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
-const Questions = () => {
+export function QuestionsRoute() {
   useDocumentTitle("Questions | JobsTrackr");
 
   return <h1>Questions</h1>;
-};
-
-export default Questions;
+}
