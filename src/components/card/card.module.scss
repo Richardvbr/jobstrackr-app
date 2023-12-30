@@ -7,9 +7,9 @@
   max-width: max-content;
 
   h2 {
+    @include font-semibold;
     position: relative;
     font-size: 18px;
-    font-weight: 600;
     margin: 0;
     padding: 25px 20px;
 

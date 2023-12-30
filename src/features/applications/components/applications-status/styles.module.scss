@@ -1,6 +1,6 @@
 .status {
   p {
-    font-weight: 600;
+    @include font-semibold;
     display: inline;
     padding: 8px 16px;
     border-radius: 25px;
