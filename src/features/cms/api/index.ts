@@ -10,7 +10,7 @@ import {
   DOCUMENTS,
 } from "@/features/cms";
 
-export const getSharedContentQuery = () => {
+export function getSharedContentQuery() {
   return useQuery({
     queryKey: ["get-cms-shared"],
     queryFn: async () => {
@@ -19,9 +19,9 @@ export const getSharedContentQuery = () => {
       return shared;
     },
   });
-};
+}
 
-export const getApplicationsContentQuery = () => {
+export function getApplicationsContentQuery() {
   return useQuery({
     queryKey: ["get-cms-applications"],
     queryFn: async () => {
@@ -32,9 +32,9 @@ export const getApplicationsContentQuery = () => {
       return applicationsPage;
     },
   });
-};
+}
 
-export const getDocumentsContentQuery = () => {
+export function getDocumentsContentQuery() {
   return useQuery({
     queryKey: ["get-cms-documents"],
     queryFn: async () => {
@@ -45,4 +45,4 @@ export const getDocumentsContentQuery = () => {
       return documentsPage;
     },
   });
-};
+}

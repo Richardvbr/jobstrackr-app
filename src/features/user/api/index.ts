@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { UserData } from "@/types/user";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetUser = () => {
+export function getUser() {
   return useQuery({
     queryKey: ["get-user"],
     queryFn: async () => {
@@ -15,4 +15,4 @@ export const useGetUser = () => {
       return data as UserData;
     },
   });
-};
+}

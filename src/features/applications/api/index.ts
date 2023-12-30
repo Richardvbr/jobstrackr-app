@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 
-export const getApplicationsQuery = () => {
+export function getApplicationsQuery() {
   return useQuery({
     queryKey: ["get-applications"],
     queryFn: async () => {
@@ -17,9 +17,9 @@ export const getApplicationsQuery = () => {
       return data;
     },
   });
-};
+}
 
-export const getApplicationQuery = (applicationId: string) => {
+export function getApplicationQuery(applicationId: string) {
   return useQuery({
     queryKey: [`get-application-${applicationId}`],
     queryFn: async () => {
@@ -35,4 +35,4 @@ export const getApplicationQuery = (applicationId: string) => {
       return data;
     },
   });
-};
+}

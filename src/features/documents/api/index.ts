@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 
-export const getDocumentsQuery = () => {
+export function getDocumentsQuery() {
   return useQuery({
     queryKey: ["get-documents"],
     queryFn: async () => {
@@ -17,9 +17,9 @@ export const getDocumentsQuery = () => {
       return data;
     },
   });
-};
+}
 
-export const getDocumentQuery = (documentId: string) => {
+export function getDocumentQuery(documentId: string) {
   return useQuery({
     queryKey: [`get-document-${documentId}`],
     queryFn: async () => {
@@ -35,4 +35,4 @@ export const getDocumentQuery = (documentId: string) => {
       return data;
     },
   });
-};
+}
