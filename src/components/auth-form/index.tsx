@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { supabase } from "@/lib/supabase";
@@ -31,7 +31,7 @@ export function AuthForm({ type }: AuthFormProps) {
   const guestPassword = "r4nd0ms3cur3pw";
 
   // Form submission
-  const submitSignIn: SubmitHandler<AuthFormInput> = async (formData) => {
+  async function submitSignIn(formData: AuthFormInput) {
     setLoading(true);
 
     try {
@@ -54,9 +54,9 @@ export function AuthForm({ type }: AuthFormProps) {
         "Check your email on this device for a single-use link to sign in."
       );
     }
-  };
+  }
 
-  const handleGuestSignIn = async () => {
+  async function handleGuestSignIn() {
     try {
       setLoading(true);
       await supabase.auth.signInWithPassword({
@@ -70,7 +70,23 @@ export function AuthForm({ type }: AuthFormProps) {
       setLoading(false);
       navigate("/dashboard");
     }
-  };
+  }
+
+  function getButtonLabel() {
+    if (loading) {
+      return "Loading...";
+    }
+
+    if (emailSent) {
+      return "Email sent!";
+    }
+
+    if (isSignInform) {
+      return "Sign in";
+    }
+
+    return "Sign up";
+  }
 
   return (
     <div className={styles.form}>
@@ -103,13 +119,7 @@ export function AuthForm({ type }: AuthFormProps) {
             disabled={loading || !!emailSent}
             fullWidth
           >
-            {loading
-              ? "Loading..."
-              : emailSent
-              ? "Email sent!"
-              : isSignInform
-              ? "Sign in"
-              : "Sign up"}
+            {getButtonLabel()}
           </Button>
         </form>
       </FormProvider>

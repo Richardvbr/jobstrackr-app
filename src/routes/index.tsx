@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { AppLayout, AuthLayout } from "@/components/layout";
-import { ApplicationsRoute } from "./applications";
 import { DashboardRoute } from "./dashboard";
 import { DocumentsRoute } from "./documents";
 import { FeedbackRoute } from "./feedback";
@@ -36,10 +35,6 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardRoute />,
-      },
-      {
-        path: "/applications",
-        element: <ApplicationsRoute />,
       },
       {
         path: "/questions",

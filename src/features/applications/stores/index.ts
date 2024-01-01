@@ -5,7 +5,7 @@ type ApplicationStore = {
   applicationModalOpened: "new" | "edit" | false;
   openNewApplicationModal: () => void;
   openEditApplicationModal: () => void;
-  closeApplicationModal: () => void;
+  closeApplicationModal: any;
   activeApplication: Application | null;
   setActiveApplication: (application: Application) => void;
 };

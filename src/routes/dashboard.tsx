@@ -1,7 +1,8 @@
+import { DashboardPage } from "@/features/dashboard";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export function DashboardRoute() {
   useDocumentTitle("Dashboard | JobsTrackr");
 
-  return <h1>Dashboard</h1>;
+  return <DashboardPage />;
 }

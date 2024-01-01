@@ -8,10 +8,10 @@ import {
   useApplicationStore,
   getApplicationsQuery,
 } from "@/features/applications";
-import { Icons, Button, Input } from "@/components";
+import { Icons, Button, Input, Card } from "@/components";
 import styles from "./styles.module.scss";
 
-export function ApplicationsPage() {
+export function Applications() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const openModal = useApplicationStore(
@@ -23,8 +23,7 @@ export function ApplicationsPage() {
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   return (
-    <section>
-      <h1>{labels?.title}</h1>
+    <Card title='Your applications' shadow>
       <Button onClick={openModal}>
         <Icons.Plus />
         {labels?.newApplication}
@@ -41,6 +40,6 @@ export function ApplicationsPage() {
         searchQuery={debouncedSearchQuery}
       />
       <ApplicationModal />
-    </section>
+    </Card>
   );
 }

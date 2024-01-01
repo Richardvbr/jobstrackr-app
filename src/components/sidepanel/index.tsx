@@ -61,7 +61,7 @@ export function SidePanel() {
         >
           <LinkItem
             label='New application'
-            href='applications?action=new-application'
+            href='dashboard?action=new-application'
             Icon={<Icons.Plus />}
           />
         </div>
