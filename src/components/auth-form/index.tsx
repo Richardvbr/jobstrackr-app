@@ -15,11 +15,10 @@ type AuthFormInput = {
   email: string;
 };
 
-// Refactor to use react-hook-form
 export function AuthForm({ type }: AuthFormProps) {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [emailSent, setEmailSent] = useState<string>("");
+  const [emailSent, setEmailSent] = useState<string | null>(null);
   const formMethods = useForm<AuthFormInput>();
   const navigate = useNavigate();
 
