@@ -1,5 +1,8 @@
 .table {
   position: relative;
+  border: 1px solid $gray-200;
+  border-radius: 10px;
+  overflow-y: auto;
 
   table {
     border-collapse: collapse;
@@ -122,6 +125,32 @@
         width: 100%;
         height: 1px;
         background-color: $gray-200;
+      }
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .table {
+    border: 1px solid $gray-500;
+  }
+
+  tr {
+    background: $gray-800;
+  }
+
+  svg {
+    stroke: $gray-200;
+  }
+
+  .stickyHeader {
+    table {
+      thead {
+        background-color: $gray-400;
+
+        &:after {
+          background-color: $gray-400;
+        }
       }
     }
   }

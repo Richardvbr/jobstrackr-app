@@ -19,11 +19,7 @@
 }
 
 .table {
-  background: white;
-  border-radius: 10px;
-  border: 1px solid $gray-200;
   max-height: 75vh;
-  overflow-y: auto;
 
   svg:hover {
     cursor: pointer;

@@ -50,6 +50,10 @@
   .card {
     background-color: $gray-800;
     color: $gray-300;
-    border: 1px solid #303542;
+    border: 1px solid $gray-650;
+
+    h2::after {
+      background: $gray-600;
+    }
   }
 }
