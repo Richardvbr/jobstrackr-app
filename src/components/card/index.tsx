@@ -21,7 +21,7 @@ export function Card({
 
   return (
     <div {...props} className={classes}>
-      {title && <h2>{title}</h2>}
+      {title && <h3>{title}</h3>}
       <div className={styles.children}>{children}</div>
     </div>
   );

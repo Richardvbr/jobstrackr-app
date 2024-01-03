@@ -101,14 +101,14 @@
 
 [data-theme="dark"] {
   .sidepanel {
-    background: $gray-800;
+    background: $gray-900;
   }
 
   .logoContainer {
     border-bottom: 2px solid $gray-600;
 
     img {
-      filter: invert(0.9);
+      filter: invert(1);
     }
   }
 

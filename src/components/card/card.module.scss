@@ -6,7 +6,7 @@
   z-index: 3;
   max-width: max-content;
 
-  h2 {
+  h3 {
     @include font-semibold;
     position: relative;
     font-size: 18px;
@@ -36,7 +36,7 @@
 
 @media screen and (min-width: $breakpoint-m) {
   .card {
-    h2 {
+    h3 {
       padding: 20px 30px;
     }
   }
@@ -48,11 +48,11 @@
 
 [data-theme="dark"] {
   .card {
-    background-color: $gray-800;
+    background-color: $gray-900;
     color: $gray-300;
-    border: 1px solid $gray-650;
+    border: 1px solid $gray-800;
 
-    h2::after {
+    h3::after {
       background: $gray-600;
     }
   }
