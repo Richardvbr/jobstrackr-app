@@ -106,6 +106,10 @@
 
   .logoContainer {
     border-bottom: 2px solid $gray-500;
+
+    img {
+      filter: invert(0.9);
+    }
   }
 
   .footer {
