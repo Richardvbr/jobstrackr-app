@@ -3,6 +3,9 @@
 }
 
 .sidepanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,12 +20,6 @@
   &Open {
     transform: translateX(0);
   }
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .logoContainer {
@@ -49,42 +46,20 @@
   }
 }
 
-.newApplication {
-  box-shadow: inset 0 10px 10px -10px rgba($color: $gray-300, $alpha: 1);
-  padding: 10px;
-}
-
-.list {
+.navLinks {
   display: flex;
   flex-direction: column;
-  margin-top: 0;
-  padding: 20px 10px;
+  margin-top: 25px;
   gap: 5px;
+  padding: 0 10px;
 }
 
 .footer {
-  @include font-semibold;
   display: flex;
   flex-direction: column;
-  gap: 5px;
   margin-top: auto;
   width: 100%;
   border-top: 2px solid $gray-200;
-  padding: 10px;
-
-  a {
-    text-decoration: none;
-    padding: 12px;
-    border-radius: 8px;
-    margin-left: -3px;
-    align-items: center;
-    transition: all;
-    transition-duration: 200ms;
-
-    &:hover {
-      background: $gray-100;
-    }
-  }
 }
 
 @media screen and (min-width: $breakpoint-m) {
@@ -110,33 +85,30 @@
     }
   }
 
-  .newApplication {
-    box-shadow: none;
-    padding: 15px 17px 25px;
-  }
-
   .menuTrigger {
     display: none;
   }
 
-  .list {
+  .navLinks {
     padding: 20px;
-    gap: 20px;
+    gap: 15px;
   }
 
-  .footer {
-    gap: 10px;
-    padding: 20px;
-
-    a {
-      padding: 12px;
-      margin-left: -3px;
-    }
+  .footer .navLinks {
+    padding: 0 20px;
   }
 }
 
 [data-theme="dark"] {
   .sidepanel {
-    background: #111;
+    background: $dark-800;
+  }
+
+  .logoContainer {
+    border-bottom: 2px solid $gray-500;
+  }
+
+  .footer {
+    border-top: 2px solid $gray-500;
   }
 }

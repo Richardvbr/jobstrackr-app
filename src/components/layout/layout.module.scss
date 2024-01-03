@@ -52,7 +52,7 @@
 
 [data-theme="dark"] {
   .appPage {
-    background: #121212;
+    background: $dark-900;
     box-shadow: inset 19px 0px 16px -6px rgba($color: $black, $alpha: 0.1);
   }
 }

@@ -4,14 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import type { LinkItemProps } from "@/types/links";
 import styles from "./styles.module.scss";
 
-export function LinkItem({
-  href,
-  label,
-  Icon,
-  onClick,
-  customLink,
-  children,
-}: LinkItemProps) {
+export function LinkItem({ href, label, Icon, onClick }: LinkItemProps) {
   const { pathname } = useLocation();
   const isActive = pathname.includes(href as string);
 
@@ -24,24 +17,19 @@ export function LinkItem({
     onClick && onClick();
   };
 
+  const itemContent = (
+    <>
+      <div className={styles.icon}>{Icon}</div>
+      <p>{label}</p>
+    </>
+  );
+
   return (
     <li className={linkItemStyles} onClick={handleClick}>
       {href ? (
-        <Link to={`/${href}`}>
-          {customLink ? (
-            <>{children}</>
-          ) : (
-            <>
-              <div className={styles.icon}>{Icon}</div>
-              <p>{label}</p>
-            </>
-          )}
-        </Link>
+        <Link to={`/${href}`}>{itemContent}</Link>
       ) : (
-        <div>
-          <div className={styles.icon}>{Icon}</div>
-          <p>{label}</p>
-        </div>
+        <div className={styles.noHrefButton}>{itemContent}</div>
       )}
     </li>
   );

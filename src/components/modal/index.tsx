@@ -39,7 +39,11 @@ export function Modal({
     }
 
     document.addEventListener("keydown", handleEscapeKey);
-    return () => document.removeEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.classList.remove(styles.hideOverflow);
+    };
   }, [opened]);
 
   const animVariants: Variants = {
@@ -55,7 +59,7 @@ export function Modal({
           animate='open'
           exit='collapsed'
           variants={animVariants}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className={styles.backdrop}
         >
           <motion.dialog
@@ -63,7 +67,7 @@ export function Modal({
             animate='open'
             exit='collapsed'
             variants={animVariants}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             {...props}
             open={opened}
             className={styles.modal}

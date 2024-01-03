@@ -1,20 +1,16 @@
-import { useEffect } from "react";
+import { type Theme, useTheme } from "@/contexts/ThemeContext";
 
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import styles from "./styles.module.scss";
 
 export function ThemeToggle() {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [theme, setTheme] = useLocalStorage(
-    "theme",
-    prefersDark ? "dark" : "light"
-  );
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
-  }, [theme]);
+  type ThemeOptions = {
+    name: Theme;
+    label: string;
+  };
 
-  const options = [
+  const options: ThemeOptions[] = [
     {
       name: "light",
       label: "Light theme",
@@ -22,6 +18,10 @@ export function ThemeToggle() {
     {
       name: "dark",
       label: "Dark theme",
+    },
+    {
+      name: "system",
+      label: "System default",
     },
   ];
 
@@ -35,7 +35,7 @@ export function ThemeToggle() {
             value={name}
             name='theme'
             checked={name === theme}
-            onChange={(e) => setTheme(e.target.value)}
+            onChange={(e) => setTheme(e.target.value as Theme)}
           />
           <label htmlFor={name}>{label}</label>
         </div>

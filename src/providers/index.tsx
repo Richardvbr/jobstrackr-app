@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 import { SessionContextProvider } from "@/contexts/AuthContext";
 import { AppContextProvider } from "@/contexts/AppContext";
 import { toastOptions } from "@/utils/toastOptions";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = new QueryClient({
@@ -20,15 +21,17 @@ export const Providers = ({ children }: PropsWithChildren) => {
   });
 
   return (
-    <SessionContextProvider supabaseClient={supabase}>
-      <AppContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <>
-            <Toaster position='bottom-center' toastOptions={toastOptions} />
-            {children}
-          </>
-        </QueryClientProvider>
-      </AppContextProvider>
-    </SessionContextProvider>
+    <ThemeProvider defaultTheme='system'>
+      <SessionContextProvider supabaseClient={supabase}>
+        <AppContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <>
+              <Toaster position='bottom-center' toastOptions={toastOptions} />
+              {children}
+            </>
+          </QueryClientProvider>
+        </AppContextProvider>
+      </SessionContextProvider>
+    </ThemeProvider>
   );
 };

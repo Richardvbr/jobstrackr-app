@@ -39,67 +39,53 @@ export function SidePanel() {
 
   return (
     <aside className={sidePanelStyles}>
-      <div className={styles.container}>
-        <div className={styles.logoContainer}>
-          <Link to='/dashboard' onClick={() => setSidePanelOpen(false)}>
-            <img
-              src='/assets/images/logo_cropped_transparent.svg'
-              alt='JobsTrackr logo'
-            />
-          </Link>
-          <div
-            aria-label='Close menu'
-            className={styles.menuTrigger}
-            onClick={() => setSidePanelOpen(false)}
-          >
-            <Icons.Close />
-          </div>
-        </div>
+      <div className={styles.logoContainer}>
+        <Link to='/dashboard' onClick={() => setSidePanelOpen(false)}>
+          <img
+            src='/assets/images/logo_cropped_transparent.svg'
+            alt='JobsTrackr logo'
+          />
+        </Link>
         <div
-          className={styles.newApplication}
+          aria-label='Close menu'
+          className={styles.menuTrigger}
           onClick={() => setSidePanelOpen(false)}
         >
-          <LinkItem
-            label='New application'
-            href='dashboard?action=new-application'
-            Icon={<Icons.Plus />}
-          />
+          <Icons.Close />
         </div>
-        <ul className={styles.list}>
-          {links.map(({ label, href, Icon }) => (
-            <LinkItem
-              onClick={() => setSidePanelOpen(false)}
-              key={label}
-              href={href}
-              label={label}
-              Icon={<Icon />}
-            />
-          ))}
-        </ul>
-        <footer className={styles.footer}>
+      </div>
+      <ul className={styles.navLinks}>
+        {links.map(({ label, href, Icon }) => (
+          <LinkItem
+            onClick={() => setSidePanelOpen(false)}
+            key={label}
+            href={href}
+            label={label}
+            Icon={<Icon />}
+          />
+        ))}
+      </ul>
+      <footer className={styles.footer}>
+        <ul className={styles.navLinks}>
           <LinkItem
             href='settings'
-            customLink
+            label='Settings'
+            Icon={<Icons.Settings />}
             onClick={() => setSidePanelOpen(false)}
-          >
-            <Icons.Settings />
-            <p>Settings</p>
-          </LinkItem>
+          />
           <LinkItem
             href='feedback'
             label='Feedback'
             Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}
           />
-          <div
-            onClick={() => handleSignOut()}
-            style={{ marginLeft: "-3px" }}
-            aria-label='sign out'
-          >
-            <LinkItem label='Sign out' Icon={<Icons.Signout />} />
-          </div>
-        </footer>
-      </div>
+          <LinkItem
+            label='Sign out'
+            onClick={handleSignOut}
+            Icon={<Icons.Signout />}
+          />
+        </ul>
+      </footer>
     </aside>
   );
 }

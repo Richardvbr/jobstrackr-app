@@ -1,5 +1,13 @@
 .linkItem {
   list-style: none;
+  border-radius: 5px;
+  transition: all;
+  transition-duration: 200ms;
+
+  &:hover {
+    cursor: pointer;
+    background: $gray-100;
+  }
 
   &Active {
     background: $gray-100;
@@ -7,21 +15,16 @@
   }
 
   a,
-  > div {
-    text-decoration: none;
-    color: $secondary;
+  .noHrefButton {
+    -webkit-backface-visibility: hidden;
     display: flex;
     align-items: center;
     gap: 20px;
     border-radius: 5px;
+    text-decoration: none;
+    color: $secondary;
+    height: inherit;
     padding: 12px;
-    transition: all;
-    transition-duration: 200ms;
-
-    &:hover {
-      cursor: pointer;
-      background: $gray-100;
-    }
 
     .icon,
     svg {
@@ -30,13 +33,13 @@
     }
 
     p {
-      @include font-semibold;
+      @include font-medium;
     }
   }
 
   [data-theme="dark"] & {
     a,
-    > div {
+    .noHrefButton {
       color: $gray-300;
 
       &:hover {
@@ -47,7 +50,7 @@
     }
 
     &Active a,
-    &Active div {
+    &Active .noHrefButton {
       background: $gray-700;
       color: $gray-100;
     }
