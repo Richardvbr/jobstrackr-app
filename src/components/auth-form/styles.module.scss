@@ -107,6 +107,7 @@
   color: $gray-500;
   border: none;
   background: none;
+
   &:hover {
     cursor: pointer;
     color: $secondary;
@@ -116,6 +117,26 @@
 @media screen and (min-width: $breakpoint-s) {
   .form {
     padding: 40px;
-    width: auto;
+    width: 400px;
+  }
+}
+
+[data-theme="dark"] {
+  .form {
+    background: $gray-800;
+    border: 1px solid $gray-650;
+  }
+
+  .header img {
+    filter: invert(0.9);
+  }
+
+  .guestSignIn {
+    color: $gray-300;
+
+    &:hover {
+      cursor: pointer;
+      color: $gray-400;
+    }
   }
 }

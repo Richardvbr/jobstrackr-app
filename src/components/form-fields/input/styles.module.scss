@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 
   input {
     @include input-base;
@@ -10,7 +10,13 @@
   }
 
   label {
-    @include font-semibold;
+    @include font-medium;
     font-size: 14px;
+  }
+}
+
+[data-theme="dark"] {
+  .wrapper label {
+    color: $gray-300;
   }
 }

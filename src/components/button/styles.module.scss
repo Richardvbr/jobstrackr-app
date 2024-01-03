@@ -87,3 +87,18 @@
     font-size: 1rem;
   }
 }
+
+[data-theme="dark"] {
+  .primary {
+    background-color: $secondary;
+
+    &:hover {
+      background-color: $gray-950;
+    }
+
+    &:disabled {
+      background-color: $gray-300;
+      color: $gray-500;
+    }
+  }
+}
