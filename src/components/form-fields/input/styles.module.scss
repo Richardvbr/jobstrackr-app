@@ -16,7 +16,19 @@
 }
 
 [data-theme="dark"] {
-  .wrapper label {
-    color: $gray-200;
+  .wrapper {
+    input {
+      background: $gray-600;
+      border: 1px solid $dark-border;
+      color: $gray-100;
+
+      &:focus,
+      &:hover {
+        border: 1px solid $gray-500;
+      }
+    }
+    label {
+      color: $gray-200;
+    }
   }
 }

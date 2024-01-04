@@ -52,11 +52,11 @@
 
 [data-theme="dark"] {
   .authPage {
-    background: $gray-1000;
+    background: $dark-primary;
   }
 
   .appPage {
-    background: $gray-1000;
+    background: $dark-primary;
     box-shadow: inset 19px 0px 16px -6px rgba($color: $black, $alpha: 0.15);
   }
 }
