@@ -1,12 +1,15 @@
+import { Link, useRouterState } from "@tanstack/react-router";
+
 import { useAppContext } from "@/contexts/AppContext";
-import { Link, useLocation } from "react-router-dom";
 
 import { Icons } from "@/components";
 import styles from "./styles.module.scss";
 
 export function Header() {
   const { setSidePanelOpen } = useAppContext();
-  const { pathname } = useLocation();
+  const {
+    location: { pathname },
+  } = useRouterState();
 
   const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
 

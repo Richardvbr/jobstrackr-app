@@ -1,5 +1,4 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-
+import { Navigate, Outlet } from "@tanstack/react-router";
 import { useSessionContext } from "@/contexts/AuthContext";
 import { Header, SidePanel } from "@/components";
 import styles from "./layout.module.scss";
@@ -13,7 +12,6 @@ export function AuthLayout() {
 }
 
 export function AppLayout() {
-  const location = useLocation();
   const { isLoading, session } = useSessionContext();
 
   if (isLoading) return null;
@@ -27,6 +25,6 @@ export function AppLayout() {
       </main>
     </div>
   ) : (
-    <Navigate to='/sign-in' replace state={{ from: location }} />
+    <Navigate to='/sign-in' replace from={location.href} />
   );
 }

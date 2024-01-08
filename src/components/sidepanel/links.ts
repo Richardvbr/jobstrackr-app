@@ -3,17 +3,17 @@ import { Icons } from "@/components";
 
 export const links: LinkItemProps[] = [
   {
-    href: "dashboard",
+    href: "/dashboard",
     label: "Dashboard",
     Icon: Icons.Dashboard,
   },
   {
-    href: "questions",
+    href: "/questions",
     label: "Questions",
     Icon: Icons.Question,
   },
   {
-    href: "documents",
+    href: "/documents",
     label: "Documents",
     Icon: Icons.Document,
   },

@@ -52,10 +52,10 @@
 }
 
 .danger {
-  background-color: $red-700;
+  background-color: $red-600;
 
   &:hover {
-    background-color: $red-600;
+    background-color: $red-500;
   }
 
   &:disabled {
@@ -99,6 +99,16 @@
     &:disabled {
       background-color: $gray-300;
       color: $gray-500;
+    }
+  }
+
+  .secondary {
+    color: $gray-100;
+    background-color: transparent;
+    border: 1px solid $gray-500;
+
+    &:hover {
+      background-color: $gray-700;
     }
   }
 }

@@ -4,8 +4,8 @@
   gap: 5px;
 
   select {
-    border: none;
-    outline: 1px solid $gray-400;
+    border: 1px solid $gray-400;
+    outline: none;
     border-radius: 3px;
     padding: 7px 10px;
     font-size: 14px;
@@ -17,7 +17,7 @@
 
     &:focus,
     &:hover {
-      outline: 1px solid $secondary;
+      border: 1px solid $secondary;
       cursor: pointer;
     }
   }
@@ -25,5 +25,23 @@
   label {
     @include font-semibold;
     font-size: 14px;
+  }
+}
+
+[data-theme="dark"] {
+  .wrapper {
+    select {
+      background: $gray-600;
+      border: 1px solid $dark-border;
+      color: $gray-100;
+
+      &:focus,
+      &:hover {
+        border: 1px solid $gray-500;
+      }
+    }
+    label {
+      color: $gray-200;
+    }
   }
 }

@@ -23,14 +23,12 @@ export const Providers = ({ children }: PropsWithChildren) => {
   return (
     <ThemeProvider defaultTheme='system'>
       <SessionContextProvider supabaseClient={supabase}>
-        <AppContextProvider>
-          <QueryClientProvider client={queryClient}>
-            <>
-              <Toaster position='bottom-center' toastOptions={toastOptions} />
-              {children}
-            </>
-          </QueryClientProvider>
-        </AppContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <AppContextProvider>
+            <Toaster position='bottom-center' toastOptions={toastOptions} />
+            {children}
+          </AppContextProvider>
+        </QueryClientProvider>
       </SessionContextProvider>
     </ThemeProvider>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useNavigate } from "@tanstack/react-router";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 import type { Application } from "@/types/application";
 import type { SelectInputItem } from "@/types/elements";

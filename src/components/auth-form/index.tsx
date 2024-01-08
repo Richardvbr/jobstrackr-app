@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 
 import { supabase } from "@/lib/supabase";
 import { ThirdPartyProvider, Button, Input } from "@/components";
@@ -67,7 +67,7 @@ export function AuthForm({ type }: AuthFormProps) {
       setError("Failed to sign in as guest.");
     } finally {
       setLoading(false);
-      navigate("/dashboard");
+      navigate({ to: "/dashboard" });
     }
   }
 
