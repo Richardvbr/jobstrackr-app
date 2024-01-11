@@ -1,7 +1,6 @@
 import {
   useDocumentStore,
   DocumentUploadModal,
-  getDocumentsQuery,
   // getDocumentsQuery,
 } from "@/features/documents";
 import { getDocumentsContentQuery } from "@/features/cms";
