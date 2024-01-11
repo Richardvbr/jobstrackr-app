@@ -5,6 +5,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/lib/supabase";
 import { ThirdPartyProvider, Button, Input } from "@/components";
 import styles from "./styles.module.scss";
+import { useUser } from "@/contexts/AuthContext";
 
 type AuthFormProps = {
   type: "sign-up" | "sign-in";
@@ -29,6 +30,8 @@ export function AuthForm({ type }: AuthFormProps) {
   const guestEmail = "guest.be4e3dfc.d8c6@gmail.com";
   const guestPassword = "r4nd0ms3cur3pw";
 
+  const user = useUser();
+
   // Form submission
   async function submitSignIn(formData: AuthFormInput) {
     setLoading(true);
@@ -49,9 +52,7 @@ export function AuthForm({ type }: AuthFormProps) {
       // );
     } finally {
       setLoading(false);
-      setEmailSent(
-        "Check your email on this device for a single-use link to sign in."
-      );
+      setEmailSent("Check your email on this device for a single-use link to sign in.");
     }
   }
 
@@ -66,8 +67,9 @@ export function AuthForm({ type }: AuthFormProps) {
       setLoading(false);
       setError("Failed to sign in as guest.");
     } finally {
-      setLoading(false);
-      navigate({ to: "/dashboard" });
+      if (user) {
+        navigate({ to: "/dashboard" });
+      }
     }
   }
 
@@ -90,10 +92,7 @@ export function AuthForm({ type }: AuthFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles.header}>
-        <img
-          src={`/assets/images/logo_cropped_transparent.svg`}
-          alt='Jobstrackr logo'
-        />
+        <img src={`/assets/images/logo_cropped_transparent.svg`} alt='Jobstrackr logo' />
         <p>Sign in to start managing your job search.</p>
       </div>
       <div className={styles.providers}>
@@ -112,26 +111,16 @@ export function AuthForm({ type }: AuthFormProps) {
             disabled={loading || !!emailSent}
             {...register("email", { required: true })}
           />
-          <Button
-            variant='primary'
-            type='submit'
-            disabled={loading || !!emailSent}
-            fullWidth
-          >
+          <Button variant='primary' type='submit' disabled={loading || !!emailSent} fullWidth>
             {getButtonLabel()}
           </Button>
         </form>
       </FormProvider>
       <p className={styles.otp}>
-        * JobsTrackr uses passwordless sign-in, meaning a single-use link will
-        be sent to your email address. Clicking the link will sign you in and
-        redirect you to JobsTrackr.
+        * JobsTrackr uses passwordless sign-in, meaning a single-use link will be sent to your email
+        address. Clicking the link will sign you in and redirect you to JobsTrackr.
       </p>
-      <button
-        onClick={handleGuestSignIn}
-        disabled={loading}
-        className={styles.guestSignIn}
-      >
+      <button onClick={handleGuestSignIn} disabled={loading} className={styles.guestSignIn}>
         Continue as guest
       </button>
     </div>
