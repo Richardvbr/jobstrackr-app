@@ -14,9 +14,7 @@ type DocumentUploadModalProps = {
   applications: Application[];
 };
 
-export function DocumentUploadModal({
-  applications,
-}: DocumentUploadModalProps) {
+export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const formMethods = useForm<any>();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
@@ -51,36 +49,25 @@ export function DocumentUploadModal({
       reset();
       closeDocumentModal();
       queryClient.invalidateQueries({
-        queryKey: ["get-applications", "get-documents"],
+        queryKey: ["get-applications"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["get-documents"],
       });
     }
   };
 
   return (
-    <Modal
-      opened={documentModalOpened}
-      handleClose={() => closeDocumentModal()}
-      modalTitle={`Upload a new document`}
-    >
+    <Modal opened={documentModalOpened} handleClose={() => closeDocumentModal()} modalTitle={`Upload a new document`}>
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input name='document-name' label='Document name' required />
-          <Input
-            name='document-file-select'
-            label='Select a file'
-            type='file'
-            required
-          />
+          <Input name='document-file-select' label='Select a file' type='file' required />
           <SelectInput item={applicationSelect} />
           <Button disabled={submitLoading} type='submit'>
             Upload document
           </Button>
-          <Button
-            disabled={submitLoading}
-            variant='secondary'
-            type='button'
-            onClick={() => closeDocumentModal()}
-          >
+          <Button disabled={submitLoading} variant='secondary' type='button' onClick={() => closeDocumentModal()}>
             Cancel
           </Button>
         </form>
