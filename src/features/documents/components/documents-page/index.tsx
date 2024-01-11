@@ -13,7 +13,7 @@ export function DocumentsPage() {
 
   const { data: labels } = getDocumentsContentQuery();
 
-  const { data: documentsData } = getDocumentsQuery();
+  // const { data: documentsData } = getDocumentsQuery();
   const { data: applicationsData } = getApplicationsQuery();
 
   // Group documents based on their corresponding application
