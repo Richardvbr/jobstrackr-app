@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useNavigate } from "@tanstack/react-router";
 
 import { supabase } from "@/lib/supabase";
-import { ThirdPartyProvider, Button, Input } from "@/components";
-import styles from "./styles.module.scss";
 import { useUser } from "@/contexts/AuthContext";
+
+import { ThirdPartyProvider, Button, Input } from "@/components";
+
+import styles from "./styles.module.scss";
 
 type AuthFormProps = {
   type: "sign-up" | "sign-in";
@@ -31,6 +33,13 @@ export function AuthForm({ type }: AuthFormProps) {
   const guestPassword = "r4nd0ms3cur3pw";
 
   const user = useUser();
+
+  // Redirect if user is found
+  useEffect(() => {
+    if (user) {
+      navigate({ to: "/dashboard" });
+    }
+  }, [user]);
 
   // Form submission
   async function submitSignIn(formData: AuthFormInput) {
@@ -66,10 +75,6 @@ export function AuthForm({ type }: AuthFormProps) {
     } catch {
       setLoading(false);
       setError("Failed to sign in as guest.");
-    } finally {
-      if (user) {
-        navigate({ to: "/dashboard" });
-      }
     }
   }
 
