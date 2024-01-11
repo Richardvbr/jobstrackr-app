@@ -16,7 +16,7 @@ export function ThirdPartyProvider({ provider }: ThirdPartyProviderProps) {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: "/dashboard",
+        redirectTo: import.meta.env.VITE_OTP_EMAIL_REDIRECT,
       },
     });
   };
@@ -29,10 +29,7 @@ export function ThirdPartyProvider({ provider }: ThirdPartyProviderProps) {
   return (
     <div onClick={handleSignIn} className={providerClasses}>
       <div className={styles.logo}>
-        <img
-          src={`/assets/images/${provider}.svg`}
-          alt={`${providerName} logo`}
-        />
+        <img src={`/assets/images/${provider}.svg`} alt={`${providerName} logo`} />
       </div>
       <span>{`Continue with ${providerName}`}</span>
     </div>
