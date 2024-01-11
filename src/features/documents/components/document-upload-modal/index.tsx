@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
 import type { Application } from "@/types/application";
@@ -20,8 +20,7 @@ export function DocumentUploadModal({
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const formMethods = useForm<any>();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
-
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { handleSubmit, reset } = formMethods;
 
@@ -51,7 +50,9 @@ export function DocumentUploadModal({
       setSubmitLoading(false);
       reset();
       closeDocumentModal();
-      navigate(".", { replace: true });
+      queryClient.invalidateQueries({
+        queryKey: ["get-applications", "get-documents"],
+      });
     }
   };
 

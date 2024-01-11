@@ -16,7 +16,6 @@
 
   a,
   .noHrefButton {
-    -webkit-backface-visibility: hidden;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -36,23 +35,24 @@
       @include font-medium;
     }
   }
+}
 
-  [data-theme="dark"] & {
+[data-theme="dark"] {
+  .linkItem {
+    &:hover {
+      cursor: pointer;
+      background: $gray-700;
+      color: $gray-100;
+    }
+
+    &Active {
+      background: $gray-700;
+      color: $gray-100;
+    }
+
     a,
     .noHrefButton {
       color: $gray-300;
-
-      &:hover {
-        cursor: pointer;
-        background: $gray-700;
-        color: $gray-100;
-      }
-    }
-
-    &Active a,
-    &Active .noHrefButton {
-      background: $gray-700;
-      color: $gray-100;
     }
   }
 }

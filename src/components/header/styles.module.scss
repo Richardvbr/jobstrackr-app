@@ -23,3 +23,14 @@
     display: none;
   }
 }
+
+[data-theme="dark"] {
+  .header {
+    background-color: $dark-secondary;
+
+    img,
+    svg {
+      filter: invert(1);
+    }
+  }
+}
