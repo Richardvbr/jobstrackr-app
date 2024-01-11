@@ -17,6 +17,7 @@ import { SettingsRoute } from "./settings";
 
 const rootRoute = new RootRoute();
 
+// Auth layout and routes
 const authRoute = new Route({
   getParentRoute: () => rootRoute,
   id: "auth-layout",
@@ -35,7 +36,8 @@ const signUpRoute = new Route({
   component: () => <SignUpRoute />,
 });
 
- const appRoute = new Route({
+// App layout and routes
+const appRoute = new Route({
   getParentRoute: () => rootRoute,
   id: "app-layout",
   component: () => <AppLayout />,
@@ -47,47 +49,51 @@ const indexRoute = new Route({
   beforeLoad: () => {
     throw redirect({
       to: dashboardRoute.to,
-      
-    })
-  }
+    });
+  },
 });
 
- const dashboardRoute = new Route({
+const dashboardRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/dashboard",
   component: () => <DashboardRoute />,
 });
 
- const settingsRoute = new Route({
+const settingsRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/settings",
   component: () => <SettingsRoute />,
 });
 
- const feedbackRoute = new Route({
+const feedbackRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/feedback",
   component: () => <FeedbackRoute />,
 });
 
- const questionsRoute = new Route({
+const questionsRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/questions",
   component: () => <QuestionsRoute />,
 });
 
- const documentsRoute = new Route({
+const documentsRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/documents",
   component: () => <DocumentsRoute />,
 });
 
-
 const routeTree = rootRoute.addChildren([
   // @ts-expect-error
   indexRoute,
   authRoute.addChildren([signInRoute, signUpRoute]),
-  appRoute.addChildren([dashboardRoute, documentsRoute, questionsRoute, settingsRoute, feedbackRoute]),
+  appRoute.addChildren([
+    dashboardRoute,
+    documentsRoute,
+    questionsRoute,
+    settingsRoute,
+    feedbackRoute,
+  ]),
 ]);
 
 const notFoundRoute = new NotFoundRoute({
@@ -96,11 +102,7 @@ const notFoundRoute = new NotFoundRoute({
 });
 
 function NotFound() {
-  return (
-    <div className='p-2'>
-      <h3>404 - Not Found</h3>
-    </div>
-  );
+  return <h3>404 - Not Found</h3>;
 }
 
 export const router = new Router({
@@ -115,4 +117,3 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
-
