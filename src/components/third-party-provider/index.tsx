@@ -22,8 +22,7 @@ export function ThirdPartyProvider({ provider }: ThirdPartyProviderProps) {
   };
 
   const providerClasses = cn([styles.thirdPartyProvider], {
-    [styles.google]: provider === "google",
-    [styles.discord]: provider === "discord",
+    [styles[provider]]: provider,
   });
 
   return (
