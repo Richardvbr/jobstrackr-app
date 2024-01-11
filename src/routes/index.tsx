@@ -84,7 +84,7 @@ const documentsRoute = new Route({
 });
 
 const routeTree = rootRoute.addChildren([
-  // @ts-expect-error
+  // @ts-ignore
   indexRoute,
   authRoute.addChildren([signInRoute, signUpRoute]),
   appRoute.addChildren([
