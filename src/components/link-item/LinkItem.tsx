@@ -1,11 +1,14 @@
 import cn from "clsx";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useRouterState } from "@tanstack/react-router";
 
 import type { LinkItemProps } from "@/types/links";
 import styles from "./styles.module.scss";
 
 export function LinkItem({ href, label, Icon, onClick }: LinkItemProps) {
-  const { pathname } = useLocation();
+  const {
+    location: { pathname },
+  } = useRouterState();
+
   const isActive = pathname.includes(href as string);
 
   const linkItemStyles = cn({
@@ -27,7 +30,7 @@ export function LinkItem({ href, label, Icon, onClick }: LinkItemProps) {
   return (
     <li className={linkItemStyles} onClick={handleClick}>
       {href ? (
-        <Link to={`/${href}`}>{itemContent}</Link>
+        <Link to={`${href}`}>{itemContent}</Link>
       ) : (
         <div className={styles.noHrefButton}>{itemContent}</div>
       )}

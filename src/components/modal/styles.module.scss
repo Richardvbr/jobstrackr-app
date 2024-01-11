@@ -56,3 +56,19 @@
     }
   }
 }
+
+[data-theme="dark"] {
+  .modal {
+    background: $dark-secondary;
+
+    header {
+      h1 {
+        color: $gray-100;
+      }
+
+      .close svg {
+        filter: invert(1);
+      }
+    }
+  }
+}

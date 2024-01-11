@@ -8,7 +8,9 @@ import {
   useApplicationStore,
   getApplicationsQuery,
 } from "@/features/applications";
+
 import { Icons, Button, Input, Card } from "@/components";
+
 import styles from "./styles.module.scss";
 
 export function Applications() {

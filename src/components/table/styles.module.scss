@@ -61,7 +61,6 @@
       }
 
       .activeCell {
-        transition: all 0.2s ease;
         svg {
           width: 24px;
           height: 24px;
@@ -81,27 +80,6 @@
       tbody {
         td {
           padding: 20px 15px;
-        }
-      }
-    }
-  }
-}
-
-.interactive {
-  table {
-    cursor: pointer;
-
-    tbody {
-      tr {
-        &:hover,
-        .activeRow {
-          background-color: $gray-100;
-        }
-      }
-      td {
-        &:hover,
-        .activeRow {
-          background-color: $gray-100;
         }
       }
     }
@@ -132,7 +110,7 @@
 
 [data-theme="dark"] {
   .table {
-    border: 1px solid $gray-500;
+    border: 1px solid $gray-600;
   }
 
   tr {

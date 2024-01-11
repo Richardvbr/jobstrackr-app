@@ -1,6 +1,6 @@
 import cn from "clsx";
 import { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
 import { useAppContext } from "@/contexts/AppContext";
 import { supabase } from "@/lib/supabase";
@@ -13,8 +13,11 @@ import styles from "./styles.module.scss";
 export function SidePanel() {
   const { sidePanelOpen, setSidePanelOpen } = useAppContext();
   const { width } = useWindowSize();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const {
+    location: { pathname },
+  } = useRouterState();
 
   const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
 
@@ -25,7 +28,7 @@ export function SidePanel() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    navigate("/sign-in");
+    navigate({ to: "/sign-in" });
   };
 
   // Disable body scroll when mobile menu is open
@@ -68,13 +71,13 @@ export function SidePanel() {
       <footer className={styles.footer}>
         <ul className={styles.navLinks}>
           <LinkItem
-            href='settings'
+            href='/settings'
             label='Settings'
             Icon={<Icons.Settings />}
             onClick={() => setSidePanelOpen(false)}
           />
           <LinkItem
-            href='feedback'
+            href='/feedback'
             label='Feedback'
             Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}

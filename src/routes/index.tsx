@@ -1,61 +1,119 @@
-import { createBrowserRouter } from "react-router-dom";
+import {
+  NotFoundRoute,
+  RootRoute,
+  Route,
+  Router,
+  redirect,
+} from "@tanstack/react-router";
 
 import { AppLayout, AuthLayout } from "@/components/layout";
+import { SignInRoute } from "./sign-in";
+import { SignUpRoute } from "./sign-up";
 import { DashboardRoute } from "./dashboard";
 import { DocumentsRoute } from "./documents";
 import { FeedbackRoute } from "./feedback";
 import { QuestionsRoute } from "./questions";
 import { SettingsRoute } from "./settings";
-import { SignInRoute } from "./sign-in";
-import { SignUpRoute } from "./sign-up";
-// import { TipsRoute } from "./tips";
 
-export const router = createBrowserRouter([
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "/sign-up",
-        element: <SignUpRoute />,
-      },
-      {
-        path: "/sign-in",
-        element: <SignInRoute />,
-      },
-    ],
+const rootRoute = new RootRoute();
+
+// Auth layout and routes
+const authRoute = new Route({
+  getParentRoute: () => rootRoute,
+  id: "auth-layout",
+  component: () => <AuthLayout />,
+});
+
+const signInRoute = new Route({
+  getParentRoute: () => authRoute,
+  path: "/sign-in",
+  component: () => <SignInRoute />,
+});
+
+const signUpRoute = new Route({
+  getParentRoute: () => authRoute,
+  path: "/sign-up",
+  component: () => <SignUpRoute />,
+});
+
+// App layout and routes
+const appRoute = new Route({
+  getParentRoute: () => rootRoute,
+  id: "app-layout",
+  component: () => <AppLayout />,
+});
+
+const indexRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/",
+  beforeLoad: () => {
+    throw redirect({
+      to: dashboardRoute.to,
+    });
   },
-  {
-    path: "/",
-    element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <DashboardRoute />,
-      },
-      {
-        path: "/dashboard",
-        element: <DashboardRoute />,
-      },
-      {
-        path: "/questions",
-        element: <QuestionsRoute />,
-      },
-      {
-        path: "/documents",
-        element: <DocumentsRoute />,
-      },
-      //   {
-      //     path: "/tips",
-      //     element: <TipsRoute />,
-      //  },
-      {
-        path: "/settings",
-        element: <SettingsRoute />,
-      },
-      {
-        path: "/feedback",
-        element: <FeedbackRoute />,
-      },
-    ],
-  },
+});
+
+const dashboardRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/dashboard",
+  component: () => <DashboardRoute />,
+});
+
+const settingsRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/settings",
+  component: () => <SettingsRoute />,
+});
+
+const feedbackRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/feedback",
+  component: () => <FeedbackRoute />,
+});
+
+const questionsRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/questions",
+  component: () => <QuestionsRoute />,
+});
+
+const documentsRoute = new Route({
+  getParentRoute: () => appRoute,
+  path: "/documents",
+  component: () => <DocumentsRoute />,
+});
+
+const routeTree = rootRoute.addChildren([
+  // @ts-expect-error
+  indexRoute,
+  authRoute.addChildren([signInRoute, signUpRoute]),
+  appRoute.addChildren([
+    dashboardRoute,
+    documentsRoute,
+    questionsRoute,
+    settingsRoute,
+    feedbackRoute,
+  ]),
 ]);
+
+const notFoundRoute = new NotFoundRoute({
+  getParentRoute: () => rootRoute,
+  component: NotFound,
+});
+
+function NotFound() {
+  return <h3>404 - Not Found</h3>;
+}
+
+export const router = new Router({
+  routeTree,
+  notFoundRoute,
+  defaultPreload: "intent",
+  defaultStaleTime: 5000,
+});
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}

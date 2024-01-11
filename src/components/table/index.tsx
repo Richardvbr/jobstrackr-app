@@ -71,7 +71,6 @@ export function Table({
   return (
     <div
       className={cn([styles.table], className, {
-        [styles.interactive]: onRowClick,
         [styles.stickyHeader]: stickyHeader,
       })}
     >
