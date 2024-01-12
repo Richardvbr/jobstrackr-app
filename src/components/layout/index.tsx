@@ -1,6 +1,9 @@
 import { Navigate, Outlet } from "@tanstack/react-router";
+
 import { useSessionContext } from "@/contexts/AuthContext";
+
 import { Header, SidePanel } from "@/components";
+
 import styles from "./layout.module.scss";
 
 export function AuthLayout() {

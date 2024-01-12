@@ -36,16 +36,18 @@ export function ThemeProvider({
     root.removeAttribute("data-theme");
 
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
 
       root.setAttribute("data-theme", systemTheme);
+      localStorage.setItem(storageKey, theme);
+      setTheme(systemTheme);
       return;
     }
 
     root.setAttribute("data-theme", theme);
+    localStorage.setItem(storageKey, theme);
   }, [theme]);
 
   const value = useMemo(() => {
@@ -68,8 +70,7 @@ export function ThemeProvider({
 export function useTheme() {
   const context = useContext(ThemeProviderContext);
 
-  if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider");
+  if (context === undefined) throw new Error("useTheme must be used within a ThemeProvider");
 
   return context;
 }
