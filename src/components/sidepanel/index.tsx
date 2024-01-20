@@ -44,10 +44,7 @@ export function SidePanel() {
     <aside className={sidePanelStyles}>
       <div className={styles.logoContainer}>
         <Link to='/dashboard' onClick={() => setSidePanelOpen(false)}>
-          <img
-            src='/assets/images/logo_cropped_transparent.svg'
-            alt='JobsTrackr logo'
-          />
+          <img src='/assets/images/logo_cropped_transparent.svg' alt='JobsTrackr logo' />
         </Link>
         <div
           aria-label='Close menu'
@@ -57,6 +54,13 @@ export function SidePanel() {
           <Icons.Close />
         </div>
       </div>
+      <ul className={styles.newApplication}>
+        <LinkItem
+          label='New application'
+          href='/dashboard?action=new-application'
+          Icon={<Icons.Plus />}
+        />
+      </ul>
       <ul className={styles.navLinks}>
         {links.map(({ label, href, Icon }) => (
           <LinkItem
@@ -82,11 +86,7 @@ export function SidePanel() {
             Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}
           />
-          <LinkItem
-            label='Sign out'
-            onClick={handleSignOut}
-            Icon={<Icons.Signout />}
-          />
+          <LinkItem label='Sign out' onClick={handleSignOut} Icon={<Icons.Signout />} />
         </ul>
       </footer>
     </aside>

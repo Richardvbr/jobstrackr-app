@@ -112,9 +112,9 @@ export function AuthForm({ type }: AuthFormProps) {
           <Input
             type='email'
             label='Email *'
+            name='email'
             autoComplete='email'
             disabled={loading || !!emailSent}
-            {...register("email", { required: true })}
           />
           <Button variant='primary' type='submit' disabled={loading || !!emailSent} fullWidth>
             {getButtonLabel()}

@@ -1,6 +1,8 @@
 import { useShallow } from "zustand/react/shallow";
+import { useNavigate } from "@tanstack/react-router";
 
 import { ApplicationForm, useApplicationStore } from "@/features/applications";
+import { dashboardRoute } from "@/routes";
 import { Modal } from "@/components";
 
 export function ApplicationModal() {
@@ -13,8 +15,10 @@ export function ApplicationModal() {
     }))
   );
 
+  const navigate = useNavigate();
+
   // Close form
-  const handleCloseForm = (askConfirm: boolean = true) => {
+  const handleCloseForm = (askConfirm = true) => {
     if (askConfirm) {
       const close = confirm(
         "Are you sure you want to close this window? You will lose the new application data."
@@ -26,6 +30,7 @@ export function ApplicationModal() {
     }
 
     closeModal();
+    navigate({ to: dashboardRoute.fullPath });
   };
 
   return (

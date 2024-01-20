@@ -1,8 +1,10 @@
 .table {
   position: relative;
+  background-color: $white;
   border: 1px solid $gray-200;
   border-radius: 10px;
   overflow-y: auto;
+  box-shadow: $shadow-s;
 
   table {
     border-collapse: collapse;
@@ -18,7 +20,7 @@
 
       th {
         @include font-bold;
-        padding: 15px 5px;
+        padding: 15px 10px;
         font-size: 14px;
         line-height: 16px;
         cursor: pointer;
@@ -40,7 +42,6 @@
     tbody {
       tr {
         border-bottom: 1px solid $gray-200;
-        border-top: 1px solid $gray-200;
       }
 
       tr:last-child {
@@ -50,7 +51,7 @@
       td {
         @include font-medium;
         line-height: 20px;
-        padding: 10px 5px;
+        padding: 10px 10px;
         font-size: 14px;
 
         span,
@@ -61,10 +62,13 @@
       }
 
       .activeCell {
+        transition: all 0.2s ease;
+
         svg {
           width: 24px;
           height: 24px;
         }
+
         &:hover {
           cursor: pointer;
         }
@@ -111,14 +115,24 @@
 [data-theme="dark"] {
   .table {
     border: 1px solid $gray-600;
-  }
+    background-color: $gray-800;
 
-  tr {
-    background: $gray-800;
-  }
+    tr {
+      background-color: $gray-800;
+    }
 
-  svg {
-    stroke: $gray-200;
+    tbody tr {
+      border-bottom: 1px solid $gray-600;
+    }
+
+    td > a,
+    td > p {
+      color: $gray-300;
+    }
+
+    svg {
+      stroke: $gray-200;
+    }
   }
 
   .stickyHeader {
@@ -127,7 +141,7 @@
         background-color: $gray-400;
 
         &:after {
-          background-color: $gray-400;
+          background-color: $gray-500;
         }
       }
     }

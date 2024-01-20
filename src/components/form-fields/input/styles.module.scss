@@ -5,8 +5,6 @@
 
   input {
     @include input-base;
-    padding: 8px 14px;
-    font-size: 14px;
   }
 
   label {
@@ -27,6 +25,11 @@
         border: 1px solid $gray-500;
       }
     }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+
     label {
       color: $gray-200;
     }

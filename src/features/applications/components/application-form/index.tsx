@@ -3,20 +3,16 @@ import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useShallow } from "zustand/react/shallow";
 import { format } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 import { useUser } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Application } from "@/types/application";
 import { useApplicationStore } from "@/features/applications";
-import {
-  formItems,
-  statusInput,
-  workModelInput,
-  employmentTypeInput,
-} from "./formItems";
+import { formItems, statusInput, workModelInput, employmentTypeInput } from "./formItems";
 import { Input, SelectInput, Button } from "@/components";
+
 import styles from "./styles.module.scss";
-import toast from "react-hot-toast";
 
 type ApplicationFormInput = Application;
 
@@ -34,16 +30,12 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       isEditing: state.applicationModalOpened === "edit",
     }))
   );
-
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
     defaultValues: isEditing
       ? {
           ...applicationData,
-          applied_at: format(
-            new Date(applicationData?.applied_at as string),
-            "yyyy-MM-dd"
-          ),
+          applied_at: format(new Date(applicationData?.applied_at as string), "yyyy-MM-dd"),
         }
       : {},
   });

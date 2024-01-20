@@ -1,23 +1,15 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 
   select {
-    border: 1px solid $gray-400;
-    outline: none;
-    border-radius: 3px;
-    padding: 7px 10px;
-    font-size: 14px;
-    line-height: 1;
-    transition: outline 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-    color: $black;
-    border-right: 10px solid transparent;
-    background: transparent;
+    @include input-base;
+    height: 39px;
 
     &:focus,
     &:hover {
-      border: 1px solid $secondary;
+      outline: 1px solid $secondary;
       cursor: pointer;
     }
   }

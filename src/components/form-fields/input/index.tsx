@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLInputTypeAttribute, forwardRef } from "react";
+import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 import cn from "clsx";
 import { useFormContext } from "react-hook-form";
 
@@ -17,41 +17,35 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
 };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      name,
-      label,
-      type = "text",
-      value,
-      placeholder,
-      error,
-      disabled,
-      required,
-      handleChange,
-      className,
-      ...props
-    }: InputProps,
-    ref
-  ) => {
-    const { register } = useFormContext() || {};
+export function Input({
+  name,
+  label,
+  type = "text",
+  value,
+  placeholder,
+  error,
+  disabled,
+  required,
+  handleChange,
+  className,
+  ...props
+}: InputProps) {
+  const { register } = useFormContext() || {};
 
-    return (
-      <div className={cn(styles.wrapper, className)}>
-        <label htmlFor={name}>{label}</label>
-        <input
-          type={type}
-          id={name}
-          value={value}
-          placeholder={placeholder}
-          disabled={disabled}
-          required={required}
-          {...(register && register(name))}
-          ref={ref}
-          onChange={handleChange}
-          {...props}
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div className={cn(styles.wrapper, className)}>
+      <label htmlFor={name}>{label}</label>
+      <input
+        type={type}
+        id={name}
+        value={value}
+        placeholder={placeholder}
+        disabled={disabled}
+        required={required}
+        {...(register && register(name))}
+        onChange={handleChange}
+        {...props}
+      />
+    </div>
+  );
+}

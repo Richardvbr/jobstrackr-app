@@ -1,10 +1,4 @@
-import {
-  NotFoundRoute,
-  RootRoute,
-  Route,
-  Router,
-  redirect,
-} from "@tanstack/react-router";
+import { NotFoundRoute, RootRoute, Route, Router, redirect } from "@tanstack/react-router";
 
 import { AppLayout, AuthLayout } from "@/components/layout";
 import { SignInRoute } from "./sign-in";
@@ -53,10 +47,19 @@ const indexRoute = new Route({
   },
 });
 
-const dashboardRoute = new Route({
+type DashboardSearch = {
+  action?: string;
+};
+
+export const dashboardRoute = new Route({
   getParentRoute: () => appRoute,
   path: "/dashboard",
   component: () => <DashboardRoute />,
+  validateSearch: (search: Record<string, unknown>): DashboardSearch => {
+    return {
+      action: search.action as string,
+    };
+  },
 });
 
 const settingsRoute = new Route({

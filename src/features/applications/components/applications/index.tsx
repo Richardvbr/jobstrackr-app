@@ -8,6 +8,7 @@ import {
   useApplicationStore,
   getApplicationsQuery,
 } from "@/features/applications";
+import { dashboardRoute } from "@/routes";
 
 import { Icons, Button, Input, Card } from "@/components";
 
@@ -16,13 +17,16 @@ import styles from "./styles.module.scss";
 export function Applications() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const openModal = useApplicationStore(
-    (state) => state.openNewApplicationModal
-  );
+  const { action } = dashboardRoute.useSearch();
+  const openModal = useApplicationStore((state) => state.openNewApplicationModal);
   const { data: applications } = getApplicationsQuery();
   const { data: labels } = getApplicationsContentQuery();
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
+
+  if (action === "new-application") {
+    openModal();
+  }
 
   return (
     <Card title='Your applications' shadow>
@@ -37,10 +41,7 @@ export function Applications() {
         placeholder={labels?.applicationSearch}
         handleChange={(e) => setSearchQuery(e.target.value)}
       />
-      <ApplicationsTable
-        data={applications ?? []}
-        searchQuery={debouncedSearchQuery}
-      />
+      <ApplicationsTable data={applications ?? []} searchQuery={debouncedSearchQuery} />
       <ApplicationModal />
     </Card>
   );
