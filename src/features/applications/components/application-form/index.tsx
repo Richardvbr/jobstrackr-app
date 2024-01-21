@@ -43,6 +43,13 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
 
   const { handleSubmit, reset } = formMethods;
 
+  function handleFormUnmount() {
+    reset();
+    setSubmitLoading(false);
+    handleCloseForm(false);
+    queryClient.invalidateQueries({ queryKey: ["get-applications"] });
+  }
+
   // Form submission
   const onSubmit: SubmitHandler<ApplicationFormInput> = async (formData) => {
     setSubmitLoading(true);
@@ -79,12 +86,26 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       console.log("Error submitting form:", error);
       // Reset form
     } finally {
-      reset();
-      setSubmitLoading(false);
-      handleCloseForm(false);
-      queryClient.invalidateQueries({ queryKey: ["get-applications"] });
+      handleFormUnmount();
     }
   };
+  async function handleDeleteApplication(applicationData: Application) {
+    // Prevent deleting data from guest account
+    if (user?.id === "5e6d4cdf-1074-4b64-bf54-df145a784201") {
+      return toast.error("Guest account data cannot be deleted.");
+    }
+
+    const { error } = await supabase.from("applications").delete().eq("id", applicationData?.id);
+
+    if (error) {
+      const errMessage = "An error occured when deleting the application.";
+      toast.error(errMessage);
+      return console.log(errMessage);
+    }
+
+    handleFormUnmount();
+    toast.success("Application deleted");
+  }
 
   return (
     <FormProvider {...formMethods}>
@@ -116,6 +137,15 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
           >
             Cancel
           </Button>
+          {isEditing && (
+            <Button
+              variant='danger'
+              type='button'
+              onClick={() => handleDeleteApplication(applicationData as Application)}
+            >
+              Delete
+            </Button>
+          )}
         </div>
       </form>
     </FormProvider>
