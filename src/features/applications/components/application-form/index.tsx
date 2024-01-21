@@ -21,6 +21,7 @@ type ApplicationForm = {
 };
 
 export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const user = useUser();
   const queryClient = useQueryClient();
 
@@ -40,8 +41,6 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       : {},
   });
 
-  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-
   const { handleSubmit, reset } = formMethods;
 
   // Form submission
@@ -49,6 +48,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     setSubmitLoading(true);
 
     try {
+      // Update application
       if (isEditing) {
         const { error } = await supabase
           .from("applications ")
@@ -61,6 +61,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
           toast.error(errMessage);
           throw errMessage;
         }
+        // Add new application
       } else {
         const { error } = await supabase.from("applications").insert({
           ...formData,
@@ -76,6 +77,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       }
     } catch (error) {
       console.log("Error submitting form:", error);
+      // Reset form
     } finally {
       reset();
       setSubmitLoading(false);

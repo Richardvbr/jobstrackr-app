@@ -42,7 +42,6 @@ export function ThemeProvider({
 
       root.setAttribute("data-theme", systemTheme);
       localStorage.setItem(storageKey, theme);
-      setTheme(systemTheme);
       return;
     }
 

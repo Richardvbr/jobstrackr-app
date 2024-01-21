@@ -25,7 +25,7 @@ export function AuthForm({ type }: AuthFormProps) {
   const formMethods = useForm<AuthFormInput>();
   const navigate = useNavigate();
 
-  const { handleSubmit, register } = formMethods;
+  const { handleSubmit } = formMethods;
 
   const isSignInform = type === "sign-in";
 
