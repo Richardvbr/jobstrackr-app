@@ -6,7 +6,7 @@ import {
   type DocumentsContent,
 } from "@/features/cms";
 
-const API_BASE_URL = import.meta.env.VITE_CMS_API_BASE_URL;
+const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/cms`;
 
 export function getSharedContentQuery() {
   return useQuery({
