@@ -80,12 +80,12 @@ export function SidePanel() {
             Icon={<Icons.Settings />}
             onClick={() => setSidePanelOpen(false)}
           />
-          <LinkItem
+          {/* <LinkItem
             href='/feedback'
             label='Feedback'
             Icon={<Icons.Feedback />}
             onClick={() => setSidePanelOpen(false)}
-          />
+          /> */}
           <LinkItem label='Sign out' onClick={handleSignOut} Icon={<Icons.Signout />} />
         </ul>
       </footer>

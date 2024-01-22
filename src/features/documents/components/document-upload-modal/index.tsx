@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type ChangeEvent, useState, useEffect } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import type { Application } from "@/types/application";
 import type { SelectInputItem } from "@/types/elements";
 
-import { Modal, Input, Button, SelectInput } from "@/components";
+import { Modal, Input, Button, SelectInput, FilePreview } from "@/components";
 import { useDocumentStore } from "@/features/documents";
 import styles from "./styles.module.scss";
 
@@ -16,6 +16,7 @@ type DocumentUploadModalProps = {
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+  const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
   const formMethods = useForm<any>();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
@@ -33,6 +34,14 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
       })),
     ],
   };
+
+  function handleFileSelect(event: ChangeEvent<HTMLInputElement>) {
+    const selectedFile = event.target.files?.[0];
+
+    if (selectedFile) {
+      setSelectedFile(selectedFile);
+    }
+  }
 
   // Form submission
   const onSubmit: SubmitHandler<any> = async (formData) => {
@@ -57,19 +66,44 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     }
   };
 
+  // Reset form on modal close
+  useEffect(() => {
+    setSelectedFile(undefined);
+    reset();
+  }, [documentModalOpened]);
+
   return (
-    <Modal opened={documentModalOpened} handleClose={() => closeDocumentModal()} modalTitle={`Upload a new document`}>
+    <Modal
+      opened={documentModalOpened}
+      handleClose={() => closeDocumentModal()}
+      modalTitle={`Upload a new document`}
+    >
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input name='document-name' label='Document name' required />
-          <Input name='document-file-select' label='Select a file' type='file' required />
+          <Input
+            name='document-file-select'
+            label='Select a file'
+            type='file'
+            onChange={handleFileSelect}
+            required
+          />
+          {selectedFile && <FilePreview file={selectedFile} />}
+
           <SelectInput item={applicationSelect} />
-          <Button disabled={submitLoading} type='submit'>
-            Upload document
-          </Button>
-          <Button disabled={submitLoading} variant='secondary' type='button' onClick={() => closeDocumentModal()}>
-            Cancel
-          </Button>
+          <div className={styles.buttons}>
+            <Button disabled={submitLoading} type='submit'>
+              Upload document
+            </Button>
+            <Button
+              disabled={submitLoading}
+              variant='secondary'
+              type='button'
+              onClick={() => closeDocumentModal()}
+            >
+              Cancel
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </Modal>
