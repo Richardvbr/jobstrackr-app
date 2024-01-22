@@ -1,35 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { cmsRequest } from "@/lib/datocms";
 import {
   type SharedContent,
   type ApplicationsContent,
   type DocumentsContent,
-  SHARED,
-  APPLICATIONS,
-  DOCUMENTS,
 } from "@/features/cms";
+
+const API_BASE_URL = import.meta.env.VITE_CMS_API_BASE_URL;
 
 export function getSharedContentQuery() {
   return useQuery({
     queryKey: ["get-cms-shared"],
     queryFn: async () => {
-      const { shared } = await cmsRequest<SharedContent>({ query: SHARED });
+      const data: SharedContent = await fetch(`${API_BASE_URL}/shared`).then((res) => res.json());
 
-      return shared;
-    },
-  });
-}
-
-export function getApplicationsContentQuery() {
-  return useQuery({
-    queryKey: ["get-cms-applications"],
-    queryFn: async () => {
-      const { applicationsPage } = await cmsRequest<ApplicationsContent>({
-        query: APPLICATIONS,
-      });
-
-      return applicationsPage;
+      return data;
     },
   });
 }
@@ -38,11 +23,24 @@ export function getDocumentsContentQuery() {
   return useQuery({
     queryKey: ["get-cms-documents"],
     queryFn: async () => {
-      const { documentsPage } = await cmsRequest<DocumentsContent>({
-        query: DOCUMENTS,
-      });
+      const data: DocumentsContent = await fetch(`${API_BASE_URL}/documents`).then((res) =>
+        res.json()
+      );
 
-      return documentsPage;
+      return data;
+    },
+  });
+}
+
+export function getApplicationsContentQuery() {
+  return useQuery({
+    queryKey: ["get-cms-applications"],
+    queryFn: async () => {
+      const data: ApplicationsContent = await fetch(`${API_BASE_URL}/applications`).then((res) =>
+        res.json()
+      );
+
+      return data;
     },
   });
 }
