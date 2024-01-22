@@ -95,6 +95,14 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       return toast.error("Guest account data cannot be deleted.");
     }
 
+    const close = confirm(
+      "Are you sure you want to delete this application? This action cannot be undone."
+    );
+
+    if (!close) {
+      return;
+    }
+
     const { error } = await supabase.from("applications").delete().eq("id", applicationData?.id);
 
     if (error) {
