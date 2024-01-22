@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { useDebounce } from "@/hooks/useDebounce";
-import { getApplicationsContentQuery } from "@/features/cms";
 import {
   ApplicationsTable,
   ApplicationModal,
@@ -20,7 +19,7 @@ export function Applications() {
   const { action } = dashboardRoute.useSearch();
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
   const { data: applications } = getApplicationsQuery();
-  const { data: labels } = getApplicationsContentQuery();
+  // const { data: labels } = getApplicationsContentQuery();
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 

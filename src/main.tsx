@@ -4,7 +4,7 @@ import { RouterProvider } from "@tanstack/react-router";
 
 import { router } from "./routes";
 import { Providers } from "@/providers";
-import "./utils/i18n";
+import "./i18n/i18next";
 import "@/styles/index.scss";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

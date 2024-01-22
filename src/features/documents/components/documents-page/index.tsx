@@ -3,14 +3,11 @@ import {
   DocumentUploadModal,
   // getDocumentsQuery,
 } from "@/features/documents";
-import { getDocumentsContentQuery } from "@/features/cms";
 import { getApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
 
 export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
-
-  const { data: labels } = getDocumentsContentQuery();
 
   // const { data: documentsData } = getDocumentsQuery();
   const { data: applicationsData } = getApplicationsQuery();
