@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useDebounce } from "@/hooks/useDebounce";
 import {
@@ -15,11 +16,11 @@ import styles from "./styles.module.scss";
 
 export function Applications() {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const { t } = useTranslation();
 
   const { action } = dashboardRoute.useSearch();
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
   const { data: applications } = getApplicationsQuery();
-  // const { data: labels } = getApplicationsContentQuery();
 
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
@@ -31,13 +32,13 @@ export function Applications() {
     <Card title='Your applications' shadow>
       <Button onClick={openModal}>
         <Icons.Plus />
-        {labels?.newApplication}
+        {t("applications.newApplication")}
       </Button>
       <Input
         className={styles.search}
-        label={labels?.applicationSearch}
+        label={t("applications.search")}
         name='application-search-table'
-        placeholder={labels?.applicationSearch}
+        placeholder={t("applications.search")}
         handleChange={(e) => setSearchQuery(e.target.value)}
       />
       <ApplicationsTable data={applications ?? []} searchQuery={debouncedSearchQuery} />

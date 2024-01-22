@@ -1,19 +1,12 @@
-import { Applications } from "@/features/applications";
 import { useTranslation } from "react-i18next";
+import { Applications } from "@/features/applications";
 
 export function DashboardPage() {
-  //   const { data: labels } = getApplicationsContentQuery();
-
-  const { t, i18n } = useTranslation();
-
-  const changeLanguageHandler = () => {
-    i18n.changeLanguage("nl");
-  };
+  const { t } = useTranslation();
 
   return (
     <section>
-      <button onClick={changeLanguageHandler}>Change language</button>
-      <h1>{t("home")}</h1>
+      <h1>{t("dashboard.title")}</h1>
       <Applications />
     </section>
   );

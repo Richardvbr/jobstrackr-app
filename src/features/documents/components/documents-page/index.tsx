@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import {
   useDocumentStore,
   DocumentUploadModal,
@@ -8,6 +10,7 @@ import { Card, Icons, Button } from "@/components";
 
 export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
+  const { t } = useTranslation();
 
   // const { data: documentsData } = getDocumentsQuery();
   const { data: applicationsData } = getApplicationsQuery();
@@ -24,15 +27,15 @@ export function DocumentsPage() {
 
   return (
     <section>
-      <h1>{labels?.title}</h1>
+      <h1>{t("documents.title")}</h1>
       <Button onClick={() => openDocumentModal()}>
         <Icons.Plus />
-        {labels?.addNewDocument}
+        {t("documents.newDocument")}
       </Button>
-      <Card shadow title={labels?.allDocumentsTitle}>
+      <Card shadow title={t("documents.allYourDocuments")}>
         <p>Placeholder</p>
       </Card>
-      <Card shadow title={`Documents per application`}>
+      <Card shadow title={t("documents.allYourGroupedDocuments")}>
         <p>Placeholder</p>
       </Card>
       <DocumentUploadModal applications={applicationsData ?? []} />
