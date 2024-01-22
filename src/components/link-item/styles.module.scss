@@ -1,29 +1,27 @@
 .linkItem {
   list-style: none;
-  border-radius: 5px;
-  transition: all;
-  transition-duration: 200ms;
-
-  &:hover {
-    cursor: pointer;
-    background: $gray-100;
-  }
 
   &Active {
     background: $gray-100;
-    border-radius: 5px;
+    border-radius: 8px;
   }
 
   a,
-  .noHrefButton {
+  > div {
+    text-decoration: none;
+    color: $secondary;
     display: flex;
     align-items: center;
     gap: 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: $secondary;
-    height: inherit;
+    border-radius: 8px;
     padding: 12px;
+    transition: all;
+    transition-duration: 200ms;
+
+    &:hover {
+      cursor: pointer;
+      background: $gray-100;
+    }
 
     .icon,
     svg {
@@ -32,27 +30,29 @@
     }
 
     p {
-      @include font-medium;
+      @include font-semibold;
     }
   }
-}
 
-[data-theme="dark"] {
-  .linkItem {
-    &:hover {
-      cursor: pointer;
-      background: $gray-700;
-      color: $gray-100;
+  [data-theme="dark"] & {
+    a,
+    > div {
+      color: $gray-300;
+
+      &:hover {
+        cursor: pointer;
+        background: $gray-700;
+        color: $gray-100;
+      }
     }
 
     &Active {
       background: $gray-700;
-      color: $gray-100;
-    }
 
-    a,
-    .noHrefButton {
-      color: $gray-300;
+      a,
+      > div {
+        color: $gray-100;
+      }
     }
   }
 }
