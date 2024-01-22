@@ -13,9 +13,7 @@ type ApplicationsTable = {
 };
 
 export function ApplicationsTable({ data, searchQuery }: ApplicationsTable) {
-  const [shownResults, setShownResults] = useState<number | string>(
-    data?.length
-  );
+  const [shownResults, setShownResults] = useState<number | string>(data?.length);
 
   const { openModal, setActiveApplication } = useApplicationStore(
     useShallow((state) => ({
@@ -29,8 +27,8 @@ export function ApplicationsTable({ data, searchQuery }: ApplicationsTable) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.count}>
-        {"Showing"} <strong>{shownResults}</strong> {"of"}{" "}
-        <strong>{totalResults}</strong> {"results"}
+        {"Showing"} <strong>{shownResults}</strong> {"of"} <strong>{totalResults}</strong>{" "}
+        {"results"}
       </div>
       <div className={styles.table}>
         <Table
