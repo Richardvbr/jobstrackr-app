@@ -4,11 +4,13 @@
   border-radius: 5px;
   font-size: 14px;
   transition: all 0.2s ease;
-  padding: 8px 20px;
-  color: $gray-100;
+  padding: 7px 20px;
+  color: $white;
+  font-weight: 500;
 
   &:hover {
     cursor: pointer;
+    color: $gray-100;
   }
 }
 
@@ -29,10 +31,11 @@
 }
 
 .primary {
-  background-color: $gray-900;
+  background-color: $green-600;
+  border: 1px solid $green-500;
 
   &:hover {
-    background-color: $secondary;
+    background-color: $green-700;
   }
 
   &:disabled {
@@ -42,20 +45,22 @@
 }
 
 .secondary {
-  color: $black;
-  background-color: transparent;
+  background-color: $gray-600;
   border: 1px solid $gray-500;
 
   &:hover {
-    background-color: $gray-100;
+    background-color: $gray-700;
   }
 }
 
 .danger {
-  background-color: $red-600;
+  background-color: transparent;
+  border: 1px solid $red-600;
+  color: $red-600;
 
   &:hover {
-    background-color: $red-500;
+    background-color: $red-600;
+    color: $white;
   }
 
   &:disabled {
@@ -84,31 +89,6 @@
 
 @media screen and (min-width: $breakpoint-l) {
   .button {
-    font-size: 1rem;
-  }
-}
-
-[data-theme="dark"] {
-  .primary {
-    background-color: $secondary;
-
-    &:hover {
-      background-color: $gray-1100;
-    }
-
-    &:disabled {
-      background-color: $gray-300;
-      color: $gray-500;
-    }
-  }
-
-  .secondary {
-    color: $gray-100;
-    background-color: transparent;
-    border: 1px solid $gray-500;
-
-    &:hover {
-      background-color: $gray-700;
-    }
+    font-size: 15px;
   }
 }

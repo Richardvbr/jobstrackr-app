@@ -21,7 +21,7 @@ export function ApplicationModal() {
   const handleCloseForm = (askConfirm = true) => {
     if (askConfirm) {
       const close = confirm(
-        "Are you sure you want to close this window? You will lose the new application data."
+        "Are you sure you want to close this window? Your changes will not be saved."
       );
 
       if (!close) {

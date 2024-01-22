@@ -1,32 +1,26 @@
 export type SharedContent = {
-  shared: {
-    showing: string;
-    of: string;
-    results: string;
-    applications: string;
-    dashboard: string;
-    questions: string;
-    feedback: string;
-    signOut: string;
-    documents: string;
-    tips: string;
-    account: string;
-    jobstrackr: string;
-  };
+  showing: string;
+  of: string;
+  results: string;
+  applications: string;
+  dashboard: string;
+  questions: string;
+  feedback: string;
+  signOut: string;
+  documents: string;
+  tips: string;
+  account: string;
+  jobstrackr: string;
 };
 
 export type ApplicationsContent = {
-  applicationsPage: {
-    title: string;
-    newApplication: string;
-    applicationSearch: string;
-  };
+  title: string;
+  newApplication: string;
+  applicationSearch: string;
 };
 
 export type DocumentsContent = {
-  documentsPage: {
-    title: string;
-    addNewDocument: string;
-    allDocumentsTitle: string;
-  };
+  title: string;
+  addNewDocument: string;
+  allDocumentsTitle: string;
 };

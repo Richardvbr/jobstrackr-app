@@ -57,15 +57,15 @@ export function Table({
     onGlobalFilterChange: setGlobalFilter,
   });
 
+  // Set shown results
+  const rowCount = table.getRowModel().rows.length;
+  useEffect(() => {
+    setShownResults && setShownResults(rowCount);
+  }, [rowCount]);
+
   // Set global filter
   useEffect(() => {
     setGlobalFilter(searchValue as string);
-    // Allow time to update
-    setTimeout(() => {
-      const count = table.getRowModel().rows.length;
-      // @ts-ignore
-      setShownResults(count);
-    }, 300);
   }, [searchValue]);
 
   return (
@@ -82,18 +82,13 @@ export function Table({
                 <th key={header.id}>
                   {header.isPlaceholder ? null : (
                     <div onClick={header.column.getToggleSortingHandler()}>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      {flexRender(header.column.columnDef.header, header.getContext())}
                       {header.column.columnDef.enableSorting && (
                         <span>
                           {{
                             asc: <Icons.SortUp />,
                             desc: <Icons.SortDown />,
-                          }[header.column.getIsSorted() as string] ?? (
-                            <Icons.Sort />
-                          )}
+                          }[header.column.getIsSorted() as string] ?? <Icons.Sort />}
                         </span>
                       )}
                     </div>
@@ -121,8 +116,7 @@ export function Table({
                       : undefined
                   }
                   className={cn({
-                    [styles.activeCell]:
-                      String(cell.column.columnDef.header) === "Edit",
+                    [styles.activeCell]: String(cell.column.columnDef.header) === "Edit",
                   })}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
