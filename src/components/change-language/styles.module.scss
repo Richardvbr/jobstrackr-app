@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: max-content;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
