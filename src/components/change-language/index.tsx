@@ -7,11 +7,13 @@ import styles from "./styles.module.scss";
 const languages = [
   {
     name: "English",
-    code: "en",
+    code: "en-US",
+    img: "assets/images/en.svg",
   },
   {
     name: "Dutch",
-    code: "nl",
+    code: "nl-NL",
+    img: "assets/images/nl.svg",
   },
 ];
 
@@ -21,7 +23,7 @@ export function ChangeLanguage() {
 
   return (
     <div className={styles.container}>
-      {languages.map(({ name, code }) => {
+      {languages.map(({ name, code, img }) => {
         const languageStyles = cn({
           [styles.language]: true,
           [styles.languageActive]: code === language,
@@ -30,12 +32,7 @@ export function ChangeLanguage() {
         return (
           <div className={languageStyles} onClick={() => changeLanguage(code)} key={code}>
             <div className={styles.languageLabel}>
-              <img
-                src={`/assets/images/${code}.svg`}
-                height={25}
-                width={25}
-                alt={`Choose language: ${name}`}
-              />
+              <img src={img} height={25} width={25} alt={`Choose language: ${name}`} />
               <p>{name}</p>
             </div>
             {code === language && <span>{`(${t("settings.currentlySelected")})`}</span>}
