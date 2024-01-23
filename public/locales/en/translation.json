@@ -35,6 +35,7 @@
     "search": "Search for an application"
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "currentlySelected": "currently selected"
   }
 }

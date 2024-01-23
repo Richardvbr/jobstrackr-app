@@ -32,6 +32,7 @@
     "search": "Zoek een sollicitatie"
   },
   "settings": {
-    "title": "Instellingen"
+    "title": "Instellingen",
+    "currentlySelected": "momenteel geselecteerd"
   }
 }

@@ -1,4 +1,5 @@
 import cn from "clsx";
+import { useTranslation } from "react-i18next";
 
 import { changeLanguage, getLanguage } from "@/utils/localization";
 import styles from "./styles.module.scss";
@@ -16,6 +17,7 @@ const languages = [
 
 export function ChangeLanguage() {
   const language = getLanguage();
+  const { t } = useTranslation();
 
   return (
     <div className={styles.container}>
@@ -36,7 +38,7 @@ export function ChangeLanguage() {
               />
               <p>{name}</p>
             </div>
-            {code === language && <span>(currently selected)</span>}
+            {code === language && <span>{`(${t("settings.currentlySelected")})`}</span>}
           </div>
         );
       })}
