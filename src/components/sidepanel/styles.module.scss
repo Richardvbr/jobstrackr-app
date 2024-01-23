@@ -11,7 +11,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 2;
+  z-index: 5;
   background: $white;
   width: 100%;
   transform: translateX(-100%);
@@ -31,6 +31,7 @@
   a {
     order: 2;
     margin: 0;
+    height: 26px;
 
     img {
       max-width: 110px;
@@ -44,6 +45,10 @@
     width: 20px;
     height: 20px;
   }
+}
+
+.newApplication {
+  padding: 0 10px;
 }
 
 .navLinks {
@@ -77,6 +82,7 @@
 
     a {
       margin: 0 auto;
+      height: auto;
 
       img {
         max-width: 140px;
@@ -90,7 +96,7 @@
   }
 
   .newApplication {
-    padding: 20px 20px 0 20px;
+    padding: 20px 20px 0 0;
   }
 
   .navLinks {
@@ -114,6 +120,10 @@
     img {
       filter: invert(1);
     }
+  }
+
+  .menuTrigger {
+    filter: invert(1);
   }
 
   .footer {

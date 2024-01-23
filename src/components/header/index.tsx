@@ -19,10 +19,7 @@ export function Header() {
     <header aria-label='Open menu' className={styles.header}>
       <Icons.Hamburger onClick={() => setSidePanelOpen(true)} />
       <Link to='/dashboard'>
-        <img
-          src='/assets/images/logo_cropped_transparent.svg'
-          alt='JobsTrackr logo'
-        />
+        <img src='/assets/images/logo_cropped_transparent.svg' alt='JobsTrackr logo' />
       </Link>
     </header>
   );
