@@ -10,8 +10,27 @@
   gap: 10px;
   max-width: max-content;
 
-  &:hover {
-    cursor: pointer;
+  &Active p {
     text-decoration: underline;
+    color: $gray-200;
+  }
+
+  span {
+    font-size: 13px;
+  }
+
+  .languageLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: max-content;
+
+    &:hover {
+      cursor: pointer;
+      p {
+        text-decoration: underline;
+        color: $gray-200;
+      }
+    }
   }
 }
