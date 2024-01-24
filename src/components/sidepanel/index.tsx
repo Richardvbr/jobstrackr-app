@@ -59,6 +59,7 @@ export function SidePanel() {
           label='New application'
           href='/dashboard?action=new-application'
           Icon={<Icons.Plus />}
+          onClick={() => setSidePanelOpen(false)}
         />
       </ul>
       <ul className={styles.navLinks}>

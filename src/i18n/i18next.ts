@@ -10,7 +10,7 @@ i18n
   .use(LanguageDetector)
   .init({
     fallbackLng: "en-US",
-    debug: true,
+    debug: false,
     keySeparator: ".",
     interpolation: {
       escapeValue: false,
