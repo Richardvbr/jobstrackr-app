@@ -18,6 +18,9 @@ i18n
     detection: {
       order: ["localStorage", "navigator"],
     },
+    react: {
+      useSuspense: false,
+    },
   });
 
 export default i18n;
