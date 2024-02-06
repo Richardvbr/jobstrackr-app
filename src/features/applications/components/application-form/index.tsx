@@ -31,6 +31,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       isEditing: state.applicationModalOpened === "edit",
     }))
   );
+
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
     defaultValues: isEditing

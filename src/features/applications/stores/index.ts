@@ -5,7 +5,7 @@ type ApplicationStore = {
   applicationModalOpened: "new" | "edit" | false;
   openNewApplicationModal: () => void;
   openEditApplicationModal: () => void;
-  closeApplicationModal: any;
+  closeApplicationModal: () => void;
   activeApplication: Application | null;
   setActiveApplication: (application: Application) => void;
 };
@@ -16,6 +16,5 @@ export const useApplicationStore = create<ApplicationStore>((set) => ({
   openEditApplicationModal: () => set({ applicationModalOpened: "edit" }),
   closeApplicationModal: () => set({ applicationModalOpened: false }),
   activeApplication: null,
-  setActiveApplication: (application) =>
-    set({ activeApplication: application }),
+  setActiveApplication: (application) => set({ activeApplication: application }),
 }));

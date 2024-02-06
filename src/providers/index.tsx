@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 
 import { supabase } from "@/lib/supabase";
 import { SessionContextProvider } from "@/contexts/AuthContext";
-import { AppContextProvider } from "@/contexts/AppContext";
 import { toastOptions } from "@/utils/toastOptions";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -24,10 +23,8 @@ export const Providers = ({ children }: PropsWithChildren) => {
     <ThemeProvider defaultTheme='system'>
       <SessionContextProvider supabaseClient={supabase}>
         <QueryClientProvider client={queryClient}>
-          <AppContextProvider>
-            <Toaster position='bottom-center' toastOptions={toastOptions} />
-            {children}
-          </AppContextProvider>
+          <Toaster position='bottom-center' toastOptions={toastOptions} />
+          {children}
         </QueryClientProvider>
       </SessionContextProvider>
     </ThemeProvider>
