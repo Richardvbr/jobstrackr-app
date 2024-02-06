@@ -52,7 +52,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   }
 
   // Form submission
-  const onSubmit: SubmitHandler<ApplicationFormInput> = async (formData) => {
+  const onSubmit: SubmitHandler<ApplicationFormInput> = async (applicationData) => {
     setSubmitLoading(true);
 
     try {
@@ -60,8 +60,8 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       if (isEditing) {
         const { error } = await supabase
           .from("applications ")
-          .update(formData)
-          .eq("id", formData.id);
+          .update(applicationData)
+          .eq("id", applicationData.id);
 
         if (error) {
           setSubmitLoading(false);
@@ -71,8 +71,15 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
         }
         // Add new application
       } else {
+        if (!user) {
+          setSubmitLoading(false);
+          const errMessage = "No valid user found.";
+          toast.error(errMessage);
+          throw errMessage;
+        }
+
         const { error } = await supabase.from("applications").insert({
-          ...formData,
+          ...applicationData,
           user_id: user?.id,
         });
 

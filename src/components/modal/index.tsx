@@ -14,13 +14,7 @@ type ModalProps = {
   [key: string]: any;
 };
 
-export function Modal({
-  children,
-  opened = false,
-  handleClose,
-  modalTitle,
-  ...props
-}: ModalProps) {
+export function Modal({ children, opened = false, handleClose, modalTitle, ...props }: ModalProps) {
   const modalRef = useRef(null);
 
   // Close when clicked outside modal
