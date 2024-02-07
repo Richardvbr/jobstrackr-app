@@ -52,11 +52,6 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     queryClient.invalidateQueries({ queryKey: ["get-applications"] });
   }
 
-  function finalizeSubmission() {
-    setSubmitLoading(false);
-    handleFormReset();
-  }
-
   function handleError(error: any) {
     console.error("Error submitting form:", error);
 
@@ -84,7 +79,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     } catch (error) {
       handleError(error);
     } finally {
-      finalizeSubmission();
+      handleFormReset();
     }
   };
 
@@ -138,7 +133,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     } catch (error) {
       handleError(error);
     } finally {
-      finalizeSubmission();
+      handleFormReset();
     }
   }
 
