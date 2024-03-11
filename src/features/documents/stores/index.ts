@@ -1,12 +1,15 @@
 import { create } from "zustand";
 
-type DocumentStore = {
+type State = {
   documentModalOpened: boolean;
+};
+
+type Action = {
   openDocumentModal: () => void;
   closeDocumentModal: () => void;
 };
 
-export const useDocumentStore = create<DocumentStore>((set) => ({
+export const useDocumentStore = create<State & Action>((set) => ({
   documentModalOpened: false,
   openDocumentModal: () => set({ documentModalOpened: true }),
   closeDocumentModal: () => set({ documentModalOpened: false }),
