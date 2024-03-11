@@ -1,12 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-
-import { useAppContext } from "@/contexts/AppContext";
+import { useShallow } from "zustand/react/shallow";
 
 import { Icons } from "@/components";
 import styles from "./styles.module.scss";
+import { useAppStore } from "@/stores/appStore";
 
 export function Header() {
-  const { setSidePanelOpen } = useAppContext();
+  const { openSidePanel } = useAppStore(
+    useShallow((state) => ({
+      openSidePanel: state.openSidePanel,
+    }))
+  );
   const {
     location: { pathname },
   } = useRouterState();
@@ -17,7 +21,7 @@ export function Header() {
 
   return (
     <header aria-label='Open menu' className={styles.header}>
-      <Icons.Hamburger onClick={() => setSidePanelOpen(true)} />
+      <Icons.Hamburger onClick={() => openSidePanel()} />
       <Link to='/dashboard'>
         <img src='/assets/images/logo_cropped_transparent.svg' alt='JobsTrackr logo' />
       </Link>

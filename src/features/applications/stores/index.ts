@@ -9,7 +9,7 @@ type State = {
 type Action = {
   openNewApplicationModal: () => void;
   openEditApplicationModal: () => void;
-  closeApplicationModal: any;
+  closeApplicationModal: () => void;
   setActiveApplication: (application: Application) => void;
 };
 

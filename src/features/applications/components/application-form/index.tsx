@@ -8,10 +8,11 @@ import toast from "react-hot-toast";
 import { useUser } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Application } from "@/types/application";
+import { isGuestUser } from "@/utils/user";
+
 import { useApplicationStore } from "@/features/applications";
 import { formItems, statusInput, workModelInput, employmentTypeInput } from "./formItems";
 import { Input, SelectInput, Button } from "@/components";
-
 import styles from "./styles.module.scss";
 
 type ApplicationFormInput = Application;
@@ -31,6 +32,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       isEditing: state.applicationModalOpened === "edit",
     }))
   );
+
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
     defaultValues: isEditing
@@ -43,55 +45,72 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
 
   const { handleSubmit, reset } = formMethods;
 
-  function handleFormUnmount() {
+  function handleFormReset() {
     reset();
     setSubmitLoading(false);
     handleCloseForm(false);
     queryClient.invalidateQueries({ queryKey: ["get-applications"] });
   }
 
+  function handleError(error: any) {
+    console.error("Error submitting form:", error);
+
+    if (error instanceof Error) {
+      toast.error(error.message);
+    } else {
+      toast.error("An unknown error occurred.");
+    }
+  }
+
   // Form submission
-  const onSubmit: SubmitHandler<ApplicationFormInput> = async (formData) => {
+  const onSubmit: SubmitHandler<ApplicationFormInput> = async (applicationData) => {
     setSubmitLoading(true);
 
+    if (!user) {
+      throw new Error("No valid user found.");
+    }
+
     try {
-      // Update application
       if (isEditing) {
-        const { error } = await supabase
-          .from("applications ")
-          .update(formData)
-          .eq("id", formData.id);
-
-        if (error) {
-          setSubmitLoading(false);
-          const errMessage = "An error occured when updating the application.";
-          toast.error(errMessage);
-          throw errMessage;
-        }
-        // Add new application
+        await updateApplication(applicationData);
       } else {
-        const { error } = await supabase.from("applications").insert({
-          ...formData,
-          user_id: user?.id,
-        });
-
-        if (error) {
-          setSubmitLoading(false);
-          const errMessage = "An error occured when adding the application.";
-          toast.error(errMessage);
-          throw errMessage;
-        }
+        await addNewApplication(applicationData);
       }
     } catch (error) {
-      console.log("Error submitting form:", error);
-      // Reset form
+      handleError(error);
     } finally {
-      handleFormUnmount();
+      handleFormReset();
     }
   };
-  async function handleDeleteApplication(applicationData: Application) {
+
+  async function updateApplication(applicationData: ApplicationFormInput) {
+    const { error } = await supabase
+      .from("applications")
+      .update(applicationData)
+      .eq("id", applicationData.id);
+
+    if (error) {
+      throw new Error("An error occurred when updating the application.");
+    }
+
+    toast.success("Application updated");
+  }
+
+  async function addNewApplication(applicationData: ApplicationFormInput) {
+    const { error } = await supabase
+      .from("applications")
+      .insert({ ...applicationData, user_id: user?.id });
+
+    if (error) {
+      throw new Error("An error occurred when adding the application.");
+    }
+
+    toast.success("Application added");
+  }
+
+  async function deleteApplication(applicationData: Application) {
     // Prevent deleting data from guest account
-    if (user?.id === "5e6d4cdf-1074-4b64-bf54-df145a784201") {
+    if (isGuestUser(user)) {
       return toast.error("Guest account data cannot be deleted.");
     }
 
@@ -103,16 +122,19 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       return;
     }
 
-    const { error } = await supabase.from("applications").delete().eq("id", applicationData?.id);
+    try {
+      const { error } = await supabase.from("applications").delete().eq("id", applicationData?.id);
 
-    if (error) {
-      const errMessage = "An error occured when deleting the application.";
-      toast.error(errMessage);
-      return console.log(errMessage);
+      if (error) {
+        throw new Error("An error occured when deleting the application.");
+      }
+
+      toast.success("Application deleted");
+    } catch (error) {
+      handleError(error);
+    } finally {
+      handleFormReset();
     }
-
-    handleFormUnmount();
-    toast.success("Application deleted");
   }
 
   return (
@@ -149,7 +171,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
             <Button
               variant='danger'
               type='button'
-              onClick={() => handleDeleteApplication(applicationData as Application)}
+              onClick={() => deleteApplication(applicationData as Application)}
             >
               Delete
             </Button>
