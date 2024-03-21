@@ -1,16 +1,19 @@
 import { Application } from "@/types/application";
 import { create } from "zustand";
 
-type ApplicationStore = {
+type State = {
   applicationModalOpened: "new" | "edit" | false;
+  activeApplication: Application | null;
+};
+
+type Action = {
   openNewApplicationModal: () => void;
   openEditApplicationModal: () => void;
   closeApplicationModal: () => void;
-  activeApplication: Application | null;
   setActiveApplication: (application: Application) => void;
 };
 
-export const useApplicationStore = create<ApplicationStore>((set) => ({
+export const useApplicationStore = create<State & Action>((set) => ({
   applicationModalOpened: false,
   openNewApplicationModal: () => set({ applicationModalOpened: "new" }),
   openEditApplicationModal: () => set({ applicationModalOpened: "edit" }),
