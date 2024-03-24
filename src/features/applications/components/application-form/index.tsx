@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { useUser } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Application } from "@/types/application";
-import { isGuestUser } from "@/utils/user";
 
 import { useApplicationStore } from "@/features/applications";
 import { formItems, statusInput, workModelInput, employmentTypeInput } from "./formItems";
@@ -109,9 +108,9 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   }
 
   async function deleteApplication(applicationData: Application) {
-    // Prevent deleting data from guest account
-    if (isGuestUser(user)) {
-      return toast.error("Guest account data cannot be deleted.");
+    // Prevent deleting demo data
+    if (applicationData.id === "0cfad3f0-0375-426c-b635-86e134993ade") {
+      return toast.error("Guest demo data cannot be deleted.");
     }
 
     const close = confirm(
