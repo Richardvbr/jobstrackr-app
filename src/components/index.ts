@@ -2,7 +2,6 @@ import { AuthForm } from "./auth-form";
 import { Avatar } from "./avatar";
 import { Button } from "./button";
 import { Card } from "./card";
-import { FilePreview } from "./file-preview";
 import { Input } from "./form-fields/input";
 import { SelectInput } from "./form-fields/select";
 import { Header } from "./header";
@@ -19,7 +18,6 @@ export {
   Avatar,
   Button,
   Card,
-  FilePreview,
   Header,
   Icons,
   Input,

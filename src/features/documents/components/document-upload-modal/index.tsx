@@ -1,14 +1,17 @@
-import { type ChangeEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
 
 import type { Application } from "@/types/application";
 import type { SelectInputItem } from "@/types/elements";
 
-import { Modal, Input, Button, SelectInput, FilePreview } from "@/components";
+import { Modal, Input, Button, SelectInput } from "@/components";
 import { useDocumentStore } from "@/features/documents";
 import styles from "./styles.module.scss";
+import { supabase } from "@/lib/supabase";
+import { useUser } from "@/contexts/AuthContext";
 
 type DocumentUploadModalProps = {
   applications: Application[];
@@ -16,12 +19,11 @@ type DocumentUploadModalProps = {
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
   const formMethods = useForm<any>();
+  const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
-
-  const { handleSubmit, reset } = formMethods;
+  const { handleSubmit, reset, register } = formMethods;
 
   const applicationSelect: SelectInputItem = {
     name: "select-application",
@@ -35,22 +37,36 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     ],
   };
 
-  function handleFileSelect(event: ChangeEvent<HTMLInputElement>) {
-    const selectedFile = event.target.files?.[0];
-
-    if (selectedFile) {
-      setSelectedFile(selectedFile);
-    }
-  }
-
   // Form submission
   const onSubmit: SubmitHandler<any> = async (formData) => {
     setSubmitLoading(true);
-    console.log(formData);
+    const { "document-name": fileName, "select-application": applicationId = null } = formData;
+    const file = formData.file[0];
+    const uniqueId = uuidv4();
 
     try {
-      console.log("Submitting...");
-      toast.success(`Your document was uploaded!`);
+      // Upload file
+      const { data: fileData, error: fileError } = await supabase.storage
+        .from("documents")
+        .upload(`file-${fileName}-${uniqueId}`, file);
+
+      if (fileError) {
+        setSubmitLoading(false);
+        toast.error("File upload failed");
+      }
+
+      // Create record
+      const { error } = await supabase.from("documents").insert({
+        user_id: user?.id,
+        title: fileName,
+        application_id: applicationId,
+        document_path: fileData?.path,
+      });
+
+      if (error) {
+        setSubmitLoading(false);
+        toast.error(error.message);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -66,9 +82,8 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     }
   };
 
-  // Reset form on modal close
+  // Reset form on modal visiblity change
   useEffect(() => {
-    setSelectedFile(undefined);
     reset();
   }, [documentModalOpened]);
 
@@ -80,16 +95,13 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     >
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input name='document-name' label='Document name' required />
+          <Input label='Document name' {...register("document-name", { required: true })} />
           <Input
-            name='document-file-select'
             label='Select a file'
             type='file'
-            onChange={handleFileSelect}
-            required
+            accept='.doc, .docx, .pdf'
+            {...register("file", { required: true })}
           />
-          {selectedFile && <FilePreview file={selectedFile} />}
-
           <SelectInput item={applicationSelect} />
           <div className={styles.buttons}>
             <Button disabled={submitLoading} type='submit'>

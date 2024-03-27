@@ -1,4 +1,10 @@
-import { NotFoundRoute, RootRoute, Route, Router, redirect } from "@tanstack/react-router";
+import {
+  NotFoundRoute,
+  createRootRoute,
+  createRoute,
+  createRouter,
+  redirect,
+} from "@tanstack/react-router";
 
 import { AppLayout, AuthLayout } from "@/components/layout";
 import { SignInRoute } from "./sign-in";
@@ -9,35 +15,35 @@ import { FeedbackRoute } from "./feedback";
 import { QuestionsRoute } from "./questions";
 import { SettingsRoute } from "./settings";
 
-const rootRoute = new RootRoute();
+const rootRoute = createRootRoute();
 
 // Auth layout and routes
-const authRoute = new Route({
+const authRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "auth-layout",
   component: () => <AuthLayout />,
 });
 
-const signInRoute = new Route({
+const signInRoute = createRoute({
   getParentRoute: () => authRoute,
   path: "/sign-in",
   component: () => <SignInRoute />,
 });
 
-const signUpRoute = new Route({
+const signUpRoute = createRoute({
   getParentRoute: () => authRoute,
   path: "/sign-up",
   component: () => <SignUpRoute />,
 });
 
 // App layout and routes
-const appRoute = new Route({
+const appRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "app-layout",
   component: () => <AppLayout />,
 });
 
-const indexRoute = new Route({
+const indexRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/",
   beforeLoad: () => {
@@ -51,7 +57,7 @@ type DashboardSearch = {
   action?: string;
 };
 
-export const dashboardRoute = new Route({
+export const dashboardRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/dashboard",
   component: () => <DashboardRoute />,
@@ -62,25 +68,25 @@ export const dashboardRoute = new Route({
   },
 });
 
-const settingsRoute = new Route({
+const settingsRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/settings",
   component: () => <SettingsRoute />,
 });
 
-const feedbackRoute = new Route({
+const feedbackRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/feedback",
   component: () => <FeedbackRoute />,
 });
 
-const questionsRoute = new Route({
+const questionsRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/questions",
   component: () => <QuestionsRoute />,
 });
 
-const documentsRoute = new Route({
+const documentsRoute = createRoute({
   getParentRoute: () => appRoute,
   path: "/documents",
   component: () => <DocumentsRoute />,
@@ -108,7 +114,7 @@ function NotFound() {
   return <h3>404 - Not Found</h3>;
 }
 
-export const router = new Router({
+export const router = createRouter({
   routeTree,
   notFoundRoute,
   defaultPreload: "intent",
