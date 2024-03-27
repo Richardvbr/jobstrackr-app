@@ -24,6 +24,14 @@ export function DocumentsPage() {
         Add a new document
       </Button>
       <Card shadow title='All your documents'>
+        {documentsData?.map(({ title, created_at, application_id, file_type }) => {
+          return (
+            <>
+              <p>{title}</p>
+              <p>{file_type}</p>
+            </>
+          );
+        })}
         <p>{JSON.stringify(documentsData)}</p>
       </Card>
       <Card shadow title='Your documents per application'>

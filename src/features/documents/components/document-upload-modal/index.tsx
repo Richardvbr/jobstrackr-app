@@ -6,12 +6,13 @@ import { v4 as uuidv4 } from "uuid";
 
 import type { Application } from "@/types/application";
 import type { SelectInputItem } from "@/types/elements";
+import { getFileExtension } from "@/utils/documents";
+import { supabase } from "@/lib/supabase";
+import { useUser } from "@/contexts/AuthContext";
 
 import { Modal, Input, Button, SelectInput } from "@/components";
 import { useDocumentStore } from "@/features/documents";
 import styles from "./styles.module.scss";
-import { supabase } from "@/lib/supabase";
-import { useUser } from "@/contexts/AuthContext";
 
 type DocumentUploadModalProps = {
   applications: Application[];
@@ -43,6 +44,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     const { "document-name": fileName, "select-application": applicationId = null } = formData;
     const file = formData.file[0];
     const uniqueId = uuidv4();
+    const fileType = getFileExtension(file.type);
 
     try {
       // Upload file
@@ -61,6 +63,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
         title: fileName,
         application_id: applicationId,
         document_path: fileData?.path,
+        file_type: fileType,
       });
 
       if (error) {
