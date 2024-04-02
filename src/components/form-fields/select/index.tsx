@@ -9,12 +9,7 @@ type SelectInputProps = React.ComponentPropsWithoutRef<"select"> & {
   value?: string;
 };
 
-export function SelectInput({
-  item,
-  disabled,
-  value,
-  ...props
-}: SelectInputProps) {
+export function SelectInput({ item, disabled, value, ...props }: SelectInputProps) {
   const { register } = useFormContext() || {};
 
   const { name, label, options } = item;
@@ -22,13 +17,7 @@ export function SelectInput({
   return (
     <div className={styles.wrapper}>
       <label htmlFor={label}>{label}</label>
-      <select
-        {...(register && register(name))}
-        disabled={disabled}
-        name={name}
-        value={value}
-        {...props}
-      >
+      <select {...(register && register(name))} disabled={disabled} name={name} {...props}>
         {options.map(({ value, label }) => (
           <option key={`${value}-${label}`} value={value}>
             {label}

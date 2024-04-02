@@ -6,7 +6,7 @@ export type SelectInputItem = {
   name: string;
   label: string;
   options: {
-    value: string | undefined;
+    value: string | number | null;
     label: string;
   }[];
 };

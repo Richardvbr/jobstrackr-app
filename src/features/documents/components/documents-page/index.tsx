@@ -24,11 +24,12 @@ export function DocumentsPage() {
         Add a new document
       </Button>
       <Card shadow title='All your documents'>
-        {documentsData?.map(({ title, created_at, application_id, file_type }) => {
+        {documentsData?.map(({ title, created_at, application_id, file_type, description }) => {
           return (
             <>
               <p>{title}</p>
               <p>{file_type}</p>
+              <p>{description}</p>
             </>
           );
         })}

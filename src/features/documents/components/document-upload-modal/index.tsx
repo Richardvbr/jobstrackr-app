@@ -14,23 +14,30 @@ import { Modal, Input, Button, SelectInput } from "@/components";
 import { useDocumentStore } from "@/features/documents";
 import styles from "./styles.module.scss";
 
-type DocumentUploadModalProps = {
+interface DocumentUploadModalProps {
   applications: Application[];
-};
+}
+
+interface AddDocumentForm {
+  documentName: string;
+  documentDescription?: string;
+  file: File[];
+  selectedApplication?: string;
+}
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const formMethods = useForm<any>();
+  const formMethods = useForm<AddDocumentForm>();
   const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
   const { handleSubmit, reset, register } = formMethods;
 
   const applicationSelect: SelectInputItem = {
-    name: "select-application",
+    name: "selectedApplication",
     label: "Select an application (optional)",
     options: [
-      { label: "None", value: undefined },
+      { label: "", value: null },
       ...applications.map(({ id, company, position }) => ({
         value: id,
         label: `${company} - ${position}`,
@@ -39,9 +46,9 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
   };
 
   // Form submission
-  const onSubmit: SubmitHandler<any> = async (formData) => {
+  const onSubmit: SubmitHandler<AddDocumentForm> = async (formData) => {
     setSubmitLoading(true);
-    const { "document-name": fileName, "select-application": applicationId = null } = formData;
+    const { documentName, selectedApplication, documentDescription } = formData;
     const file = formData.file[0];
     const uniqueId = uuidv4();
     const fileType = getFileExtension(file.type);
@@ -50,26 +57,29 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
       // Upload file
       const { data: fileData, error: fileError } = await supabase.storage
         .from("documents")
-        .upload(`file-${fileName}-${uniqueId}`, file);
+        .upload(`file-${documentName}-${uniqueId}`, file);
 
       if (fileError) {
         setSubmitLoading(false);
-        toast.error("File upload failed");
+        throw toast.error("An error occurred while uploading the file");
       }
 
-      // Create record
+      // Create record with path to file
       const { error } = await supabase.from("documents").insert({
         user_id: user?.id,
-        title: fileName,
-        application_id: applicationId,
-        document_path: fileData?.path,
+        title: documentName,
+        file_path: fileData?.path,
         file_type: fileType,
+        description: documentDescription,
+        ...(selectedApplication && { application_id: selectedApplication }),
       });
 
       if (error) {
         setSubmitLoading(false);
-        toast.error(error.message);
+        throw toast.error("An error occurred while uploading the file");
       }
+
+      toast.success("Document uploaded!");
     } catch (error) {
       console.log(error);
     } finally {
@@ -94,13 +104,17 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     <Modal
       opened={documentModalOpened}
       handleClose={() => closeDocumentModal()}
-      modalTitle={`Upload a new document`}
+      modalTitle='Upload a new document'
     >
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input label='Document name' {...register("document-name", { required: true })} />
+          <Input label='Document name *' {...register("documentName", { required: true })} />
           <Input
-            label='Select a file'
+            label='Document description'
+            {...register("documentDescription", { required: false })}
+          />
+          <Input
+            label='Select a file *'
             type='file'
             accept='.doc, .docx, .pdf'
             {...register("file", { required: true })}

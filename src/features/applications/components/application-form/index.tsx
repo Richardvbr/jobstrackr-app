@@ -89,7 +89,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       .eq("id", applicationData.id);
 
     if (error) {
-      throw new Error("An error occurred when updating the application.");
+      throw toast.error("An error occurred when updating the application.");
     }
 
     toast.success("Application updated");
@@ -101,7 +101,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       .insert({ ...applicationData, user_id: user?.id });
 
     if (error) {
-      throw new Error("An error occurred when adding the application.");
+      throw toast.error("An error occurred when adding the application.");
     }
 
     toast.success("Application added");
@@ -125,7 +125,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       const { error } = await supabase.from("applications").delete().eq("id", applicationData?.id);
 
       if (error) {
-        throw new Error("An error occured when deleting the application.");
+        throw toast.error("An error occured when deleting the application.");
       }
 
       toast.success("Application deleted");
