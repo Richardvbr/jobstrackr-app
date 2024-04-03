@@ -30,16 +30,18 @@ export function DocumentsPage() {
         <Icons.Plus />
         Add a new document
       </Button>
-      <Card shadow title='All your documents'>
-        <div className={styles.documentContainer}>
-          {documentsData?.map((document: Document) => {
-            return <DocumentItem key={document.title} document={document} />;
-          })}
-        </div>
-      </Card>
-      <Card shadow title='Your documents per application'>
-        <p>{JSON.stringify(groupedDocuments)}</p>
-      </Card>
+      <div className={styles.documentSections}>
+        <Card shadow title='All your documents'>
+          <div className={styles.documentContainer}>
+            {documentsData?.map((document: Document) => {
+              return <DocumentItem key={document.title} document={document} />;
+            })}
+          </div>
+        </Card>
+        <Card shadow title='Your documents per application'>
+          <p>{JSON.stringify(groupedDocuments)}</p>
+        </Card>
+      </div>
       <DocumentUploadModal applications={applicationsData ?? []} />
     </section>
   );

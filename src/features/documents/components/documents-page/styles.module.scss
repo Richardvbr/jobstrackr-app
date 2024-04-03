@@ -1,3 +1,10 @@
+.documentSections {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
 .documentContainer {
   display: flex;
   gap: 25px;

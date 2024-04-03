@@ -9,3 +9,11 @@ export function getFirstCharacter(string: string = "") {
 export function getFirstCharacterCapitalized(string: string = "") {
   return string.charAt(0).toUpperCase();
 }
+
+export function truncate(string: string, maxLength?: number) {
+  if (!maxLength) {
+    return string;
+  }
+
+  return string.length > maxLength ? string.slice(0, maxLength - 1) + "…" : string;
+}

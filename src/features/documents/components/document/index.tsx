@@ -1,15 +1,22 @@
+import { useRef, useState } from "react";
 import { FileIcon, defaultStyles } from "react-file-icon";
 import { Document } from "@/types/document";
-import styles from "./styles.module.scss";
-import { capitalizeFirstLetter } from "@/utils/text";
+import { useWindowSize } from "@/hooks/useWindowSize";
+import { capitalizeFirstLetter, truncate } from "@/utils/text";
 import { BsThreeDotsVertical } from "@/components/icons";
+import Menu from "@/components/menu";
+import styles from "./styles.module.scss";
 
 interface DocumentProps {
   document: Document;
 }
 
 export function DocumentItem({ document }: DocumentProps) {
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const { width } = useWindowSize();
   const { title, file_type: fileType, file_path: filePath } = document;
+  const fileTitle = truncate(capitalizeFirstLetter(title as string), width < 768 ? 13 : undefined);
 
   const fileUrl = `${
     import.meta.env.VITE_SUPABASE_URL
@@ -18,14 +25,24 @@ export function DocumentItem({ document }: DocumentProps) {
   return (
     <div className={styles.document}>
       <div className={styles.heading}>
-        <p>{capitalizeFirstLetter(title as string)}</p>
-        <a href={fileUrl} download>
+        <p>{fileTitle}</p>
+        <div className={styles.menuButton} ref={menuRef} onClick={() => setMenuOpen((s) => !s)}>
           <BsThreeDotsVertical size={18} />
-        </a>
+        </div>
       </div>
       <div className={styles.fileType}>
         <FileIcon extension={fileType} {...defaultStyles[fileType]} />
       </div>
+      <Menu
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        targetEl={menuRef.current}
+        className={styles.downloadMenu}
+      >
+        <a href={fileUrl} download onClick={() => setMenuOpen(false)}>
+          Download file
+        </a>
+      </Menu>
     </div>
   );
 }

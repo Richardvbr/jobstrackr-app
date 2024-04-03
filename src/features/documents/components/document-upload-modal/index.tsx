@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import type { Application } from "@/types/application";
 import type { SelectInputItem } from "@/types/elements";
-import { getFileExtension } from "@/utils/documents";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@/contexts/AuthContext";
 
@@ -51,7 +50,6 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     const { documentName, selectedApplication, documentDescription } = formData;
     const file = formData.file[0];
     const uniqueId = uuidv4();
-    const fileType = getFileExtension(file.type);
 
     try {
       // Upload file

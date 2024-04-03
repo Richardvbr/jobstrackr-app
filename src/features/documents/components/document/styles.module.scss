@@ -2,47 +2,67 @@
   padding: 10px;
   background-color: $gray-600;
   transition: 0.15s ease;
-  min-height: 150px;
-  min-width: 150px;
+  height: 100px;
+  width: 100px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
 
   p {
     color: $white;
+    line-height: 1.2;
   }
 
-  &:hover {
-    background-color: $gray-500;
-    cursor: pointer;
+  .fileType {
+    width: 25px;
+    margin: auto 0 0 auto;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
   }
 }
 
 .heading {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 10px;
 
-  a {
+  .menuButton {
     color: $gray-300;
+
     svg {
       flex-shrink: 0;
 
       &:hover {
-        cursor: pointer;
         fill: $white;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
 
-.fileType {
-  width: 30px;
-  margin: auto 0 0 auto;
+.downloadMenu {
+  font-size: 14px;
 
-  img {
-    height: 100%;
-    width: 100%;
+  a {
+    color: $gray-200;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-m) {
+  .document {
+    height: 125px;
+    width: 125px;
   }
 }

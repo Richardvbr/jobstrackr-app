@@ -2,11 +2,16 @@ import { RefObject, useEffect } from "react";
 
 export function useClickOutside(
   ref: RefObject<any>,
-  handler: (event: Event) => void
+  handler: (event: Event) => void,
+  ignoreElement?: Element
 ) {
   useEffect(() => {
     const listener = (event: Event) => {
-      if (!ref.current || ref.current.contains(event.target)) {
+      if (
+        !ref.current ||
+        ref.current.contains(event.target) ||
+        ignoreElement?.contains(event.target as any)
+      ) {
         return;
       }
       handler(event);
