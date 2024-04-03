@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 
-export function getDocumentsQuery() {
+export function useDocumentsQuery() {
   return useQuery({
     queryKey: ["get-documents"],
     queryFn: async () => {
@@ -19,14 +19,11 @@ export function getDocumentsQuery() {
   });
 }
 
-export function getDocumentQuery(documentId: string) {
+export function useDocumentQuery(documentId: string) {
   return useQuery({
     queryKey: [`get-document-${documentId}`],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("documents")
-        .select()
-        .eq("id", documentId);
+      const { data, error } = await supabase.from("documents").select().eq("id", documentId);
 
       if (error) {
         throw new Error(error.message);

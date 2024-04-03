@@ -1,3 +1,5 @@
+import { ElementType } from "react";
+
 export type LinkItemProps = {
   href?:
     | "/"
@@ -11,6 +13,6 @@ export type LinkItemProps = {
     | "/feedback"
     | string;
   label?: string;
-  Icon?: any;
+  Icon?: ElementType;
   onClick?: () => void;
 };

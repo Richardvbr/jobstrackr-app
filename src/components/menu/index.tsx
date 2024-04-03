@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import React, { useMemo, useRef } from "react";
+import React, { RefObject, useMemo, useRef } from "react";
 import cn from "clsx";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
@@ -10,10 +10,10 @@ import style from "./styles.module.scss";
 export type MenuProps = {
   isOpen: boolean;
   onClose: () => void;
-  targetEl: any;
-  offset?: number[];
+  targetEl: Element;
+  offset?: [number, number];
   placement?: Placement;
-} & React.ComponentPropsWithoutRef<"div">;
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const Menu = ({
   isOpen = false,
@@ -24,7 +24,7 @@ const Menu = ({
   children,
   className,
 }: MenuProps) => {
-  const ref = useRef<any>();
+  const ref = useRef<HTMLDivElement>(null);
   const classes = cn(style.menu, className);
 
   const offsetModifier = useMemo(

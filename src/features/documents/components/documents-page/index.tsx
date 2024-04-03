@@ -1,10 +1,10 @@
 import {
   useDocumentStore,
   DocumentUploadModal,
-  getDocumentsQuery,
+  useDocumentsQuery,
   DocumentItem,
 } from "@/features/documents";
-import { getApplicationsQuery } from "@/features/applications";
+import { useApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
 import styles from "./styles.module.scss";
 import { Document } from "@/types/document";
@@ -12,8 +12,8 @@ import { Document } from "@/types/document";
 export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
 
-  const { data: documentsData } = getDocumentsQuery();
-  const { data: applicationsData } = getApplicationsQuery();
+  const { data: documentsData } = useDocumentsQuery();
+  const { data: applicationsData } = useApplicationsQuery();
 
   // Group documents based on their corresponding application
   const groupedDocuments = applicationsData?.map((application) => ({

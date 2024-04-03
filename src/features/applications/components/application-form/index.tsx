@@ -51,7 +51,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     queryClient.invalidateQueries({ queryKey: ["get-applications"] });
   }
 
-  function handleError(error: any) {
+  function handleError(error: unknown) {
     console.error("Error submitting form:", error);
 
     if (error instanceof Error) {
