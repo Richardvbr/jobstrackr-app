@@ -13,4 +13,4 @@ export {
 } from "react-icons/fa6";
 export { FiExternalLink as ExternalLink, FiSettings as Settings } from "react-icons/fi";
 export { FaRegEdit as Edit } from "react-icons/fa";
-export { BsFiletypeDoc, BsFiletypeDocx, BsFiletypePdf } from "react-icons/bs";
+export { BsFiletypeDoc, BsFiletypeDocx, BsFiletypePdf, BsThreeDotsVertical } from "react-icons/bs";

@@ -1,6 +1,3 @@
-import { ReactNode } from "react";
-import { BsFiletypeDoc, BsFiletypeDocx, BsFiletypePdf } from "@/components/icons";
-
 export function formatBytes(bytes: number, decimals = 2) {
   if (!+bytes) return "0 Bytes";
 
@@ -16,9 +13,3 @@ export function formatBytes(bytes: number, decimals = 2) {
 export function getFileExtension(fileType: string) {
   return fileType.split("/")[1];
 }
-
-export const fileTypeIcons: { [key: string]: ReactNode } = {
-  doc: <BsFiletypeDoc />,
-  docx: <BsFiletypeDocx />,
-  pdf: <BsFiletypePdf />,
-};

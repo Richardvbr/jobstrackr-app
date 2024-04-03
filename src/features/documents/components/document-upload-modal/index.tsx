@@ -37,7 +37,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     name: "selectedApplication",
     label: "Select an application (optional)",
     options: [
-      { label: "", value: null },
+      { label: "", value: undefined },
       ...applications.map(({ id, company, position }) => ({
         value: id,
         label: `${company} - ${position}`,
@@ -68,9 +68,9 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
       const { error } = await supabase.from("documents").insert({
         user_id: user?.id,
         title: documentName,
-        file_path: fileData?.path,
-        file_type: fileType,
         description: documentDescription,
+        file_path: fileData?.path,
+        file_type: file.type,
         ...(selectedApplication && { application_id: selectedApplication }),
       });
 
@@ -116,7 +116,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
           <Input
             label='Select a file *'
             type='file'
-            accept='.doc, .docx, .pdf'
+            accept='application/msword, application/docx, application/pdf'
             {...register("file", { required: true })}
           />
           <SelectInput item={applicationSelect} />

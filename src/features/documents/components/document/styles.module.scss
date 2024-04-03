@@ -1,0 +1,48 @@
+.document {
+  padding: 10px;
+  background-color: $gray-600;
+  transition: 0.15s ease;
+  min-height: 150px;
+  min-width: 150px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    color: $white;
+  }
+
+  &:hover {
+    background-color: $gray-500;
+    cursor: pointer;
+  }
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  a {
+    color: $gray-300;
+    svg {
+      flex-shrink: 0;
+
+      &:hover {
+        cursor: pointer;
+        fill: $white;
+      }
+    }
+  }
+}
+
+.fileType {
+  width: 30px;
+  margin: auto 0 0 auto;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
