@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import React, { RefObject, useMemo, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import cn from "clsx";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
@@ -10,7 +10,7 @@ import style from "./styles.module.scss";
 export type MenuProps = {
   isOpen: boolean;
   onClose: () => void;
-  targetEl: Element;
+  targetEl: Element | null;
   offset?: [number, number];
   placement?: Placement;
 } & React.HTMLAttributes<HTMLDivElement>;

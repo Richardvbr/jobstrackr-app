@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { FileIcon, defaultStyles } from "react-file-icon";
+import { DefaultExtensionType, FileIcon, defaultStyles } from "react-file-icon";
 import { Document } from "@/types/document";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { capitalizeFirstLetter, truncate } from "@/utils/text";
@@ -31,7 +31,10 @@ export function DocumentItem({ document }: DocumentProps) {
         </div>
       </div>
       <div className={styles.fileType}>
-        <FileIcon extension={fileType} {...defaultStyles[fileType]} />
+        <FileIcon
+          extension={fileType || undefined}
+          {...defaultStyles[fileType as DefaultExtensionType]}
+        />
       </div>
       <Menu
         isOpen={menuOpen}

@@ -3,7 +3,7 @@ import { RefObject, useEffect } from "react";
 export function useClickOutside(
   ref: RefObject<Element>,
   handler: (event: Event) => void,
-  ignoreElement?: Element
+  ignoreElement?: Element | null
 ) {
   useEffect(() => {
     const listener = (event: Event) => {
