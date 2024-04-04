@@ -29,4 +29,10 @@
       cursor: pointer;
     }
   }
+
+  .inputError {
+    color: $red-500;
+    margin-top: -10px;
+    font-size: 13px;
+  }
 }

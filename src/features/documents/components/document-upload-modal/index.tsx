@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
@@ -30,7 +31,12 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
   const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
-  const { handleSubmit, reset, register } = formMethods;
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors },
+  } = formMethods;
 
   const applicationSelect: SelectInputItem = {
     name: "selectedApplication",
@@ -98,6 +104,8 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     reset();
   }, [documentModalOpened]);
 
+  console.log(errors);
+
   return (
     <Modal
       opened={documentModalOpened}
@@ -106,7 +114,17 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     >
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input label='Document name *' {...register("documentName", { required: true })} />
+          <Input
+            label='Document name *'
+            {...register("documentName", {
+              required: { value: true, message: "This field is required" },
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name='documentName'
+            render={({ message }) => <p className={styles.inputError}>{message}</p>}
+          />
           <Input
             label='Document description'
             {...register("documentDescription", { required: false })}
@@ -115,7 +133,12 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
             label='Select a file *'
             type='file'
             accept='application/msword, application/docx, application/pdf'
-            {...register("file", { required: true })}
+            {...register("file", { required: { value: true, message: "Please select a file" } })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name='file'
+            render={({ message }) => <p className={styles.inputError}>{message}</p>}
           />
           <SelectInput item={applicationSelect} />
           <div className={styles.buttons}>
