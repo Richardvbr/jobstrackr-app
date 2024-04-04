@@ -115,7 +115,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
           <Input
             label='Document name *'
             {...register("documentName", {
-              required: { value: true, message: "This field is required" },
+              required: "This field is required",
             })}
           />
           <ErrorMessage
@@ -131,7 +131,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
             label='Select a file *'
             type='file'
             accept='application/msword, application/docx, application/pdf'
-            {...register("file", { required: { value: true, message: "Please select a file" } })}
+            {...register("file", { required: "Please select a file" })}
           />
           <ErrorMessage
             errors={errors}
