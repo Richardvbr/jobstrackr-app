@@ -90,7 +90,7 @@ $shadow-m: 0px 0px 15px -1px rgba(0, 0, 0, 0.25);
 
 $shadow-inset: inset 19px 0px 16px -6px rgba(
     $color: $gray-300,
-    $alpha: 0.8,
+    $alpha: 0.4,
   );
 
 @mixin constrain {

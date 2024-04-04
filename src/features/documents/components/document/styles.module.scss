@@ -1,6 +1,6 @@
 .document {
   padding: 10px;
-  background-color: $gray-600;
+  background-color: $gray-100;
   transition: 0.15s ease;
   height: 100px;
   width: 100px;
@@ -9,8 +9,8 @@
   flex-direction: column;
 
   p {
-    color: $white;
     line-height: 1.2;
+    @include font-medium;
   }
 
   .fileType {
@@ -28,21 +28,21 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+}
 
-  .menuButton {
-    color: $gray-300;
+.menuButton {
+  color: $gray-500;
 
-    svg {
-      flex-shrink: 0;
-
-      &:hover {
-        fill: $white;
-      }
-    }
+  svg {
+    flex-shrink: 0;
 
     &:hover {
-      cursor: pointer;
+      fill: $gray-400;
     }
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -65,5 +65,25 @@
   .document {
     height: 125px;
     width: 125px;
+  }
+}
+
+[data-theme="dark"] {
+  .document {
+    background-color: $gray-600;
+
+    p {
+      color: $gray-200;
+    }
+  }
+
+  .menuButton {
+    color: $gray-300;
+
+    svg {
+      &:hover {
+        fill: $white;
+      }
+    }
   }
 }

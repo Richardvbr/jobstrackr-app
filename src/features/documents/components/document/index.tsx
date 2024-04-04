@@ -32,7 +32,7 @@ export function DocumentItem({ document }: DocumentProps) {
       </div>
       <div className={styles.fileType}>
         <FileIcon
-          extension={fileType || undefined}
+          extension={fileType ?? undefined}
           {...defaultStyles[fileType as DefaultExtensionType]}
         />
       </div>
