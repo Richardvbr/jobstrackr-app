@@ -104,8 +104,6 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     reset();
   }, [documentModalOpened]);
 
-  console.log(errors);
-
   return (
     <Modal
       opened={documentModalOpened}
