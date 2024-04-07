@@ -41,8 +41,8 @@ export function Input({
         value={value}
         placeholder={placeholder}
         disabled={disabled}
-        required={required}
-        {...(register && register(name))}
+        {...(register &&
+          register(name, { ...(required && { required: "This field is required" }) }))}
         onChange={handleChange}
         {...props}
       />

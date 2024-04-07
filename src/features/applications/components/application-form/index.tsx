@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import { useShallow } from "zustand/react/shallow";
 import { format } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
@@ -42,7 +43,11 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       : {},
   });
 
-  const { handleSubmit, reset } = formMethods;
+  const {
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = formMethods;
 
   function handleFormReset() {
     reset();
@@ -141,14 +146,20 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formItems}>
           {formItems.map(({ label, name, type, required }) => (
-            <Input
-              key={name}
-              label={label}
-              name={name}
-              type={type}
-              placeholder={label}
-              required={required}
-            />
+            <div className={styles.inputContainer} key={name}>
+              <Input
+                label={label}
+                name={name}
+                type={type}
+                placeholder={label}
+                required={required}
+              />
+              <ErrorMessage
+                errors={errors}
+                name={name}
+                render={({ message }) => <p className={styles.inputError}>{message}</p>}
+              />
+            </div>
           ))}
           <SelectInput item={statusInput} />
           <SelectInput item={workModelInput} />
