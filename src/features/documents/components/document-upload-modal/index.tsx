@@ -26,16 +26,11 @@ interface AddDocumentForm {
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const formMethods = useForm<AddDocumentForm>();
+  const formMethods = useForm<AddDocumentForm>({ mode: "all" });
   const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
-  const {
-    handleSubmit,
-    reset,
-    formState: { errors },
-    register,
-  } = formMethods;
+  const { handleSubmit, reset } = formMethods;
 
   const applicationSelect: SelectInputItem = {
     name: "selectedApplication",

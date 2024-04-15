@@ -21,13 +21,10 @@ export function AuthForm({ type }: AuthFormProps) {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<string | null>(null);
-  const formMethods = useForm<AuthFormInput>();
+  const formMethods = useForm<AuthFormInput>({ mode: "all" });
   const user = useUser();
   const navigate = useNavigate();
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = formMethods;
+  const { handleSubmit } = formMethods;
   const isSignInform = type === "sign-in";
   const guestEmail = "guest.be4e3dfc.d8c6@gmail.com";
   const guestPassword = "r4nd0ms3cur3pw";

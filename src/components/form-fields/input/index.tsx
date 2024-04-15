@@ -36,7 +36,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   } = props;
 
   const { register, formState } = useFormContext() || {};
-
   const errors = formState?.errors || {};
 
   return (
