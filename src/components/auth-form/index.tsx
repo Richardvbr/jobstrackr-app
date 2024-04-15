@@ -6,9 +6,7 @@ import { supabase } from "@/lib/supabase";
 import { useUser } from "@/contexts/AuthContext";
 
 import { ThirdPartyProvider, Button, Input } from "@/components";
-
 import styles from "./styles.module.scss";
-import { ErrorMessage } from "@hookform/error-message";
 
 type AuthFormProps = {
   type: "sign-up" | "sign-in";
@@ -117,11 +115,6 @@ export function AuthForm({ type }: AuthFormProps) {
             disabled={loading || !!emailSent}
             name='email'
             required
-          />
-          <ErrorMessage
-            errors={errors}
-            name='email'
-            render={({ message }) => <p className={styles.inputError}>{message}</p>}
           />
           <Button variant='primary' type='submit' fullWidth disabled={loading || !!emailSent}>
             {getButtonLabel()}

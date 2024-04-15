@@ -13,6 +13,12 @@
   }
 }
 
+.inputError {
+  color: $red-500;
+  margin-top: -5px;
+  font-size: 13px;
+}
+
 [data-theme="dark"] {
   .wrapper {
     input {

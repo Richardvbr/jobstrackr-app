@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useShallow } from "zustand/react/shallow";
 import { format } from "date-fns";
 import { useQueryClient } from "@tanstack/react-query";
@@ -153,11 +152,6 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
                 type={type}
                 placeholder={label}
                 required={required}
-              />
-              <ErrorMessage
-                errors={errors}
-                name={name}
-                render={({ message }) => <p className={styles.inputError}>{message}</p>}
               />
             </div>
           ))}

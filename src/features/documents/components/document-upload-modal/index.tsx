@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
@@ -35,6 +34,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     handleSubmit,
     reset,
     formState: { errors },
+    register,
   } = formMethods;
 
   const applicationSelect: SelectInputItem = {
@@ -112,11 +112,6 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input label='Document name *' name='documentName' required />
-          <ErrorMessage
-            errors={errors}
-            name='documentName'
-            render={({ message }) => <p className={styles.inputError}>{message}</p>}
-          />
           <Input label='Document description' name='documentDescription' />
           <Input
             label='Select a file *'
@@ -125,11 +120,6 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
             name='file'
             required
             requiredMsg='Please select a file'
-          />
-          <ErrorMessage
-            errors={errors}
-            name='file'
-            render={({ message }) => <p className={styles.inputError}>{message}</p>}
           />
           <SelectInput item={applicationSelect} />
           <div className={styles.buttons}>
