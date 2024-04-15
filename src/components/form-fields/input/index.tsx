@@ -1,8 +1,9 @@
-import React, { ChangeEvent, HTMLInputTypeAttribute, forwardRef } from "react";
+import React, { ChangeEvent, HTMLInputTypeAttribute } from "react";
+import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext } from "react-hook-form";
 import cn from "clsx";
+
 import styles from "./styles.module.scss";
-import { ErrorMessage } from "@hookform/error-message";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   name: string;
@@ -18,8 +19,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
 };
 
-// Define the Input component as a forwardRef
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export function Input(props: InputProps) {
   const {
     name,
     label,
@@ -58,4 +58,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       />
     </div>
   );
-});
+}
