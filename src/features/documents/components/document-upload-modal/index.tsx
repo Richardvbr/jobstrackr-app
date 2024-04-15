@@ -106,10 +106,10 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     >
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input label='Document name *' name='documentName' required />
+          <Input label='Document name' name='documentName' required />
           <Input label='Document description' name='documentDescription' />
           <Input
-            label='Select a file *'
+            label='Select a file'
             type='file'
             accept='application/msword, application/docx, application/pdf'
             name='file'

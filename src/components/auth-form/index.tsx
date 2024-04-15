@@ -107,7 +107,7 @@ export function AuthForm({ type }: AuthFormProps) {
           {emailSent && <p className={styles.notification}>{emailSent}</p>}
           <Input
             type='email'
-            label='Email *'
+            label='Email'
             autoComplete='email'
             disabled={loading || !!emailSent}
             name='email'

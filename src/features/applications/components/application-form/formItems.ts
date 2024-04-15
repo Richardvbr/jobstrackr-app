@@ -20,13 +20,13 @@ type FormItem = {
 export const formItems: FormItem[] = [
   {
     name: "company",
-    label: "Company *",
+    label: "Company",
     type: "text",
     required: true,
   },
   {
     name: "position",
-    label: "Position *",
+    label: "Position",
     type: "text",
     required: true,
   },
@@ -37,7 +37,7 @@ export const formItems: FormItem[] = [
   },
   {
     name: "applied_at",
-    label: "Applied at *",
+    label: "Applied at",
     type: "date",
     required: true,
   },

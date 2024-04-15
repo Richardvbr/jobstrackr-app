@@ -40,7 +40,7 @@ export function Input(props: InputProps) {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{required ? `${label} *` : label}</label>
       <input
         type={type}
         id={name}
