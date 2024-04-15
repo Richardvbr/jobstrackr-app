@@ -34,7 +34,6 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
   const {
     handleSubmit,
     reset,
-    register,
     formState: { errors },
   } = formMethods;
 
@@ -112,26 +111,20 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     >
       <FormProvider {...formMethods}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label='Document name *'
-            {...register("documentName", {
-              required: "This field is required",
-            })}
-          />
+          <Input label='Document name *' name='documentName' required />
           <ErrorMessage
             errors={errors}
             name='documentName'
             render={({ message }) => <p className={styles.inputError}>{message}</p>}
           />
-          <Input
-            label='Document description'
-            {...register("documentDescription", { required: false })}
-          />
+          <Input label='Document description' name='documentDescription' />
           <Input
             label='Select a file *'
             type='file'
             accept='application/msword, application/docx, application/pdf'
-            {...register("file", { required: "Please select a file" })}
+            name='file'
+            required
+            requiredMsg='Please select a file'
           />
           <ErrorMessage
             errors={errors}

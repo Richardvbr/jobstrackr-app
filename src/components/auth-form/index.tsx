@@ -8,6 +8,7 @@ import { useUser } from "@/contexts/AuthContext";
 import { ThirdPartyProvider, Button, Input } from "@/components";
 
 import styles from "./styles.module.scss";
+import { ErrorMessage } from "@hookform/error-message";
 
 type AuthFormProps = {
   type: "sign-up" | "sign-in";
@@ -23,16 +24,15 @@ export function AuthForm({ type }: AuthFormProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<string | null>(null);
   const formMethods = useForm<AuthFormInput>();
+  const user = useUser();
   const navigate = useNavigate();
-
-  const { handleSubmit } = formMethods;
-
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = formMethods;
   const isSignInform = type === "sign-in";
-
   const guestEmail = "guest.be4e3dfc.d8c6@gmail.com";
   const guestPassword = "r4nd0ms3cur3pw";
-
-  const user = useUser();
 
   // Redirect if user is found
   useEffect(() => {
@@ -46,22 +46,23 @@ export function AuthForm({ type }: AuthFormProps) {
     setLoading(true);
 
     try {
-      await supabase.auth.signInWithOtp({
+      const { error } = await supabase.auth.signInWithOtp({
         email: formData.email,
         options: {
           shouldCreateUser: true,
           emailRedirectTo: import.meta.env.VITE_OTP_EMAIL_REDIRECT,
         },
       });
+
+      if (!error) {
+        setEmailSent("Check your email on this device for a single-use link to sign in.");
+      }
     } catch (error) {
       console.log(error);
       setLoading(false);
-      // setError(
-      //   "Failed to sign in. Please check your email address and password."
-      // );
+      setError("Failed to sign in. Please check your email address and password.");
     } finally {
       setLoading(false);
-      setEmailSent("Check your email on this device for a single-use link to sign in.");
     }
   }
 
@@ -97,7 +98,7 @@ export function AuthForm({ type }: AuthFormProps) {
   return (
     <div className={styles.form}>
       <div className={styles.header}>
-        <img src={`/assets/images/logo_cropped_transparent.svg`} alt='Jobstrackr logo' />
+        <img src='/assets/images/logo_cropped_transparent.svg' alt='Jobstrackr logo' />
         <p>Sign in to start managing your job search.</p>
       </div>
       <div className={styles.providers}>
@@ -112,11 +113,17 @@ export function AuthForm({ type }: AuthFormProps) {
           <Input
             type='email'
             label='Email *'
-            name='email'
             autoComplete='email'
             disabled={loading || !!emailSent}
+            name='email'
+            required
           />
-          <Button variant='primary' type='submit' disabled={loading || !!emailSent} fullWidth>
+          <ErrorMessage
+            errors={errors}
+            name='email'
+            render={({ message }) => <p className={styles.inputError}>{message}</p>}
+          />
+          <Button variant='primary' type='submit' fullWidth disabled={loading || !!emailSent}>
             {getButtonLabel()}
           </Button>
         </form>

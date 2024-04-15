@@ -13,6 +13,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: boolean;
   disabled?: boolean;
   required?: boolean;
+  requiredMsg?: string;
   handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 };
@@ -25,7 +26,8 @@ export function Input({
   placeholder,
   error,
   disabled,
-  required,
+  required = false,
+  requiredMsg = "This field is required",
   handleChange,
   className,
   ...props
@@ -41,8 +43,7 @@ export function Input({
         value={value}
         placeholder={placeholder}
         disabled={disabled}
-        {...(register &&
-          register(name, { ...(required && { required: "This field is required" }) }))}
+        {...(register && register(name, { ...(required && { required: requiredMsg }) }))}
         onChange={handleChange}
         {...props}
       />

@@ -59,6 +59,12 @@
   }
 }
 
+.inputError {
+  color: $red-500;
+  margin: -5px 0 10px;
+  font-size: 13px;
+}
+
 .error {
   color: $accent-red;
   font-size: 0.8rem;
@@ -125,18 +131,21 @@
   .form {
     background: $dark-secondary;
     border: 1px solid $dark-border;
-
-    p {
-      color: $gray-200;
-    }
+    color: $gray-200;
   }
 
   .divider {
     color: $gray-200;
   }
 
-  .header img {
-    filter: invert(1);
+  .header {
+    img {
+      filter: invert(1);
+    }
+
+    p {
+      color: $gray-200;
+    }
   }
 
   .guestSignIn {
