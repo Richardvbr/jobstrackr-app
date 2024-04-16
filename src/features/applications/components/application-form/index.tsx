@@ -34,7 +34,8 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
 
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
-    mode: "all",
+    mode: "onSubmit",
+    reValidateMode: "onBlur",
     defaultValues: isEditing
       ? {
           ...applicationData,

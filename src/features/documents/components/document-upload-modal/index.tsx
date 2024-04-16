@@ -26,7 +26,7 @@ interface AddDocumentForm {
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const formMethods = useForm<AddDocumentForm>({ mode: "all" });
+  const formMethods = useForm<AddDocumentForm>({ mode: "onSubmit", reValidateMode: "onBlur" });
   const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();

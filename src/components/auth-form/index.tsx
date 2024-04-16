@@ -21,7 +21,7 @@ export function AuthForm({ type }: AuthFormProps) {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<string | null>(null);
-  const formMethods = useForm<AuthFormInput>({ mode: "all" });
+  const formMethods = useForm<AuthFormInput>({ mode: "onSubmit", reValidateMode: "onBlur" });
   const user = useUser();
   const navigate = useNavigate();
   const { handleSubmit } = formMethods;
