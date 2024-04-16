@@ -50,12 +50,10 @@ export function AuthForm({ type }: AuthFormProps) {
       });
 
       if (error) {
-        setError(`An error occured: ${error.message}`);
+        return setError(`An error occured: ${error.message}`);
       }
 
-      if (data.user) {
-        setEmailSent("Check your email on this device for a single-use link to sign in.");
-      }
+      setEmailSent("Check your email on this device for a single-use link to sign in.");
     } catch (error) {
       console.log(error);
       setLoading(false);
