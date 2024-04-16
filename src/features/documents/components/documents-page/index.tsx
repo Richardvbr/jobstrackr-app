@@ -6,8 +6,8 @@ import {
 } from "@/features/documents";
 import { useApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
-import { Document } from "@/types/document";
 import styles from "./styles.module.scss";
+import { Document } from "@/types/document";
 
 export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
@@ -33,9 +33,13 @@ export function DocumentsPage() {
       <div className={styles.documentSections}>
         <Card shadow title='All your documents'>
           <div className={styles.documentContainer}>
-            {documentsData?.map((document: Document) => (
-              <DocumentItem key={document.id} document={document} />
-            ))}
+            {documentsData?.length ? (
+              documentsData?.map((document: Document) => (
+                <DocumentItem key={document.id} document={document} />
+              ))
+            ) : (
+              <p>No documents yet, any documents you upload will appear here</p>
+            )}
           </div>
         </Card>
         <Card shadow title='Your documents per application'>
