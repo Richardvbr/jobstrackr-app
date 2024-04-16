@@ -38,6 +38,10 @@ export function Input(props: InputProps) {
   const { register, formState } = useFormContext() || {};
   const errors = formState?.errors || {};
 
+  const preventSubmitOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") e.preventDefault();
+  };
+
   return (
     <div className={cn(styles.wrapper, className)}>
       <label htmlFor={name}>{required ? `${label} *` : label}</label>
@@ -49,6 +53,7 @@ export function Input(props: InputProps) {
         disabled={disabled}
         {...(register && register(name, { ...(required && { required: requiredMsg }) }))}
         onChange={handleChange}
+        onKeyDown={(e) => preventSubmitOnEnter(e)}
         {...restProps}
       />
       <ErrorMessage

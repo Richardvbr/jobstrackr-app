@@ -41,7 +41,7 @@ export function AuthForm({ type }: AuthFormProps) {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithOtp({
+      const { data, error } = await supabase.auth.signInWithOtp({
         email: formData.email,
         options: {
           shouldCreateUser: true,
@@ -49,7 +49,11 @@ export function AuthForm({ type }: AuthFormProps) {
         },
       });
 
-      if (!error) {
+      if (error) {
+        setError(`An error occured: ${error.message}`);
+      }
+
+      if (data.user) {
         setEmailSent("Check your email on this device for a single-use link to sign in.");
       }
     } catch (error) {

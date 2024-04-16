@@ -6,38 +6,38 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   type ThemeOptions = {
-    name: Theme;
+    value: Theme;
     label: string;
   };
 
   const options: ThemeOptions[] = [
     {
-      name: "light",
+      value: "light",
       label: "Light theme",
     },
     {
-      name: "dark",
+      value: "dark",
       label: "Dark theme",
     },
     {
-      name: "system",
+      value: "system",
       label: "System default",
     },
   ];
 
   return (
     <fieldset className={styles.fieldset}>
-      {options.map(({ name, label }) => (
-        <div className={styles.themeOption} key={name}>
+      {options.map(({ value, label }) => (
+        <div className={styles.themeOption} key={value}>
           <input
             type='radio'
-            id={name}
-            value={name}
+            id={value}
+            value={value}
             name='theme'
-            checked={name === theme}
+            checked={value === theme}
             onChange={(e) => setTheme(e.target.value as Theme)}
           />
-          <label htmlFor={name}>{label}</label>
+          <label htmlFor={value}>{label}</label>
         </div>
       ))}
     </fieldset>

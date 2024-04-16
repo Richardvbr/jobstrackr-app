@@ -12,8 +12,7 @@ export function LinkItem({ href, label, Icon, onClick }: LinkItemProps) {
 
   const isActive = pathname.includes(href as string);
 
-  const linkItemStyles = cn({
-    [styles.linkItem]: true,
+  const linkItemStyles = cn(styles.linkItem, {
     [styles.linkItemActive]: isActive,
   });
 
