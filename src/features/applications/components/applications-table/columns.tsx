@@ -34,9 +34,7 @@ export const columns = [
   }),
   columnHelper.accessor("status", {
     header: "Status",
-    cell: (info) => (
-      <ApplicationStatus status={info.getValue() as ApplicationStatusType} />
-    ),
+    cell: (info) => <ApplicationStatus status={info.getValue() as ApplicationStatusType} />,
     enableSorting: true,
   }),
   columnHelper.accessor("work_model", {
@@ -59,16 +57,16 @@ export const columns = [
   }),
   columnHelper.accessor("link", {
     header: "Link",
-    cell: (info) => (
-      <a
-        href={info.getValue() ?? undefined}
-        target='_blank'
-        className={styles.link}
-      >
-        <p>View</p>
-        <Icons.ExternalLink />
-      </a>
-    ),
+    cell: (info) => {
+      if (!info.getValue()) return null;
+
+      return (
+        <a href={info.getValue() ?? ""} target='_blank' className={styles.link}>
+          <p>View</p>
+          <Icons.ExternalLink />
+        </a>
+      );
+    },
   }),
   columnHelper.accessor("via", {
     header: "Via",
