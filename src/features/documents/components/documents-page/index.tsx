@@ -6,8 +6,8 @@ import {
 } from "@/features/documents";
 import { useApplicationsQuery } from "@/features/applications";
 import { Card, Icons, Button } from "@/components";
-import styles from "./styles.module.scss";
 import { Document } from "@/types/document";
+import styles from "./styles.module.scss";
 
 export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
@@ -33,13 +33,20 @@ export function DocumentsPage() {
       <div className={styles.documentSections}>
         <Card shadow title='All your documents'>
           <div className={styles.documentContainer}>
-            {documentsData?.map((document: Document) => {
-              return <DocumentItem key={document.title} document={document} />;
-            })}
+            {documentsData?.map((document: Document) => (
+              <DocumentItem key={document.id} document={document} />
+            ))}
           </div>
         </Card>
         <Card shadow title='Your documents per application'>
-          <p>{JSON.stringify(groupedDocuments)}</p>
+          {groupedDocuments?.map(({ application, documents }) => (
+            <div key={application.id} className={styles.groupedDocuments}>
+              <p>{`${application.company} - ${application.position}`}</p>
+              {documents?.map((document: Document) => (
+                <DocumentItem key={document.id} document={document} />
+              ))}
+            </div>
+          ))}
         </Card>
       </div>
       <DocumentUploadModal applications={applicationsData ?? []} />

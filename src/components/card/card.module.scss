@@ -6,7 +6,7 @@
   z-index: 2;
   max-width: 100%;
 
-  h3 {
+  .title {
     @include font-semibold;
     position: relative;
     font-size: 18px;
@@ -37,6 +37,7 @@
 @media screen and (min-width: $breakpoint-m) {
   .card {
     max-width: max-content;
+
     h3 {
       padding: 20px 30px;
     }
@@ -53,7 +54,7 @@
     color: $gray-300;
     border: 1px solid $dark-border;
 
-    h3::after {
+    .title::after {
       background: $gray-600;
     }
   }
