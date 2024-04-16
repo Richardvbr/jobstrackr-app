@@ -7,16 +7,16 @@ export const links: LinkItemProps[] = [
     label: "Dashboard",
     Icon: Icons.Dashboard,
   },
-  // {
-  //   href: "/questions",
-  //   label: "Questions",
-  //   Icon: Icons.Question,
-  // },
   {
     href: "/documents",
     label: "Documents",
     Icon: Icons.Document,
   },
+  // {
+  //   href: "/questions",
+  //   label: "Questions",
+  //   Icon: Icons.Question,
+  // },
   // {
   //   href: "tips",
   //   label: "Tips and prepare",

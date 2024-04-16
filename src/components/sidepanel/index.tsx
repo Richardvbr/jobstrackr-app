@@ -88,6 +88,12 @@ export function SidePanel() {
             Icon={<Icons.Settings />}
             onClick={() => closeSidePanel()}
           />
+          <LinkItem
+            href='/feedback'
+            label='Feedback'
+            Icon={<Icons.Feedback />}
+            onClick={() => closeSidePanel()}
+          />
           <LinkItem label='Sign out' onClick={handleSignOut} Icon={<Icons.Signout />} />
         </ul>
       </footer>

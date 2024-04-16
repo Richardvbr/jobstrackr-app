@@ -48,13 +48,14 @@
 }
 
 .downloadMenu {
-  font-size: 14px;
   @include font-semibold;
+  font-size: 14px;
 
   a {
     color: $gray-200;
     text-decoration: none;
     transition: color 0.15s ease;
+    display: block;
 
     &:hover {
       color: $white;

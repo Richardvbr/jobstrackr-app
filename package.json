@@ -17,6 +17,7 @@
     "apply-npm-updates": "npx npm-check-updates -u && npm i"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "@fontsource-variable/inter": "^5.0.17",
     "@hookform/error-message": "^2.0.1",
     "@popperjs/core": "^2.11.8",
