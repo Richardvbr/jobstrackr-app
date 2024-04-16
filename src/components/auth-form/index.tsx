@@ -41,7 +41,7 @@ export function AuthForm({ type }: AuthFormProps) {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithOtp({
+      const { error } = await supabase.auth.signInWithOtp({
         email: formData.email,
         options: {
           shouldCreateUser: true,

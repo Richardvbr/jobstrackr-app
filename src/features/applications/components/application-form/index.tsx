@@ -100,7 +100,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   async function addNewApplication(applicationData: ApplicationFormInput) {
     const { error } = await supabase
       .from("applications")
-      .insert({ ...applicationData, user_id: user?.id });
+      .insert({ ...applicationData, user_id: user?.id as string });
 
     if (error) {
       throw toast.error("An error occurred when adding the application.");
