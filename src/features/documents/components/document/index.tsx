@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { DefaultExtensionType, FileIcon, defaultStyles } from "react-file-icon";
+import mime from "mime-types";
+
 import { Document } from "@/types/document";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { capitalizeFirstLetter, truncate } from "@/utils/text";
@@ -16,11 +18,12 @@ export function DocumentItem({ document }: DocumentProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const { title, file_type: fileType, file_path: filePath } = document;
+  const fileExtension = mime.extension(fileType as string);
   const fileTitle = truncate(capitalizeFirstLetter(title as string), width < 768 ? 13 : undefined);
 
   const fileUrl = `${
     import.meta.env.VITE_SUPABASE_URL
-  }/storage/v1/object/public/documents/${filePath}?download=${title}.${fileType}`;
+  }/storage/v1/object/public/documents/${filePath}?download=${title}.${fileExtension}`;
 
   return (
     <div className={styles.document}>
@@ -32,8 +35,8 @@ export function DocumentItem({ document }: DocumentProps) {
       </div>
       <div className={styles.fileType}>
         <FileIcon
-          extension={fileType ?? undefined}
-          {...defaultStyles[fileType as DefaultExtensionType]}
+          extension={(fileExtension as string) ?? undefined}
+          {...defaultStyles[fileExtension as DefaultExtensionType]}
         />
       </div>
       <Menu
