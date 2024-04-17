@@ -1,11 +1,11 @@
 .form {
   padding: 25px;
   border-radius: 10px;
-  border: 1px solid $gray-200;
   display: flex;
   flex-direction: column;
   width: 85vw;
   box-shadow: $shadow-m;
+  background-color: $white;
 
   form button {
     margin-top: 25px;
