@@ -17,7 +17,12 @@ $gray-900: hsl(0, 0%, 13.7%);
 $gray-1000: hsl(0, 0%, 11%);
 $gray-1100: hsl(0, 0%, 5%);
 
-// Frequently used tints for dark mode. Renamed for convenience.
+// Frequently used tints for light mode
+$light-primary: #f3f3fb;
+$light-secondary: $white;
+$light-border: $gray-200;
+
+// Frequently used tints for dark mode
 $dark-primary: $gray-1000;
 $dark-secondary: $gray-900;
 $dark-border: $gray-800;
@@ -86,11 +91,11 @@ $breakpoint-xxl: 1540px;
 // Shadows
 $shadow-xs: 0px 0px 10px 5px rgba(0, 0, 0, 0.03);
 $shadow-s: 0px 0px 10px -1px rgba(0, 0, 0, 0.15);
-$shadow-m: 0px 0px 15px -1px rgba(0, 0, 0, 0.25);
+$shadow-m: 0px 0px 15px -1px rgba(0, 0, 0, 0.15);
 
 $shadow-inset: inset 19px 0px 16px -6px rgba(
     $color: $gray-300,
-    $alpha: 0.4,
+    $alpha: 0.25,
   );
 
 @mixin constrain {

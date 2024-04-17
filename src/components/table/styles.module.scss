@@ -1,7 +1,6 @@
 .table {
   position: relative;
   background-color: $white;
-  border: 1px solid $gray-200;
   border-radius: 10px;
   overflow-y: auto;
   box-shadow: $shadow-s;
@@ -41,7 +40,7 @@
 
     tbody {
       tr {
-        border-bottom: 1px solid $gray-200;
+        border-bottom: 1px solid $gray-100;
       }
 
       tr:last-child {
