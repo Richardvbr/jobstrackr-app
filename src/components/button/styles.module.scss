@@ -32,7 +32,6 @@
 
 .primary {
   background-color: $green-600;
-  border: 1px solid $green-500;
 
   &:hover {
     background-color: $green-700;
@@ -46,11 +45,10 @@
 }
 
 .secondary {
-  background-color: $gray-600;
-  border: 1px solid $gray-500;
+  background-color: $gray-500;
 
   &:hover {
-    background-color: $gray-700;
+    background-color: $gray-600;
   }
 }
 

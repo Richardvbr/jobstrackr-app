@@ -111,7 +111,10 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
 
   async function deleteApplication(applicationData: Application) {
     // Prevent deleting demo data
-    if (applicationData.id === "0cfad3f0-0375-426c-b635-86e134993ade") {
+    if (
+      applicationData.id === "0cfad3f0-0375-426c-b635-86e134993ade" ||
+      applicationData.id === "07c14adf-33bb-4ecb-9aff-39a5dbe1751c"
+    ) {
       return toast.error("Guest demo data cannot be deleted.");
     }
 
