@@ -3,6 +3,7 @@ import { Avatar } from "./avatar";
 import { Button } from "./button";
 import { Card } from "./card";
 import { Input } from "./form-fields/input";
+import { Textarea } from "./form-fields/textarea";
 import { SelectInput } from "./form-fields/select";
 import { Header } from "./header";
 import * as Icons from "./icons";
@@ -21,6 +22,7 @@ export {
   Header,
   Icons,
   Input,
+  Textarea,
   LinkItem,
   Modal,
   SelectInput,

@@ -26,7 +26,11 @@ interface AddDocumentForm {
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const formMethods = useForm<AddDocumentForm>({ mode: "onSubmit", reValidateMode: "onBlur" });
+  const formMethods = useForm<AddDocumentForm>({
+    mode: "onSubmit",
+    reValidateMode: "onBlur",
+    disabled: submitLoading,
+  });
   const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
@@ -118,15 +122,8 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
           />
           <SelectInput item={applicationSelect} />
           <div className={styles.buttons}>
-            <Button disabled={submitLoading} type='submit'>
-              Upload document
-            </Button>
-            <Button
-              disabled={submitLoading}
-              variant='secondary'
-              type='button'
-              onClick={() => closeDocumentModal()}
-            >
+            <Button type='submit'>Upload document</Button>
+            <Button variant='secondary' type='button' onClick={() => closeDocumentModal()}>
               Cancel
             </Button>
           </div>

@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  textarea {
+    @include input-base;
+  }
+
+  label {
+    @include font-medium;
+    font-size: 14px;
+  }
+}
+
+.inputError {
+  color: $red-600;
+  margin-top: -5px;
+  font-size: 13px;
+}
+
+[data-theme="dark"] {
+  .wrapper {
+    textarea {
+      background: $gray-600;
+      border: 1px solid $dark-border;
+      color: $gray-100;
+
+      &:focus,
+      &:hover {
+        border: 1px solid $gray-500;
+      }
+    }
+
+    label {
+      color: $gray-200;
+    }
+  }
+
+  .inputError {
+    color: $red-500;
+  }
+}

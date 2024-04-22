@@ -1,0 +1,24 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  button {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  @media screen and (min-width: $breakpoint-m) {
+    textarea {
+      min-width: 400px;
+      min-height: 150px;
+    }
+  }
+}
