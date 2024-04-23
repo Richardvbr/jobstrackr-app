@@ -126,6 +126,7 @@ export type Database = {
         Row: {
           answer: string | null;
           application_id: string | null;
+          category: string | null;
           created_at: string;
           id: string;
           question: string | null;
@@ -135,6 +136,7 @@ export type Database = {
         Insert: {
           answer?: string | null;
           application_id?: string | null;
+          category?: string | null;
           created_at?: string;
           id?: string;
           question?: string | null;
@@ -144,6 +146,7 @@ export type Database = {
         Update: {
           answer?: string | null;
           application_id?: string | null;
+          category?: string | null;
           created_at?: string;
           id?: string;
           question?: string | null;
