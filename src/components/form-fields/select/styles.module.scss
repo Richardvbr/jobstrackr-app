@@ -5,7 +5,9 @@
 
   select {
     @include input-base;
-    height: 39px;
+    & {
+      height: 39px;
+    }
 
     &:focus,
     &:hover {
@@ -20,7 +22,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   .wrapper {
     select {
       background: $gray-600;

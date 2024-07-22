@@ -47,7 +47,11 @@
 
     .close {
       @include icon-hover;
-      padding: 3px 7px;
+
+      & {
+        padding: 3px 7px;
+      }
+
       svg {
         width: 20px;
         height: 20px;
@@ -57,7 +61,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   .modal {
     background: $dark-secondary;
 

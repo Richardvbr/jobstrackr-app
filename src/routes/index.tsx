@@ -1,10 +1,4 @@
-import {
-  NotFoundRoute,
-  createRootRoute,
-  createRoute,
-  createRouter,
-  redirect,
-} from '@tanstack/react-router';
+import { createRootRoute, createRoute, createRouter, redirect } from '@tanstack/react-router';
 
 import { AppLayout, AuthLayout } from '@/components/layout';
 import { SignInRoute } from './sign-in';
