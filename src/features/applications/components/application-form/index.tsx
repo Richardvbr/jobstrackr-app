@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { useShallow } from "zustand/react/shallow";
-import { format } from "date-fns";
-import { useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { useState } from 'react';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useShallow } from 'zustand/react/shallow';
+import { format } from 'date-fns';
+import { useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
-import { useUser } from "@/contexts/AuthContext";
-import { supabase } from "@/lib/supabase";
-import { Application } from "@/types/application";
+import { useUser } from '@/contexts/AuthContext';
+import { supabase } from '@/lib/supabase';
+import { Application } from '@/types/application';
 
-import { useApplicationStore } from "@/features/applications";
-import { formItems, statusInput, workModelInput, employmentTypeInput } from "./formItems";
-import { Input, SelectInput, Button } from "@/components";
-import styles from "./styles.module.scss";
+import { useApplicationStore } from '@/features/applications';
+import { formItems, statusInput, workModelInput, employmentTypeInput } from './formItems';
+import { Input, SelectInput, Button } from '@/components';
+import styles from './styles.module.scss';
 
 type ApplicationFormInput = Application;
 
@@ -28,18 +28,18 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   const { applicationData, isEditing } = useApplicationStore(
     useShallow((state) => ({
       applicationData: state.activeApplication,
-      isEditing: state.applicationModalOpened === "edit",
+      isEditing: state.applicationModalOpened === 'edit',
     }))
   );
 
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
-    mode: "onSubmit",
-    reValidateMode: "onBlur",
+    mode: 'onSubmit',
+    reValidateMode: 'onBlur',
     defaultValues: isEditing
       ? {
           ...applicationData,
-          applied_at: format(new Date(applicationData?.applied_at as string), "yyyy-MM-dd"),
+          applied_at: format(new Date(applicationData?.applied_at as string), 'yyyy-MM-dd'),
         }
       : {},
   });
@@ -50,16 +50,16 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     reset();
     setSubmitLoading(false);
     handleCloseForm(false);
-    queryClient.invalidateQueries({ queryKey: ["get-applications"] });
+    queryClient.invalidateQueries({ queryKey: ['get-applications'] });
   }
 
   function handleError(error: unknown) {
-    console.error("Error submitting form:", error);
+    console.error('Error submitting form:', error);
 
     if (error instanceof Error) {
       toast.error(error.message);
     } else {
-      toast.error("An unknown error occurred.");
+      toast.error('An unknown error occurred.');
     }
   }
 
@@ -68,7 +68,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     setSubmitLoading(true);
 
     if (!user) {
-      throw new Error("No valid user found.");
+      throw new Error('No valid user found.');
     }
 
     try {
@@ -86,40 +86,41 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
 
   async function updateApplication(applicationData: ApplicationFormInput) {
     const { error } = await supabase
-      .from("applications")
+      .from('applications')
       .update(applicationData)
-      .eq("id", applicationData.id);
+      .eq('id', applicationData.id);
 
     if (error) {
-      throw toast.error("An error occurred when updating the application.");
+      throw toast.error('An error occurred when updating the application.');
     }
 
-    toast.success("Application updated");
+    toast.success('Application updated');
   }
 
   async function addNewApplication(applicationData: ApplicationFormInput) {
     const { error } = await supabase
-      .from("applications")
+      .from('applications')
       .insert({ ...applicationData, user_id: user?.id as string });
 
     if (error) {
-      throw toast.error("An error occurred when adding the application.");
+      throw toast.error('An error occurred when adding the application.');
     }
 
-    toast.success("Application added");
+    toast.success('Application added');
   }
 
   async function deleteApplication(applicationData: Application) {
     // Prevent deleting demo data
+    const { id } = applicationData;
     if (
-      applicationData.id === "0cfad3f0-0375-426c-b635-86e134993ade" ||
-      applicationData.id === "07c14adf-33bb-4ecb-9aff-39a5dbe1751c"
+      id === '0cfad3f0-0375-426c-b635-86e134993ade' ||
+      id === '07c14adf-33bb-4ecb-9aff-39a5dbe1751c'
     ) {
-      return toast.error("Guest demo data cannot be deleted.");
+      return toast.error('Guest demo data cannot be deleted.');
     }
 
     const close = confirm(
-      "Are you sure you want to delete this application? This action cannot be undone."
+      'Are you sure you want to delete this application? This action cannot be undone.'
     );
 
     if (!close) {
@@ -127,13 +128,13 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
 
     try {
-      const { error } = await supabase.from("applications").delete().eq("id", applicationData?.id);
+      const { error } = await supabase.from('applications').delete().eq('id', applicationData?.id);
 
       if (error) {
-        throw toast.error("An error occured when deleting the application.");
+        throw toast.error('An error occured when deleting the application.');
       }
 
-      toast.success("Application deleted");
+      toast.success('Application deleted');
     } catch (error) {
       handleError(error);
     } finally {
@@ -162,7 +163,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
         </div>
         <div className={styles.buttons}>
           <Button disabled={submitLoading} type='submit'>
-            {isEditing ? "Edit application" : "Add application"}
+            {isEditing ? 'Edit application' : 'Add application'}
           </Button>
           <Button
             disabled={submitLoading}

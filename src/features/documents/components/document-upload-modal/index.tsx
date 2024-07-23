@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
+import { useState, useEffect } from 'react';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
 
-import type { Application } from "@/types/application";
-import type { SelectInputItem } from "@/types/elements";
-import { supabase } from "@/lib/supabase";
-import { useUser } from "@/contexts/AuthContext";
+import type { Application } from '@/types/application';
+import type { SelectInputItem } from '@/types/elements';
+import { supabase } from '@/lib/supabase';
+import { useUser } from '@/contexts/AuthContext';
 
-import { Modal, Input, Button, SelectInput } from "@/components";
-import { useDocumentStore } from "@/features/documents";
-import styles from "./styles.module.scss";
+import { Modal, Input, Button, SelectInput } from '@/components';
+import { useDocumentStore } from '@/features/documents';
+import styles from './styles.module.scss';
 
 interface DocumentUploadModalProps {
   applications: Application[];
@@ -27,8 +27,8 @@ interface AddDocumentForm {
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const formMethods = useForm<AddDocumentForm>({
-    mode: "onSubmit",
-    reValidateMode: "onBlur",
+    mode: 'onSubmit',
+    reValidateMode: 'onBlur',
     disabled: submitLoading,
   });
   const user = useUser();
@@ -37,10 +37,10 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
   const { handleSubmit, reset } = formMethods;
 
   const applicationSelect: SelectInputItem = {
-    name: "selectedApplication",
-    label: "Select an application (optional)",
+    name: 'selectedApplication',
+    label: 'Select an application (optional)',
     options: [
-      { label: "", value: undefined },
+      { label: '', value: undefined },
       ...applications.map(({ id, company, position }) => ({
         value: id,
         label: `${company} - ${position}`,
@@ -58,16 +58,15 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     try {
       // Upload file
       const { data: fileData, error: fileError } = await supabase.storage
-        .from("documents")
+        .from('documents')
         .upload(`file-${documentName}-${uniqueId}`, file);
 
       if (fileError) {
-        setSubmitLoading(false);
-        throw toast.error("An error occurred while uploading the file");
+        throw toast.error('An error occurred while uploading the file');
       }
 
       // Create record with path to file
-      const { error } = await supabase.from("documents").insert({
+      const { error } = await supabase.from('documents').insert({
         user_id: user?.id,
         title: documentName,
         description: documentDescription,
@@ -77,11 +76,10 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
       });
 
       if (error) {
-        setSubmitLoading(false);
-        throw toast.error("An error occurred while uploading the file");
+        throw toast.error('An error occurred while uploading the file');
       }
 
-      toast.success("Document uploaded!");
+      toast.success('Document uploaded!');
     } catch (error) {
       console.log(error);
     } finally {
@@ -89,10 +87,10 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
       reset();
       closeDocumentModal();
       queryClient.invalidateQueries({
-        queryKey: ["get-applications"],
+        queryKey: ['get-applications'],
       });
       queryClient.invalidateQueries({
-        queryKey: ["get-documents"],
+        queryKey: ['get-documents'],
       });
     }
   };

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { useForm, FormProvider } from "react-hook-form";
-import { useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useNavigate } from '@tanstack/react-router';
 
-import { supabase } from "@/lib/supabase";
-import { useUser } from "@/contexts/AuthContext";
+import { supabase } from '@/lib/supabase';
+import { useUser } from '@/contexts/AuthContext';
 
-import { ThirdPartyProvider, Button, Input } from "@/components";
-import styles from "./styles.module.scss";
+import { ThirdPartyProvider, Button, Input } from '@/components';
+import styles from './styles.module.scss';
 
 type AuthFormProps = {
-  type: "sign-up" | "sign-in";
+  type: 'sign-up' | 'sign-in';
 };
 
 type AuthFormInput = {
@@ -18,21 +18,21 @@ type AuthFormInput = {
 };
 
 export function AuthForm({ type }: AuthFormProps) {
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [emailSent, setEmailSent] = useState<string | null>(null);
-  const formMethods = useForm<AuthFormInput>({ mode: "onSubmit", reValidateMode: "onBlur" });
+  const formMethods = useForm<AuthFormInput>({ mode: 'onSubmit', reValidateMode: 'onBlur' });
   const user = useUser();
   const navigate = useNavigate();
   const { handleSubmit } = formMethods;
-  const isSignInform = type === "sign-in";
-  const guestEmail = "guest.be4e3dfc.d8c6@gmail.com";
-  const guestPassword = "r4nd0ms3cur3pw";
+  const isSignInform = type === 'sign-in';
+  const guestEmail = 'guest.be4e3dfc.d8c6@gmail.com';
+  const guestPassword = 'r4nd0ms3cur3pw';
 
   // Redirect if user is found
   useEffect(() => {
     if (user) {
-      navigate({ to: "/dashboard" });
+      navigate({ to: '/dashboard' });
     }
   }, [user]);
 
@@ -53,11 +53,10 @@ export function AuthForm({ type }: AuthFormProps) {
         return setError(`An error occured: ${error.message}`);
       }
 
-      setEmailSent("Check your email on this device for a single-use link to sign in.");
+      setEmailSent('Check your email on this device for a single-use link to sign in.');
     } catch (error) {
       console.log(error);
-      setLoading(false);
-      setError("Failed to sign in. Please check your email address and password.");
+      setError('Failed to sign in. Please check your email address and password.');
     } finally {
       setLoading(false);
     }
@@ -71,25 +70,26 @@ export function AuthForm({ type }: AuthFormProps) {
         password: guestPassword,
       });
     } catch {
+      setError('Failed to sign in as guest.');
+    } finally {
       setLoading(false);
-      setError("Failed to sign in as guest.");
     }
   }
 
   function getButtonLabel() {
     if (loading) {
-      return "Loading...";
+      return 'Loading...';
     }
 
     if (emailSent) {
-      return "Email sent!";
+      return 'Email sent!';
     }
 
     if (isSignInform) {
-      return "Sign in";
+      return 'Sign in';
     }
 
-    return "Sign up";
+    return 'Sign up';
   }
 
   return (
