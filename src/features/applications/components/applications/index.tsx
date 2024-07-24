@@ -1,23 +1,24 @@
-import { useState } from "react";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useState } from 'react';
+import { useDebounce } from '@/hooks/useDebounce';
+import { useParams } from 'react-router-dom';
+
 import {
   ApplicationsTable,
   ApplicationModal,
   useApplicationStore,
   useApplicationsQuery,
-} from "@/features/applications";
-import { dashboardRoute } from "@/routes";
-import { Icons, Button, Input, Card } from "@/components";
-import styles from "./styles.module.scss";
+} from '@/features/applications';
+import { Icons, Button, Input, Card } from '@/components';
+import styles from './styles.module.scss';
 
 export function Applications() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const { action } = dashboardRoute.useSearch();
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  let { action } = useParams();
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
   const { data: applications } = useApplicationsQuery();
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-  if (action === "new-application") {
+  if (action === 'new-application') {
     openModal();
   }
 
