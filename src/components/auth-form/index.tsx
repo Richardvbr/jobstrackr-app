@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/contexts/AuthContext';
