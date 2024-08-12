@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/contexts/AuthContext';
@@ -32,7 +32,7 @@ export function AuthForm({ type }: AuthFormProps) {
   // Redirect if user is found
   useEffect(() => {
     if (user) {
-      navigate({ to: '/dashboard' });
+      navigate('/dashboard');
     }
   }, [user]);
 
@@ -65,10 +65,17 @@ export function AuthForm({ type }: AuthFormProps) {
   async function handleGuestSignIn() {
     try {
       setLoading(true);
-      await supabase.auth.signInWithPassword({
+
+      const { error } = await supabase.auth.signInWithPassword({
         email: guestEmail,
         password: guestPassword,
       });
+
+      if (error) {
+        return setError(`An error occured: ${error.message}`);
+      }
+
+      navigate('/dashboard');
     } catch {
       setError('Failed to sign in as guest.');
     } finally {

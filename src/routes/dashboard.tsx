@@ -1,8 +1,8 @@
-import { DashboardPage } from "@/features/dashboard";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { DashboardPage } from '@/features/dashboard';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export function DashboardRoute() {
-  useDocumentTitle("Dashboard | JobsTrackr");
+  useDocumentTitle('Dashboard | JobsTrackr');
 
   return <DashboardPage />;
 }

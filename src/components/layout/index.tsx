@@ -1,10 +1,7 @@
-import { Navigate, Outlet } from "@tanstack/react-router";
-
-import { useSessionContext } from "@/contexts/AuthContext";
-
-import { Header, SidePanel } from "@/components";
-
-import styles from "./layout.module.scss";
+import { Navigate, Outlet } from 'react-router-dom';
+import { useSessionContext } from '@/contexts/AuthContext';
+import { Header, SidePanel } from '@/components';
+import styles from './layout.module.scss';
 
 export function AuthLayout() {
   return (
@@ -28,6 +25,6 @@ export function AppLayout() {
       </main>
     </div>
   ) : (
-    <Navigate to='/sign-in' replace from={location.href} />
+    <Navigate to='/sign-in' replace />
   );
 }
