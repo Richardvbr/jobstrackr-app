@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { redirect } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/contexts/AuthContext';
@@ -23,6 +23,7 @@ export function AuthForm({ type }: AuthFormProps) {
   const [emailSent, setEmailSent] = useState<string | null>(null);
   const formMethods = useForm<AuthFormInput>({ mode: 'onSubmit', reValidateMode: 'onBlur' });
   const user = useUser();
+  const navigate = useNavigate();
   const { handleSubmit } = formMethods;
   const isSignInform = type === 'sign-in';
   const guestEmail = 'guest.be4e3dfc.d8c6@gmail.com';
@@ -31,7 +32,7 @@ export function AuthForm({ type }: AuthFormProps) {
   // Redirect if user is found
   useEffect(() => {
     if (user) {
-      redirect('/dashboard');
+      navigate('/dashboard');
     }
   }, [user]);
 
@@ -55,7 +56,6 @@ export function AuthForm({ type }: AuthFormProps) {
       setEmailSent('Check your email on this device for a single-use link to sign in.');
     } catch (error) {
       console.log(error);
-      setLoading(false);
       setError('Failed to sign in. Please check your email address and password.');
     } finally {
       setLoading(false);
@@ -65,12 +65,18 @@ export function AuthForm({ type }: AuthFormProps) {
   async function handleGuestSignIn() {
     try {
       setLoading(true);
-      await supabase.auth.signInWithPassword({
+
+      const { error } = await supabase.auth.signInWithPassword({
         email: guestEmail,
         password: guestPassword,
       });
+
+      if (error) {
+        return setError(`An error occured: ${error.message}`);
+      }
+
+      navigate('/dashboard');
     } catch {
-      setLoading(false);
       setError('Failed to sign in as guest.');
     } finally {
       setLoading(false);

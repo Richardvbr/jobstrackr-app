@@ -1,10 +1,10 @@
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
-import emailjs from "@emailjs/browser";
-import toast from "react-hot-toast";
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast';
 
-import { Button, Input, Textarea } from "@/components";
-import styles from "./styles.module.scss";
+import { Button, Input, Textarea } from '@/components';
+import styles from './styles.module.scss';
 
 interface FeedbackForm {
   userName: string;
@@ -15,8 +15,8 @@ interface FeedbackForm {
 export function FeedbackForm() {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const formMethods = useForm<FeedbackForm>({
-    mode: "onSubmit",
-    reValidateMode: "onBlur",
+    mode: 'onSubmit',
+    reValidateMode: 'onBlur',
     disabled: submitLoading,
   });
   const { handleSubmit, reset } = formMethods;
@@ -34,12 +34,12 @@ export function FeedbackForm() {
         }
       )
       .then(() => {
-        toast.success("Feedback sent!");
+        toast.success('Feedback sent!');
         reset();
       })
       .catch((error) => {
         console.error(error);
-        throw toast.error("An error occurred while submitting the form");
+        throw toast.error('An error occurred while submitting the form');
       })
       .finally(() => {
         setSubmitLoading(false);
