@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import {
   ApplicationsTable,
@@ -13,7 +13,8 @@ import styles from './styles.module.scss';
 
 export function Applications() {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  let { action } = useParams();
+  const [searchParams] = useSearchParams();
+  const action = searchParams.get('action');
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
   const { data: applications } = useApplicationsQuery();
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
