@@ -1,11 +1,11 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type PropsWithChildren } from "react";
-import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { type PropsWithChildren } from 'react';
+import { Toaster } from 'react-hot-toast';
 
-import { supabase } from "@/lib/supabase";
-import { SessionContextProvider } from "@/contexts/AuthContext";
-import { toastOptions } from "@/utils/toastOptions";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { supabase } from '@/lib/supabase';
+import { SessionContextProvider } from '@/contexts/AuthContext';
+import { toastOptions } from '@/utils/toast';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 export const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = new QueryClient({

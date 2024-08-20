@@ -1,17 +1,17 @@
-import type { SelectInputItem } from "@/types/elements";
-import type { HTMLInputTypeAttribute } from "react";
+import type { SelectInputItem } from '@/types/elements';
+import type { HTMLInputTypeAttribute } from 'react';
 
 type FormItem = {
   name:
-    | "company"
-    | "position"
-    | "location"
-    | "applied_at"
-    | "salary"
-    | "salary_currency"
-    | "link"
-    | "notes"
-    | "via";
+    | 'company'
+    | 'position'
+    | 'location'
+    | 'applied_at'
+    | 'salary'
+    | 'salary_currency'
+    | 'link'
+    | 'notes'
+    | 'via';
   label: string;
   required?: boolean;
   type: HTMLInputTypeAttribute;
@@ -19,132 +19,170 @@ type FormItem = {
 
 export const formItems: FormItem[] = [
   {
-    name: "company",
-    label: "Company",
-    type: "text",
+    name: 'company',
+    label: 'Company',
+    type: 'text',
     required: true,
   },
   {
-    name: "position",
-    label: "Position",
-    type: "text",
+    name: 'position',
+    label: 'Position',
+    type: 'text',
     required: true,
   },
   {
-    name: "location",
-    label: "Location",
-    type: "text",
+    name: 'location',
+    label: 'Location',
+    type: 'text',
   },
   {
-    name: "applied_at",
-    label: "Applied at",
-    type: "date",
+    name: 'applied_at',
+    label: 'Applied at',
+    type: 'date',
     required: true,
   },
   {
-    name: "salary",
-    label: "Salary (range)",
-    type: "text",
+    name: 'salary',
+    label: 'Salary (range)',
+    type: 'text',
   },
   {
-    name: "salary_currency",
-    label: "Salary currency",
-    type: "text",
+    name: 'link',
+    label: 'Link',
+    type: 'text',
   },
   {
-    name: "link",
-    label: "Link",
-    type: "text",
+    name: 'notes',
+    label: 'Notes',
+    type: 'text',
   },
   {
-    name: "notes",
-    label: "Notes",
-    type: "text",
-  },
-  {
-    name: "via",
-    label: "Via/source",
-    type: "text",
+    name: 'via',
+    label: 'Via/source',
+    type: 'text',
   },
 ];
 
-export const statusInput: SelectInputItem = {
-  name: "status",
-  label: "Status",
+export const currencyInput: SelectInputItem = {
+  name: 'currency',
+  label: 'Currency',
   options: [
     {
-      value: "applied",
-      label: "Applied",
+      value: 'usd',
+      label: 'USD',
     },
     {
-      value: "processing",
-      label: "Processing",
+      value: 'eur',
+      label: 'EUR',
     },
     {
-      value: "denied",
-      label: "Denied",
+      value: 'gbp',
+      label: 'GBP',
     },
     {
-      value: "accepted",
-      label: "Accepted",
+      value: 'jpy',
+      label: 'JPY',
     },
     {
-      value: "offered",
-      label: "Offered",
+      value: 'aud',
+      label: 'AUD',
     },
     {
-      value: "withdrawn",
-      label: "Withdrawn",
+      value: 'cad',
+      label: 'CAD',
     },
     {
-      value: "ghosted",
-      label: "Ghosted",
+      value: 'chf',
+      label: 'CHF',
+    },
+    {
+      value: 'cny',
+      label: 'CNY',
+    },
+    {
+      value: 'inr',
+      label: 'INR',
+    },
+  ],
+};
+
+export const statusInput: SelectInputItem = {
+  name: 'status',
+  label: 'Status',
+  options: [
+    {
+      value: 'applied',
+      label: 'Applied',
+    },
+    {
+      value: 'processing',
+      label: 'Processing',
+    },
+    {
+      value: 'denied',
+      label: 'Denied',
+    },
+    {
+      value: 'accepted',
+      label: 'Accepted',
+    },
+    {
+      value: 'offered',
+      label: 'Offered',
+    },
+    {
+      value: 'withdrawn',
+      label: 'Withdrawn',
+    },
+    {
+      value: 'ghosted',
+      label: 'Ghosted',
     },
   ],
 };
 
 export const employmentTypeInput: SelectInputItem = {
-  name: "employment_type",
-  label: "Employment type",
+  name: 'employment_type',
+  label: 'Employment type',
   options: [
     {
-      value: "office",
-      label: "Office",
+      value: 'office',
+      label: 'Office',
     },
     {
-      value: "remote",
-      label: "Remote",
+      value: 'remote',
+      label: 'Remote',
     },
     {
-      value: "hybrid",
-      label: "Hybrid",
+      value: 'hybrid',
+      label: 'Hybrid',
     },
   ],
 };
 
 export const workModelInput: SelectInputItem = {
-  name: "work_model",
-  label: "Work model",
+  name: 'work_model',
+  label: 'Work model',
   options: [
     {
-      value: "full-time",
-      label: "Full-time",
+      value: 'full-time',
+      label: 'Full-time',
     },
     {
-      value: "part-time",
-      label: "Part-time",
+      value: 'part-time',
+      label: 'Part-time',
     },
     {
-      value: "freelance",
-      label: "Freelance",
+      value: 'freelance',
+      label: 'Freelance',
     },
     {
-      value: "internship",
-      label: "Internship",
+      value: 'internship',
+      label: 'Internship',
     },
     {
-      value: "other",
-      label: "Other",
+      value: 'other',
+      label: 'Other',
     },
   ],
 };

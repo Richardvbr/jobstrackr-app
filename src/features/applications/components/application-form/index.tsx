@@ -10,7 +10,13 @@ import { supabase } from '@/lib/supabase';
 import { Application } from '@/types/application';
 
 import { useApplicationStore } from '@/features/applications';
-import { formItems, statusInput, workModelInput, employmentTypeInput } from './formItems';
+import {
+  formItems,
+  statusInput,
+  workModelInput,
+  employmentTypeInput,
+  currencyInput,
+} from './formItems';
 import { Input, SelectInput, Button } from '@/components';
 import styles from './styles.module.scss';
 
@@ -146,16 +152,19 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     <FormProvider {...formMethods}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formItems}>
-          {formItems.map(({ label, name, type, required }) => (
-            <div className={styles.inputContainer} key={name}>
-              <Input
-                label={label}
-                name={name}
-                type={type}
-                placeholder={label}
-                required={required}
-              />
-            </div>
+          {formItems.map(({ label, name, type, required }, index) => (
+            <>
+              {index === 5 && <SelectInput item={currencyInput} />}
+              <div className={styles.inputContainer} key={name}>
+                <Input
+                  label={label}
+                  name={name}
+                  type={type}
+                  placeholder={label}
+                  required={required}
+                />
+              </div>
+            </>
           ))}
           <SelectInput item={statusInput} />
           <SelectInput item={workModelInput} />

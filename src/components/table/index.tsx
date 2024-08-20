@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   Row,
   SortingState,
@@ -7,11 +7,11 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import cn from "clsx";
+} from '@tanstack/react-table';
+import cn from 'clsx';
 
-import { Icons } from "@/components";
-import styles from "./styles.module.scss";
+import { Icons } from '@/components';
+import styles from './styles.module.scss';
 
 type TableProps = {
   data: any[];
@@ -41,7 +41,7 @@ export function Table({
   setShownResults,
 }: TableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = useState<string>("");
+  const [globalFilter, setGlobalFilter] = useState<string>('');
 
   const table = useReactTable({
     data: data,
@@ -83,7 +83,7 @@ export function Table({
                   {header.isPlaceholder ? null : (
                     <div onClick={header.column.getToggleSortingHandler()}>
                       {flexRender(header.column.columnDef.header, header.getContext())}
-                      {header.column.columnDef.enableSorting && (
+                      {header.column.columnDef.enableSorting !== false && (
                         <span>
                           {{
                             asc: <Icons.SortUp />,
@@ -111,12 +111,12 @@ export function Table({
                 <td
                   key={cell.id}
                   onClick={
-                    cell.column.columnDef.header === "Edit" && onEditClick
+                    cell.column.columnDef.header === 'Edit' && onEditClick
                       ? () => onEditClick(row.original)
                       : undefined
                   }
                   className={cn({
-                    [styles.activeCell]: String(cell.column.columnDef.header) === "Edit",
+                    [styles.activeCell]: String(cell.column.columnDef.header) === 'Edit',
                   })}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
