@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useShallow } from 'zustand/react/shallow';
 import { format } from 'date-fns';
@@ -148,14 +148,16 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
   }
 
+  console.log(applicationData);
+
   return (
     <FormProvider {...formMethods}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formItems}>
           {formItems.map(({ label, name, type, required }, index) => (
-            <>
+            <Fragment key={name}>
               {index === 5 && <SelectInput item={currencyInput} />}
-              <div className={styles.inputContainer} key={name}>
+              <div className={styles.inputContainer}>
                 <Input
                   label={label}
                   name={name}
@@ -164,7 +166,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
                   required={required}
                 />
               </div>
-            </>
+            </Fragment>
           ))}
           <SelectInput item={statusInput} />
           <SelectInput item={workModelInput} />

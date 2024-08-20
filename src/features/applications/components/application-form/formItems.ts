@@ -64,7 +64,7 @@ export const formItems: FormItem[] = [
 ];
 
 export const currencyInput: SelectInputItem = {
-  name: 'currency',
+  name: 'salary_currency',
   label: 'Currency',
   options: [
     {
