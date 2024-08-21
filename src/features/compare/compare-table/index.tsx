@@ -13,6 +13,7 @@ export function CompareTable({ data }: CompareTable) {
       { header: 'Company', accessor: 'company' },
       { header: 'Position', accessor: 'position' },
       { header: 'Salary', accessor: 'salary' },
+      { header: 'Salary currency', accessor: 'salary_currency' },
       { header: 'Location', accessor: 'location' },
       { header: 'Status', accessor: 'status' },
       { header: 'Work model', accessor: 'work_model' },
