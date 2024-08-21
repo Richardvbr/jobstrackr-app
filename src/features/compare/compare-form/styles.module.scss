@@ -6,10 +6,17 @@
 
   p {
     @include font-semibold;
-    color: $gray-200;
   }
 
   button {
     align-self: flex-start;
+  }
+}
+
+[data-theme='dark'] {
+  .selectApplications {
+    p {
+      color: $gray-200;
+    }
   }
 }

@@ -5,6 +5,10 @@
   svg:hover {
     cursor: pointer;
   }
+
+  table tbody tr td:first-of-type {
+    @include font-semibold;
+  }
 }
 
 .link {
@@ -30,6 +34,11 @@
     background-color: $dark-secondary;
     color: $gray-300;
     border: 1px solid $dark-border;
+
+    table tbody tr td:first-of-type,
+    table thead tr th:first-of-type {
+      color: white;
+    }
 
     .title::after {
       background: $gray-600;
