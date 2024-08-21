@@ -1,0 +1,25 @@
+.table {
+  max-height: 75vh;
+
+  svg:hover {
+    cursor: pointer;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: $black;
+  text-decoration: none;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
