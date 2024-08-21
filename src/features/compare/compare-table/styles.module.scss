@@ -1,5 +1,6 @@
 .table {
   max-height: 75vh;
+  margin-top: 20px;
 
   svg:hover {
     cursor: pointer;
@@ -21,5 +22,17 @@
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+[data-theme='dark'] {
+  .table {
+    background-color: $dark-secondary;
+    color: $gray-300;
+    border: 1px solid $dark-border;
+
+    .title::after {
+      background: $gray-600;
+    }
   }
 }
