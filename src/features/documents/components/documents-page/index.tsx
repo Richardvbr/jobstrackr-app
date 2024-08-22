@@ -3,15 +3,14 @@ import {
   DocumentUploadModal,
   useDocumentsQuery,
   DocumentItem,
-} from "@/features/documents";
-import { useApplicationsQuery } from "@/features/applications";
-import { Card, Icons, Button } from "@/components";
-import styles from "./styles.module.scss";
-import { Document } from "@/types/document";
+} from '@/features/documents';
+import { useApplicationsQuery } from '@/features/applications';
+import { Card, Icons, Button } from '@/components';
+import { Document } from '@/types/document';
+import styles from './styles.module.scss';
 
 export function DocumentsPage() {
   const { openDocumentModal } = useDocumentStore();
-
   const { data: documentsData } = useDocumentsQuery();
   const { data: applicationsData } = useApplicationsQuery();
 
@@ -45,10 +44,16 @@ export function DocumentsPage() {
         <Card shadow title='Your documents per application'>
           {groupedDocuments?.map(({ application, documents }) => (
             <div key={application.id} className={styles.groupedDocuments}>
-              <p>{`${application.company} - ${application.position}`}</p>
-              {documents?.map((document: Document) => (
-                <DocumentItem key={document.id} document={document} />
-              ))}
+              <p
+                className={styles.applicationName}
+              >{`${application.company} - ${application.position}`}</p>
+              {documents.length >= 1 ? (
+                documents?.map((document: Document) => (
+                  <DocumentItem key={document.id} document={document} />
+                ))
+              ) : (
+                <p>No documents for this application</p>
+              )}
             </div>
           ))}
         </Card>

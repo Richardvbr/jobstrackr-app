@@ -11,12 +11,16 @@
   flex-wrap: wrap;
 }
 
+.applicationName {
+  @include font-semibold;
+}
+
 .groupedDocuments {
   p {
-    @include font-semibold;
     margin-bottom: 15px;
   }
+
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
   }
 }
