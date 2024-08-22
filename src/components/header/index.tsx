@@ -1,9 +1,9 @@
-import { Link, useRouterState } from "@tanstack/react-router";
-import { useShallow } from "zustand/react/shallow";
+import { Link, useLocation } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 
-import { Icons } from "@/components";
-import styles from "./styles.module.scss";
-import { useAppStore } from "@/stores/appStore";
+import { Icons } from '@/components';
+import styles from './styles.module.scss';
+import { useAppStore } from '@/stores/appStore';
 
 export function Header() {
   const { openSidePanel } = useAppStore(
@@ -11,11 +11,9 @@ export function Header() {
       openSidePanel: state.openSidePanel,
     }))
   );
-  const {
-    location: { pathname },
-  } = useRouterState();
+  const { pathname } = useLocation();
 
-  const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
+  const isAuthPage = pathname === '/sign-in' || pathname === '/sign-up';
 
   if (isAuthPage) return null;
 

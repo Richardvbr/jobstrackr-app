@@ -1,16 +1,16 @@
-import cn from "clsx";
-import { useEffect } from "react";
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useShallow } from "zustand/react/shallow";
+import cn from 'clsx';
+import { useEffect } from 'react';
+import { Link, useLocation, redirect } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 
-import { supabase } from "@/lib/supabase";
-import { useWindowSize } from "@/hooks/useWindowSize";
-import { useAppStore } from "@/stores/appStore";
+import { supabase } from '@/lib/supabase';
+import { useWindowSize } from '@/hooks/useWindowSize';
+import { useAppStore } from '@/stores/appStore';
 
-import { Icons, LinkItem } from "@/components";
-import { links } from "./links";
-import { breakpoints } from "@/styles/variables";
-import styles from "./styles.module.scss";
+import { Icons, LinkItem } from '@/components';
+import { links } from './links';
+import { breakpoints } from '@/styles/variables';
+import styles from './styles.module.scss';
 
 export function SidePanel() {
   const { sidePanelOpened, closeSidePanel } = useAppStore(
@@ -20,13 +20,9 @@ export function SidePanel() {
     }))
   );
   const { width } = useWindowSize();
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const {
-    location: { pathname },
-  } = useRouterState();
-
-  const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
+  const isAuthPage = pathname === '/sign-in' || pathname === '/sign-up';
 
   const sidePanelStyles = cn({
     [styles.sidepanel]: true,
@@ -35,7 +31,7 @@ export function SidePanel() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    navigate({ to: "/sign-in" });
+    redirect('/sign-in');
   };
 
   // Disable body scroll when mobile menu is open

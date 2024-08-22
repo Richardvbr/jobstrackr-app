@@ -1,128 +1,62 @@
-import {
-  NotFoundRoute,
-  createRootRoute,
-  createRoute,
-  createRouter,
-  redirect,
-} from "@tanstack/react-router";
+import { createBrowserRouter, redirect } from 'react-router-dom';
 
-import { AppLayout, AuthLayout } from "@/components/layout";
-import { SignInRoute } from "./sign-in";
-import { SignUpRoute } from "./sign-up";
-import { DashboardRoute } from "./dashboard";
-import { DocumentsRoute } from "./documents";
-import { FeedbackRoute } from "./feedback";
-import { QuestionsRoute } from "./questions";
-import { SettingsRoute } from "./settings";
+import { AppLayout, AuthLayout } from '@/components/layout';
+import { SignInRoute } from './sign-in';
+import { SignUpRoute } from './sign-up';
+import { DashboardRoute } from './dashboard';
+import { DocumentsRoute } from './documents';
+import { CompareRoute } from './compare';
+import { FeedbackRoute } from './feedback';
+import { QuestionsRoute } from './questions';
+import { SettingsRoute } from './settings';
 
-const rootRoute = createRootRoute();
-
-// Auth layout and routes
-const authRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  id: "auth-layout",
-  component: () => <AuthLayout />,
-});
-
-const signInRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "/sign-in",
-  component: () => <SignInRoute />,
-});
-
-const signUpRoute = createRoute({
-  getParentRoute: () => authRoute,
-  path: "/sign-up",
-  component: () => <SignUpRoute />,
-});
-
-// App layout and routes
-const appRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  id: "app-layout",
-  component: () => <AppLayout />,
-});
-
-const indexRoute = createRoute({
-  getParentRoute: () => appRoute,
-  path: "/",
-  beforeLoad: () => {
-    throw redirect({
-      to: dashboardRoute.to,
-    });
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    loader: () => {
+      return redirect('/dashboard');
+    },
   },
-});
-
-type DashboardSearch = {
-  action?: string;
-};
-
-export const dashboardRoute = createRoute({
-  getParentRoute: () => appRoute,
-  path: "/dashboard",
-  component: () => <DashboardRoute />,
-  validateSearch: (search: Record<string, unknown>): DashboardSearch => {
-    return {
-      action: search.action as string,
-    };
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        path: '/sign-in',
+        element: <SignInRoute />,
+      },
+      {
+        path: '/sign-up',
+        element: <SignUpRoute />,
+      },
+    ],
   },
-});
-
-const settingsRoute = createRoute({
-  getParentRoute: () => appRoute,
-  path: "/settings",
-  component: () => <SettingsRoute />,
-});
-
-const feedbackRoute = createRoute({
-  getParentRoute: () => appRoute,
-  path: "/feedback",
-  component: () => <FeedbackRoute />,
-});
-
-const questionsRoute = createRoute({
-  getParentRoute: () => appRoute,
-  path: "/questions",
-  component: () => <QuestionsRoute />,
-});
-
-const documentsRoute = createRoute({
-  getParentRoute: () => appRoute,
-  path: "/documents",
-  component: () => <DocumentsRoute />,
-});
-
-const routeTree = rootRoute.addChildren([
-  // @ts-ignore
-  indexRoute,
-  authRoute.addChildren([signInRoute, signUpRoute]),
-  appRoute.addChildren([
-    dashboardRoute,
-    documentsRoute,
-    questionsRoute,
-    settingsRoute,
-    feedbackRoute,
-  ]),
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/dashboard',
+        element: <DashboardRoute />,
+      },
+      {
+        path: '/documents',
+        element: <DocumentsRoute />,
+      },
+      {
+        path: '/compare',
+        element: <CompareRoute />,
+      },
+      {
+        path: '/questions',
+        element: <QuestionsRoute />,
+      },
+      {
+        path: '/settings',
+        element: <SettingsRoute />,
+      },
+      {
+        path: '/feedback',
+        element: <FeedbackRoute />,
+      },
+    ],
+  },
 ]);
-
-const notFoundRoute = new NotFoundRoute({
-  getParentRoute: () => rootRoute,
-  component: NotFound,
-});
-
-function NotFound() {
-  return <h3>404 - Not Found</h3>;
-}
-
-export const router = createRouter({
-  routeTree,
-  notFoundRoute,
-  defaultPreload: "intent",
-  defaultStaleTime: 5000,
-});
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}

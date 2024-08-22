@@ -1,7 +1,7 @@
-@use "@fontsource-variable/inter";
+@use '@fontsource-variable/inter';
 
 body {
-  font-family: "Inter Variable", sans-serif;
+  font-family: 'Inter Variable', sans-serif;
 }
 
 h1,
@@ -13,7 +13,7 @@ h5 {
   color: $secondary;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   h1,
   h2,
   h3,

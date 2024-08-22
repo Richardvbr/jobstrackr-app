@@ -5,11 +5,12 @@
 
   select {
     @include input-base;
-    height: 39px;
+    & {
+      height: 39px;
+    }
 
     &:focus,
     &:hover {
-      outline: 1px solid $secondary;
       cursor: pointer;
     }
   }
@@ -20,7 +21,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   .wrapper {
     select {
       background: $gray-600;

@@ -1,14 +1,12 @@
-import cn from "clsx";
-import { Link, useRouterState } from "@tanstack/react-router";
-import { ReactNode } from "react";
+import cn from 'clsx';
+import { ReactNode } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import type { LinkItemProps } from "@/types/links";
-import styles from "./styles.module.scss";
+import type { LinkItemProps } from '@/types/links';
+import styles from './styles.module.scss';
 
 export function LinkItem({ href, label, Icon, onClick }: LinkItemProps) {
-  const {
-    location: { pathname },
-  } = useRouterState();
+  const { pathname } = useLocation();
 
   const isActive = pathname.includes(href as string);
 

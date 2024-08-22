@@ -14,7 +14,7 @@
 
     &::after {
       position: absolute;
-      content: "";
+      content: '';
       height: 1px;
       background: $gray-300;
       width: 100%;
@@ -47,7 +47,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   .card {
     background-color: $dark-secondary;
     color: $gray-300;

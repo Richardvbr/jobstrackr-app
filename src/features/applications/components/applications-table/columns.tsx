@@ -1,6 +1,6 @@
 import { createColumnHelper } from '@tanstack/react-table';
-
 import { formatDate } from '@/utils/date';
+import { currencies } from '@/utils/currency';
 import {
   ApplicationStatus,
   ApplicationStatusType,
@@ -40,8 +40,10 @@ export const columns = [
   columnHelper.accessor('salary', {
     header: 'Salary',
     cell: (info) => {
-      const currency = info.row.original.salary_currency;
-      return <p>{`${info.getValue()} ${currency}`}</p>;
+      const currency = info.row.original.salary_currency?.toUpperCase();
+      const currencySymbol: string = currencies[currency as keyof typeof currencies].symbol;
+
+      return <p>{`${currencySymbol}${info.getValue()}`}</p>;
     },
   }),
   columnHelper.accessor('employment_type', {

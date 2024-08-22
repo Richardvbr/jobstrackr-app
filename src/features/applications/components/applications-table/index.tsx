@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useShallow } from "zustand/react/shallow";
+import { useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
-import { useApplicationStore } from "@/features/applications";
-import type { Application } from "@/types/application";
-import { Table } from "@/components";
-import { columns } from "./columns";
-import styles from "./styles.module.scss";
+import { useApplicationStore } from '@/features/applications';
+import type { Application } from '@/types/application';
+import { Table } from '@/components';
+import { columns } from './columns';
+import styles from './styles.module.scss';
 
 type ApplicationsTable = {
   data: Application[];
@@ -27,8 +27,8 @@ export function ApplicationsTable({ data, searchQuery }: ApplicationsTable) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.count}>
-        {"Showing"} <strong>{shownResults}</strong> {"of"} <strong>{totalResults}</strong>{" "}
-        {"results"}
+        {'Showing'} <strong>{shownResults}</strong> {'of'} <strong>{totalResults}</strong>{' '}
+        {'results'}
       </div>
       <div className={styles.table}>
         <Table

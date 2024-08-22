@@ -57,6 +57,6 @@ TypeScript
 Supabase            # auth, postgres db
 Zustand             # client-side state
 React-query         # queries, mutations, server-side state
-Tanstack-router     # client-side routing
+React-router        # client-side routing
 SCSS modules        # styling
 ```
