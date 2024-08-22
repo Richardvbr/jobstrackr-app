@@ -47,7 +47,7 @@ export function DocumentsPage() {
               <p
                 className={styles.applicationName}
               >{`${application.company} - ${application.position}`}</p>
-              {documents.length >= 1 ? (
+              {documents?.length ? (
                 documents?.map((document: Document) => (
                   <DocumentItem key={document.id} document={document} />
                 ))
