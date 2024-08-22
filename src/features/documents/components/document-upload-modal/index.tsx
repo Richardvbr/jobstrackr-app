@@ -40,7 +40,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     name: 'selectedApplication',
     label: 'Select an application (optional)',
     options: [
-      { label: '', value: undefined },
+      { label: 'Select an option', value: '' },
       ...applications.map(({ id, company, position }) => ({
         value: id,
         label: `${company} - ${position}`,

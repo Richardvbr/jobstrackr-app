@@ -1,16 +1,21 @@
-import { LinkItemProps } from "@/types/links";
-import { Icons } from "@/components";
+import { LinkItemProps } from '@/types/links';
+import { Icons } from '@/components';
 
 export const links: LinkItemProps[] = [
   {
-    href: "/dashboard",
-    label: "Dashboard",
+    href: '/dashboard',
+    label: 'Dashboard',
     Icon: Icons.Dashboard,
   },
   {
-    href: "/documents",
-    label: "Documents",
+    href: '/documents',
+    label: 'Documents',
     Icon: Icons.Document,
+  },
+  {
+    href: '/compare',
+    label: 'Compare',
+    Icon: Icons.Compare,
   },
   // {
   //   href: "/questions",

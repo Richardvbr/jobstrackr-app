@@ -5,6 +5,7 @@ import { SignInRoute } from './sign-in';
 import { SignUpRoute } from './sign-up';
 import { DashboardRoute } from './dashboard';
 import { DocumentsRoute } from './documents';
+import { CompareRoute } from './compare';
 import { FeedbackRoute } from './feedback';
 import { QuestionsRoute } from './questions';
 import { SettingsRoute } from './settings';
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: '/documents',
         element: <DocumentsRoute />,
+      },
+      {
+        path: '/compare',
+        element: <CompareRoute />,
       },
       {
         path: '/questions',

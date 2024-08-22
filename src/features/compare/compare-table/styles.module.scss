@@ -1,0 +1,47 @@
+.table {
+  max-height: 75vh;
+  margin-top: 20px;
+
+  svg:hover {
+    cursor: pointer;
+  }
+
+  table tbody tr td:first-of-type {
+    @include font-semibold;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: $black;
+  text-decoration: none;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+[data-theme='dark'] {
+  .table {
+    background-color: $dark-secondary;
+    color: $gray-300;
+    border: 1px solid $dark-border;
+
+    table tbody tr td:first-of-type,
+    table thead tr th:first-of-type {
+      color: white;
+    }
+
+    .title::after {
+      background: $gray-600;
+    }
+  }
+}

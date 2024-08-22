@@ -148,8 +148,6 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
   }
 
-  console.log(applicationData);
-
   return (
     <FormProvider {...formMethods}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
