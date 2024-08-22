@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
-import { Table } from '@/components';
 import type { Application } from '@/types/application';
-import styles from './styles.module.scss';
 import { capitalizeFirstLetter } from '@/utils/text';
 import { formatDate } from '@/utils/date';
+import { Table } from '@/components';
+import styles from './styles.module.scss';
 
-type CompareTable = {
+type CompareTableProps = {
   data: Application[];
 };
 
-export function CompareTable({ data }: CompareTable) {
+export function CompareTable({ data }: CompareTableProps) {
   const properties = useMemo(
     () => [
       { header: 'Company', accessor: 'company' },
@@ -27,9 +27,8 @@ export function CompareTable({ data }: CompareTable) {
     []
   );
 
-  // Add property/comparison column
   const columns = useMemo(() => {
-    let appColumns = data.map((_, index) => ({
+    const appColumns = data.map((_, index) => ({
       header: `Application ${index + 1}`,
       accessorKey: `app${index + 1}`,
       enableSorting: false,
@@ -38,23 +37,23 @@ export function CompareTable({ data }: CompareTable) {
     return [{ header: 'Property', accessorKey: 'property', enableSorting: false }, ...appColumns];
   }, [data]);
 
-  // Transpose data to layout data horizontally for easy comparison
+  // Transpose data to layout horizontally for easy comparison
   const tableData = useMemo(() => {
     return properties.map(({ header, accessor }) => {
-      let row = { property: header };
+      const row: { [key: string]: string | undefined } = { property: header };
+
       data.forEach((app, index) => {
-        if (accessor === 'applied_at') {
-          const date = new Date(app[accessor] as string);
+        const value = app[accessor as keyof Application];
+
+        if (accessor === 'applied_at' && typeof value === 'string') {
+          const date = new Date(value);
           const formattedDate = formatDate(date);
-
-          return (row[`app${index + 1}`] = formattedDate);
+          row[`app${index + 1}`] = formattedDate;
+        } else if (accessor === 'link' && typeof value === 'string') {
+          row[`app${index + 1}`] = value;
+        } else if (typeof value === 'string') {
+          row[`app${index + 1}`] = capitalizeFirstLetter(value);
         }
-
-        if (accessor === 'link') {
-          return (row[`app${index + 1}`] = app[accessor] as string);
-        }
-
-        row[`app${index + 1}`] = capitalizeFirstLetter(app[accessor] as string);
       });
 
       return row;
