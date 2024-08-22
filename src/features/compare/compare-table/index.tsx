@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 import { Table } from '@/components';
 import type { Application } from '@/types/application';
 import styles from './styles.module.scss';
+import { capitalizeFirstLetter } from '@/utils/text';
+import { formatDate } from '@/utils/date';
 
 type CompareTable = {
   data: Application[];
@@ -38,12 +40,23 @@ export function CompareTable({ data }: CompareTable) {
 
   // Transpose data to layout data horizontally for easy comparison
   const tableData = useMemo(() => {
-    return properties.map((property) => {
-      let row = { property: property.header };
+    return properties.map(({ header, accessor }) => {
+      let row = { property: header };
       data.forEach((app, index) => {
-        // @ts-ignore
-        row[`app${index + 1}`] = app[property.accessor];
+        if (accessor === 'applied_at') {
+          const date = new Date(app[accessor] as string);
+          const formattedDate = formatDate(date);
+
+          return (row[`app${index + 1}`] = formattedDate);
+        }
+
+        if (accessor === 'link') {
+          return (row[`app${index + 1}`] = app[accessor] as string);
+        }
+
+        row[`app${index + 1}`] = capitalizeFirstLetter(app[accessor] as string);
       });
+
       return row;
     });
   }, [data, properties]);
