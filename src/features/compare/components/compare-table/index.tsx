@@ -53,6 +53,8 @@ export function CompareTable({ data }: CompareTableProps) {
           row[`app${index + 1}`] = value;
         } else if (typeof value === 'string') {
           row[`app${index + 1}`] = capitalizeFirstLetter(value);
+        } else {
+          row[`app${index + 1}`] = '';
         }
       });
 

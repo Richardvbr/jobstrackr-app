@@ -14,7 +14,7 @@ export const links: LinkItemProps[] = [
   },
   {
     href: '/questions',
-    label: 'Questions',
+    label: 'Questions/notes',
     Icon: Icons.Question,
   },
   {
@@ -22,11 +22,6 @@ export const links: LinkItemProps[] = [
     label: 'Compare',
     Icon: Icons.Compare,
   },
-  // {
-  //   href: "/questions",
-  //   label: "Questions",
-  //   Icon: Icons.Question,
-  // },
   // {
   //   href: "tips",
   //   label: "Tips and prepare",

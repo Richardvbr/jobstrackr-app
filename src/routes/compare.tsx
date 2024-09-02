@@ -1,4 +1,4 @@
-import { ComparePage } from '@/features/compare/compare-page';
+import { ComparePage } from '@/features/compare/components/compare-page';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 export function CompareRoute() {

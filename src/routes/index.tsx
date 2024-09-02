@@ -50,6 +50,10 @@ export const router = createBrowserRouter([
         element: <QuestionsRoute />,
       },
       {
+        path: 'questions/:applicationId',
+        element: <QuestionsRoute />,
+      },
+      {
         path: '/settings',
         element: <SettingsRoute />,
       },

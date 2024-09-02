@@ -13,6 +13,21 @@
   }
 }
 
+.checkboxWrapper {
+  width: max-content;
+
+  > div {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  label,
+  input,
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 [data-theme='dark'] {
   .selectApplications {
     p {
