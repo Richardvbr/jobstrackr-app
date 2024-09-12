@@ -1,12 +1,5 @@
-import { AuthError, Session, SupabaseClient } from "@supabase/supabase-js";
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { AuthError, Session, SupabaseClient } from '@supabase/supabase-js';
+import { createContext, PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
 
 export type SessionContext =
   | {
@@ -34,17 +27,17 @@ export type SessionContext =
       supabaseClient: SupabaseClient;
     };
 
+export interface SessionContextProviderProps {
+  supabaseClient: SupabaseClient;
+  initialSession?: Session | null;
+}
+
 const SessionContext = createContext<SessionContext>({
   isLoading: true,
   session: null,
   error: null,
   supabaseClient: {} as any,
 });
-
-export interface SessionContextProviderProps {
-  supabaseClient: SupabaseClient;
-  initialSession?: Session | null;
-}
 
 export const SessionContextProvider = ({
   supabaseClient,
@@ -96,14 +89,12 @@ export const SessionContextProvider = ({
     } = supabaseClient.auth.onAuthStateChange((event, session) => {
       if (
         session &&
-        (event === "SIGNED_IN" ||
-          event === "TOKEN_REFRESHED" ||
-          event === "USER_UPDATED")
+        (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED')
       ) {
         setSession(session);
       }
 
-      if (event === "SIGNED_OUT") {
+      if (event === 'SIGNED_OUT') {
         setSession(null);
       }
     });
@@ -140,17 +131,13 @@ export const SessionContextProvider = ({
     };
   }, [isLoading, session, error]);
 
-  return (
-    <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
-  );
+  return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 };
 
 export const useSessionContext = () => {
   const context = useContext(SessionContext);
   if (context === undefined) {
-    throw new Error(
-      `useSessionContext must be used within a SessionContextProvider.`
-    );
+    throw new Error(`useSessionContext must be used within a SessionContextProvider.`);
   }
 
   return context;
@@ -158,15 +145,13 @@ export const useSessionContext = () => {
 
 export function useSupabaseClient<
   Database = any,
-  SchemaName extends string & keyof Database = "public" extends keyof Database
-    ? "public"
+  SchemaName extends string & keyof Database = 'public' extends keyof Database
+    ? 'public'
     : string & keyof Database
 >() {
   const context = useContext(SessionContext);
   if (context === undefined) {
-    throw new Error(
-      `useSupabaseClient must be used within a SessionContextProvider.`
-    );
+    throw new Error(`useSupabaseClient must be used within a SessionContextProvider.`);
   }
 
   return context.supabaseClient as SupabaseClient<Database, SchemaName>;

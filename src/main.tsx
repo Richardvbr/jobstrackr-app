@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import { Providers } from '@/providers';
 import { router } from './routes';
+import { Providers } from './contexts';
 import '@/styles/index.scss';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

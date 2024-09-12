@@ -3,8 +3,8 @@ import { type PropsWithChildren } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import { supabase } from '@/lib/supabase';
-import { SessionContextProvider } from '@/contexts/AuthContext';
 import { toastOptions } from '@/utils/toast';
+import { SessionContextProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 
 export const Providers = ({ children }: PropsWithChildren) => {
