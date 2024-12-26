@@ -1,7 +1,7 @@
-import { motion, AnimatePresence, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
-import cn from "clsx";
-import styles from "./styles.module.scss";
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import type { ReactNode } from 'react';
+import cn from 'clsx';
+import styles from './styles.module.scss';
 
 export interface AccordionItem {
   id?: string;
@@ -13,12 +13,13 @@ export interface AccordionItem {
   onToggle?: () => void;
 }
 
+// TODO: finish component
 export function AccordionItem({
-  id,
+  // id,
   title,
   description,
   open = true,
-  category = "",
+  // category = "",
   children,
   onToggle,
 }: AccordionItem) {
@@ -41,7 +42,7 @@ export function AccordionItem({
     },
     open: {
       transition: { duration: 0.3 },
-      height: "auto",
+      height: 'auto',
       opacity: 1,
     },
   };
@@ -67,7 +68,7 @@ export function AccordionItem({
             className={styles.content}
             initial='closed'
             exit='closed'
-            animate={open ? "open" : "closed"}
+            animate={open ? 'open' : 'closed'}
             variants={contentVariants}
           >
             {description ? <p>{description}</p> : children}
