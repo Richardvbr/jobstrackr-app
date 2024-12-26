@@ -12,11 +12,11 @@ export const links: LinkItemProps[] = [
     label: 'Documents',
     Icon: Icons.Document,
   },
-  {
-    href: '/questions',
-    label: 'Questions/notes',
-    Icon: Icons.Question,
-  },
+  // {
+  //   href: '/questions',
+  //   label: 'Questions/notes',
+  //   Icon: Icons.Question,
+  // },
   {
     href: '/compare',
     label: 'Compare',
