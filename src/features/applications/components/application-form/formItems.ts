@@ -37,7 +37,7 @@ export const formItems: FormItem[] = [
   },
   {
     name: 'applied_at',
-    label: 'Applied at',
+    label: 'Applied at / added',
     type: 'date',
     required: true,
   },
@@ -110,6 +110,10 @@ export const statusInput: SelectInputItem = {
   name: 'status',
   label: 'Status',
   options: [
+    {
+      value: 'interested',
+      label: 'Interested',
+    },
     {
       value: 'applied',
       label: 'Applied',
