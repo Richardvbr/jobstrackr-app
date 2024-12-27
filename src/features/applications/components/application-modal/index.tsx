@@ -1,10 +1,12 @@
 import { useShallow } from 'zustand/react/shallow';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ApplicationForm, useApplicationStore } from '@/features/applications';
 import { Modal } from '@/components';
 
 export function ApplicationModal() {
+  const navigate = useNavigate();
+
   const { applicationModalOpened, closeModal, isEditing } = useApplicationStore(
     useShallow((state) => ({
       applicationModalOpened: state.applicationModalOpened,
@@ -26,8 +28,8 @@ export function ApplicationModal() {
       }
     }
 
+    navigate('/dashboard', { replace: true });
     closeModal();
-    redirect('/dashboard');
   };
 
   return (
