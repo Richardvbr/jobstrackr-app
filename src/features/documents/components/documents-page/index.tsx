@@ -6,7 +6,7 @@ import {
 } from '@/features/documents';
 import { useApplicationsQuery } from '@/features/applications';
 import { Card, Icons, Button } from '@/components';
-import { Document } from '@/types/document';
+import type { Document } from '@/features/documents';
 import styles from './styles.module.scss';
 
 export function DocumentsPage() {

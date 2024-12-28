@@ -1,13 +1,13 @@
-import { useRef, useState } from "react";
-import { DefaultExtensionType, FileIcon, defaultStyles } from "react-file-icon";
-import mime from "mime-types";
+import { useRef, useState } from 'react';
+import { DefaultExtensionType, FileIcon, defaultStyles } from 'react-file-icon';
+import mime from 'mime-types';
 
-import { Document } from "@/types/document";
-import { useWindowSize } from "@/hooks/useWindowSize";
-import { capitalizeFirstLetter, truncate } from "@/utils/text";
-import { BsThreeDotsVertical } from "@/components/icons";
-import Menu from "@/components/menu";
-import styles from "./styles.module.scss";
+import type { Document } from '@/features/documents';
+import { useWindowSize } from '@/hooks/useWindowSize';
+import { capitalizeFirstLetter, truncate } from '@/utils/text';
+import { BsThreeDotsVertical } from '@/components/icons';
+import Menu from '@/components/menu';
+import styles from './styles.module.scss';
 
 interface DocumentProps {
   document: Document;

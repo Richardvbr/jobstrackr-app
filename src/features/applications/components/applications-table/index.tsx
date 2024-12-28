@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
-import { useApplicationStore } from '@/features/applications';
-import type { Application } from '@/types/application';
+import { useApplicationStore, type Application } from '@/features/applications';
 import { Table } from '@/components';
 import { columns } from './columns';
 import styles from './styles.module.scss';

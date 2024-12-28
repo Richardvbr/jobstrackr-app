@@ -1,6 +1,6 @@
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Button, Icons, Input } from '@/components';
-import { Application } from '@/types/application';
+import type { Application } from '@/features/applications';
 import styles from './styles.module.scss';
 
 type CompareFormProps = {

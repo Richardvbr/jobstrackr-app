@@ -7,9 +7,8 @@ import toast from 'react-hot-toast';
 
 import { useUser } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
-import { Application } from '@/types/application';
 
-import { useApplicationStore } from '@/features/applications';
+import { useApplicationStore, type Application } from '@/features/applications';
 import {
   formItems,
   statusInput,

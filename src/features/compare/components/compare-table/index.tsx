@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Application } from '@/types/application';
+import type { Application } from '@/features/applications';
 import { capitalizeFirstLetter } from '@/utils/text';
 import { formatDate } from '@/utils/date';
 import { Table } from '@/components';

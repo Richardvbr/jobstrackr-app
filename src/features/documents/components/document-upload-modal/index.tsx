@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { Application } from '@/types/application';
+import type { Application } from '@/features/applications';
 import type { SelectInputItem } from '@/types/elements';
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/contexts/AuthContext';

@@ -1,8 +1,8 @@
-import cn from "clsx";
+import cn from 'clsx';
 
-import { ApplicationStatus as ApplicationStatusType } from "@/types/application";
-import { capitalizeFirstLetter } from "@/utils/text";
-import styles from "./styles.module.scss";
+import { ApplicationStatusType } from '@/features/applications';
+import { capitalizeFirstLetter } from '@/utils/text';
+import styles from './styles.module.scss';
 
 type ApplicationStatusProps = {
   status: ApplicationStatusType;
@@ -12,12 +12,12 @@ export function ApplicationStatus({ status }: ApplicationStatusProps) {
   const lowercaseStatus = status?.toLowerCase();
 
   const classes = cn(styles.status, {
-    [styles[lowercaseStatus]]: lowercaseStatus && lowercaseStatus !== "status",
+    [styles[lowercaseStatus]]: lowercaseStatus && lowercaseStatus !== 'status',
   });
 
   return (
     <div className={classes}>
-      <p>{capitalizeFirstLetter(lowercaseStatus || "None")}</p>
+      <p>{capitalizeFirstLetter(lowercaseStatus || 'None')}</p>
     </div>
   );
 }
