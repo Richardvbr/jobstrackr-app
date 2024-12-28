@@ -14,7 +14,11 @@
 }
 
 .checkboxWrapper {
-  width: max-content;
+  width: 100px;
+
+  input {
+    margin-left: auto;
+  }
 
   > div {
     flex-direction: row;
