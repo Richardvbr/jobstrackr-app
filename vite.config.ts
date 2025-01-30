@@ -12,8 +12,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData:
-          '@use "@/styles/_variables.scss"; @use "@/styles/_buttons.scss"; @use "@/styles/_inputs.scss"; @use "@/styles/_typography.scss"; @use "@/styles/reset.scss";',
+        additionalData: `@import "@/styles/variables.scss"; @import "@/styles/buttons.scss"; @import "@/styles/inputs.scss"; @import "@/styles/typography.scss"; @import "@/styles/reset.scss";`,
       },
     },
   },
