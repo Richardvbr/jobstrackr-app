@@ -1,11 +1,11 @@
-import { AnimatePresence, motion, Variants } from "framer-motion";
-import React, { useMemo, useRef } from "react";
-import cn from "clsx";
-import { usePopper } from "react-popper";
-import { Placement } from "@popperjs/core";
+import { AnimatePresence, motion, Variants } from 'framer-motion';
+import React, { useMemo, useRef } from 'react';
+import cn from 'clsx';
+import { usePopper } from 'react-popper';
+import { Placement } from '@popperjs/core';
 
-import { useClickOutside } from "@/hooks/useClickOutside";
-import style from "./styles.module.scss";
+import { useClickOutside } from '@/hooks/useClickOutside';
+import style from './styles.module.scss';
 
 export type MenuProps = {
   isOpen: boolean;
@@ -20,7 +20,7 @@ const Menu = ({
   onClose,
   targetEl,
   offset,
-  placement = "bottom-end",
+  placement = 'bottom-end',
   children,
   className,
 }: MenuProps) => {
@@ -29,7 +29,7 @@ const Menu = ({
 
   const offsetModifier = useMemo(
     () => ({
-      name: "offset",
+      name: 'offset',
       options: {
         offset: () => {
           return offset ?? [0, 10];
@@ -66,8 +66,8 @@ const Menu = ({
         ref={ref}
         className={classes}
         initial='initial'
-        animate={isOpen ? "open" : "closed"}
-        style={{ ...styles.popper, pointerEvents: isOpen ? "all" : "none" }}
+        animate={isOpen ? 'open' : 'closed'}
+        style={{ ...styles.popper, pointerEvents: isOpen ? 'all' : 'none' }}
         variants={variants}
         {...attributes.popper}
       >

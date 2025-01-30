@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
-import { useClickOutside } from "@/hooks/useClickOutside";
-import { Icons } from "@/components";
-import styles from "./styles.module.scss";
+import { useClickOutside } from '@/hooks/useClickOutside';
+import { Icons } from '@/components';
+import styles from './styles.module.scss';
 
 type ModalProps = {
   children: React.ReactNode;
@@ -27,15 +27,15 @@ export function Modal({ children, opened = false, handleClose, modalTitle, ...pr
     }
 
     function handleEscapeKey(event: KeyboardEvent) {
-      if (opened && event.code === "Escape") {
+      if (opened && event.code === 'Escape') {
         handleClose();
       }
     }
 
-    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener('keydown', handleEscapeKey);
       document.body.classList.remove(styles.hideOverflow);
     };
   }, [opened]);
@@ -53,7 +53,7 @@ export function Modal({ children, opened = false, handleClose, modalTitle, ...pr
           animate='open'
           exit='collapsed'
           variants={animVariants}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
           className={styles.backdrop}
         >
           <motion.dialog
@@ -61,7 +61,7 @@ export function Modal({ children, opened = false, handleClose, modalTitle, ...pr
             animate='open'
             exit='collapsed'
             variants={animVariants}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
             {...props}
             open={opened}
             className={styles.modal}

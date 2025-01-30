@@ -1,13 +1,19 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from 'vite';
+import path from 'path';
+import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {
         additionalData:
-          '@import "./src/styles/_variables.scss"; @import "./src/styles/_buttons.scss"; @import "./src/styles/_inputs.scss"; @import "./src/styles/_typography.scss"; @import "./src/styles/reset.scss";',
+          '@use "@/styles/_variables.scss"; @use "@/styles/_buttons.scss"; @use "@/styles/_inputs.scss"; @use "@/styles/_typography.scss"; @use "@/styles/reset.scss";',
       },
     },
   },
@@ -19,8 +25,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return id.toString().split("node_modules/")[1].split("/")[0].toString();
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
           }
         },
       },
