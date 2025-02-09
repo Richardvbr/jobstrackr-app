@@ -1,10 +1,10 @@
 {
-  "name": "jobstrackr",
+  "name": "jobstrackr-app",
   "version": "1.0.0",
-  "description": "JobsTrackr",
+  "description": "JobsTrackr-app",
   "author": "Richard van Brunschot",
-  "repository": "https://github.com/Richardvbr/jobstrackr-vite",
-  "private": true,
+  "repository": "https://github.com/Richardvbr/jobstrackr-app",
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "vite",
