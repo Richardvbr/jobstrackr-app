@@ -166,6 +166,15 @@ export const useSession = () => {
   return context.session;
 };
 
+export const useToken = () => {
+  const context = useContext(SessionContext);
+  if (context === undefined) {
+    throw new Error(`useToken must be used within a SessionContextProvider.`);
+  }
+
+  return context.session?.access_token as string;
+};
+
 export const useUser = () => {
   const context = useContext(SessionContext);
   if (context === undefined) {
