@@ -5,7 +5,6 @@ import { toast } from 'react-hot-toast';
 
 import type { Application } from '@/features/applications';
 import type { SelectInputItem } from '@/types/elements';
-import { useUser } from '@/contexts/AuthContext';
 import { Modal, Input, Button, SelectInput } from '@/components';
 import { useDocumentStore, useNewDocumentMutation } from '@/features/documents';
 import styles from './styles.module.scss';
@@ -28,7 +27,6 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     reValidateMode: 'onBlur',
     disabled: submitLoading,
   });
-  const user = useUser();
   const { documentModalOpened, closeDocumentModal } = useDocumentStore();
   const queryClient = useQueryClient();
   const { handleSubmit, reset } = formMethods;
