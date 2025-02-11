@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useToken } from '@/contexts/AuthContext';
 import { handleRequest } from '@/utils/handleRequest';
 import type { Application } from '../types';
@@ -31,6 +31,59 @@ export function useApplicationQuery(applicationId: string) {
       const request = await handleRequest<Response<Application>>({
         url: `${BASE_URL}/applications/${applicationId}`,
         token,
+      });
+
+      return request?.data;
+    },
+  });
+}
+
+export function useNewApplicationMutation(applicationId: string) {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: [`new-application-${applicationId}`],
+    mutationFn: async (application: Application) => {
+      const request = await handleRequest<Response<Application>>({
+        url: `${BASE_URL}/applications/${applicationId}`,
+        token,
+        method: 'POST',
+        body: application,
+      });
+
+      return request?.data;
+    },
+  });
+}
+
+export function useUpdateApplicationMutation(applicationId: string) {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: [`update-application-${applicationId}`],
+    mutationFn: async (application: Application) => {
+      const request = await handleRequest<Response<Application>>({
+        url: `${BASE_URL}/applications/${applicationId}`,
+        token,
+        method: 'PUT',
+        body: application,
+      });
+
+      return request?.data;
+    },
+  });
+}
+
+export function useDeleteApplicationMutation(applicationId: string) {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: [`delete-application-${applicationId}`],
+    mutationFn: async () => {
+      const request = await handleRequest<Response<Application>>({
+        url: `${BASE_URL}/applications/${applicationId}`,
+        token,
+        method: 'DELETE',
       });
 
       return request?.data;

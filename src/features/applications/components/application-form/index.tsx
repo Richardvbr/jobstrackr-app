@@ -6,9 +6,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { useUser } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase';
-
-import { useApplicationStore, type Application } from '@/features/applications';
+import {
+  useApplicationStore,
+  useDeleteApplicationMutation,
+  useNewApplicationMutation,
+  useUpdateApplicationMutation,
+  type Application,
+} from '@/features/applications';
 import {
   formItems,
   statusInput,
@@ -36,6 +40,16 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
       isEditing: state.applicationModalOpened === 'edit',
     }))
   );
+
+  const { mutate: updateApplicationMutation, error: updateApplicationError } =
+    useUpdateApplicationMutation(applicationData?.id as string);
+
+  const { mutate: newApplicationMutation, error: newApplicationError } = useNewApplicationMutation(
+    applicationData?.id as string
+  );
+
+  const { mutate: deleteApplicationMutation, error: deleteApplicationError } =
+    useDeleteApplicationMutation(applicationData?.id as string);
 
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<ApplicationFormInput>({
@@ -69,7 +83,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   }
 
   // Form submission
-  const onSubmit: SubmitHandler<ApplicationFormInput> = async (applicationData) => {
+  const onSubmit: SubmitHandler<ApplicationFormInput> = async (applicationForm) => {
     setSubmitLoading(true);
 
     if (!user) {
@@ -78,9 +92,9 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
 
     try {
       if (isEditing) {
-        await updateApplication(applicationData);
+        await updateApplication(applicationForm);
       } else {
-        await addNewApplication(applicationData);
+        await addNewApplication(applicationForm);
       }
     } catch (error) {
       handleError(error);
@@ -89,26 +103,21 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
   };
 
-  async function updateApplication(applicationData: ApplicationFormInput) {
-    const { error } = await supabase
-      .from('applications')
-      .update(applicationData)
-      .eq('id', applicationData.id);
+  async function updateApplication(application: Application) {
+    updateApplicationMutation(application);
 
-    if (error) {
+    if (updateApplicationError) {
       throw toast.error('An error occurred when updating the application.');
     }
 
     toast.success('Application updated');
   }
 
-  async function addNewApplication(applicationData: ApplicationFormInput) {
-    const { error } = await supabase
-      .from('applications')
-      .insert({ ...applicationData, user_id: user?.id as string });
+  async function addNewApplication(application: Application) {
+    newApplicationMutation(application);
 
-    if (error) {
-      throw toast.error('An error occurred when adding the application.');
+    if (newApplicationError) {
+      throw toast.error('An error occurred when updating the application.');
     }
 
     toast.success('Application added');
@@ -117,9 +126,11 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   async function deleteApplication(applicationData: Application) {
     // Prevent deleting demo data
     const { id } = applicationData;
+
     if (
       id === '0cfad3f0-0375-426c-b635-86e134993ade' ||
-      id === '07c14adf-33bb-4ecb-9aff-39a5dbe1751c'
+      id === '07c14adf-33bb-4ecb-9aff-39a5dbe1751c' ||
+      id === '1675cad0-41d4-429a-97a9-c7964ea4692e'
     ) {
       return toast.error('Guest demo data cannot be deleted.');
     }
@@ -133,9 +144,9 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
 
     try {
-      const { error } = await supabase.from('applications').delete().eq('id', applicationData?.id);
+      deleteApplicationMutation();
 
-      if (error) {
+      if (deleteApplicationError) {
         throw toast.error('An error occured when deleting the application.');
       }
 
