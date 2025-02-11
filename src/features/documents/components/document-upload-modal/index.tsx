@@ -2,15 +2,12 @@ import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { v4 as uuidv4 } from 'uuid';
 
 import type { Application } from '@/features/applications';
 import type { SelectInputItem } from '@/types/elements';
-import { supabase } from '@/lib/supabase';
 import { useUser } from '@/contexts/AuthContext';
-
 import { Modal, Input, Button, SelectInput } from '@/components';
-import { useDocumentStore } from '@/features/documents';
+import { useDocumentStore, useNewDocumentMutation } from '@/features/documents';
 import styles from './styles.module.scss';
 
 interface DocumentUploadModalProps {
@@ -36,6 +33,8 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
   const queryClient = useQueryClient();
   const { handleSubmit, reset } = formMethods;
 
+  const { mutate: newDocumentMutation, error: newDocumentError } = useNewDocumentMutation('');
+
   const applicationSelect: SelectInputItem = {
     name: 'selectedApplication',
     label: 'Select an application (optional)',
@@ -53,29 +52,18 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
     setSubmitLoading(true);
     const { documentName, selectedApplication, documentDescription } = formData;
     const file = formData.file[0];
-    const uniqueId = uuidv4();
+
+    const body = {
+      documentName,
+      documentDescription,
+      selectedApplication,
+      file,
+    };
 
     try {
-      // Upload file
-      const { data: fileData, error: fileError } = await supabase.storage
-        .from('documents')
-        .upload(`file-${documentName}-${uniqueId}`, file);
+      newDocumentMutation(body);
 
-      if (fileError) {
-        throw toast.error('An error occurred while uploading the file');
-      }
-
-      // Create record with path to file
-      const { error } = await supabase.from('documents').insert({
-        user_id: user?.id,
-        title: documentName,
-        description: documentDescription,
-        file_path: fileData?.path,
-        file_type: file.type,
-        ...(selectedApplication && { application_id: selectedApplication }),
-      });
-
-      if (error) {
+      if (newDocumentError) {
         throw toast.error('An error occurred while uploading the file');
       }
 

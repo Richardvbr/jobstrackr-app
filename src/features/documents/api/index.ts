@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useToken } from '@/contexts/AuthContext';
 import { handleRequest } from '@/utils/handleRequest';
 import type { Document } from '../types';
@@ -31,6 +31,24 @@ export function useDocumentQuery(documentId: string) {
       const request = await handleRequest<Response<Document>>({
         url: `${BASE_URL}/documents/${documentId}`,
         token,
+      });
+
+      return request?.data;
+    },
+  });
+}
+
+export function useNewDocumentMutation(documentId: string) {
+  const token = useToken();
+
+  return useMutation({
+    mutationKey: [`new-document-${documentId}`],
+    mutationFn: async (documentbody: any) => {
+      const request = await handleRequest<Response<any>>({
+        url: `${BASE_URL}/documents`,
+        token,
+        method: 'POST',
+        body: documentbody,
       });
 
       return request?.data;
