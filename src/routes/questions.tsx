@@ -1,5 +1,5 @@
-import { Accordion } from '@/components/shared/accordion';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { Accordion } from '@/components/shared/accordion';
 import type { AccordionItem as AccordionItemType } from '@/components/shared/accordion/accordion-item';
 
 export function QuestionsRoute() {

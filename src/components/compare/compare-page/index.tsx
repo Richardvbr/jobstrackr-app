@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useApplicationsQuery } from '@/data/applications';
+import { useApplicationsQuery } from '@/data/application';
 import { CompareForm } from '../compare-form';
 import { CompareTable } from '../compare-table';
 

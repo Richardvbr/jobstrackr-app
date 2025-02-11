@@ -1,12 +1,10 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { formatDate } from '@/utils/date';
 import { currencies } from '@/utils/currency';
-import {
-  ApplicationStatus,
-  ApplicationStatusType,
-  ApplicationTableRow,
-} from '@/features/applications';
+
+import type { ApplicationStatusType, ApplicationTableRow } from '@/types/application';
 import { Icons } from '@/components/shared';
+import { ApplicationStatus } from '../applications-status';
 import styles from './styles.module.scss';
 
 const columnHelper = createColumnHelper<ApplicationTableRow>();

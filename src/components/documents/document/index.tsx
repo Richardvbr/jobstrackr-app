@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { DefaultExtensionType, FileIcon, defaultStyles } from 'react-file-icon';
 import mime from 'mime-types';
 
-import type { Document } from '@/features/documents';
+import type { Document } from '@/types/document';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { capitalizeFirstLetter, truncate } from '@/utils/text';
 import { BsThreeDotsVertical } from '@/components/shared/icons';

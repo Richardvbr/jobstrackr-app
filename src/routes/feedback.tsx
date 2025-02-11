@@ -1,8 +1,8 @@
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { FeedbackPage } from "@/features/feedback/components/feedback-page";
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { FeedbackPage } from '@/components/feedback';
 
 export function FeedbackRoute() {
-  useDocumentTitle("Feedback | JobsTrackr");
+  useDocumentTitle('Feedback | JobsTrackr');
 
   return <FeedbackPage />;
 }

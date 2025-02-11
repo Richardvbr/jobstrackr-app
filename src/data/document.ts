@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useToken } from '@/contexts/AuthContext';
 import { handleRequest } from '@/utils/handleRequest';
-import type { Document } from '../types';
 import type { Response } from '@/types/response';
+import type { Document } from '@/types/document';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

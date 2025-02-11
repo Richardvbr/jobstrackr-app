@@ -1,12 +1,10 @@
-import {
-  useDocumentStore,
-  DocumentUploadModal,
-  useDocumentsQuery,
-  DocumentItem,
-} from '@/features/documents';
-import { useApplicationsQuery } from '@/features/applications';
+import { useApplicationsQuery } from '@/data/application';
+import type { Document } from '@/types/document';
+import { useDocumentStore } from '@/stores/documentStore';
+import { useDocumentsQuery } from '@/data/document';
 import { Card, Icons, Button } from '@/components/shared';
-import type { Document } from '@/features/documents';
+import { DocumentItem } from './document';
+import { DocumentUploadModal } from './document-upload-modal';
 import styles from './styles.module.scss';
 
 export function DocumentsPage() {

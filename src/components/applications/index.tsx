@@ -3,7 +3,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { useSearchParams } from 'react-router-dom';
 
 import { useApplicationStore } from '@/stores/applicationStore';
-import { useApplicationsQuery } from '@/data/applications';
+import { useApplicationsQuery } from '@/data/application';
 import { Icons, Button, Input, Card } from '@/components/shared';
 import { ApplicationsTable } from './applications-table';
 import { ApplicationModal } from './application-modal';

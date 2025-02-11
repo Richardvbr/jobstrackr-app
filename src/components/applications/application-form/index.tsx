@@ -13,7 +13,7 @@ import {
   useDeleteApplicationMutation,
   useNewApplicationMutation,
   useUpdateApplicationMutation,
-} from '@/data/applications';
+} from '@/data/application';
 import {
   formItems,
   statusInput,

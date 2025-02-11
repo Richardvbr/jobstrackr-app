@@ -3,10 +3,11 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import type { Application } from '@/features/applications';
+import type { Application } from '@/types/application';
 import type { SelectInputItem } from '@/types/elements';
 import { Modal, Input, Button, SelectInput } from '@/components/shared';
-import { useDocumentStore, useNewDocumentMutation } from '@/features/documents';
+import { useNewDocumentMutation } from '@/data/document';
+import { useDocumentStore } from '@/stores/documentStore';
 import styles from './styles.module.scss';
 
 interface DocumentUploadModalProps {

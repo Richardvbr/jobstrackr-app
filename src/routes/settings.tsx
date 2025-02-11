@@ -1,8 +1,8 @@
-import { SettingsPage } from "@/features/settings";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SettingsPage } from '@/components/settings';
 
 export function SettingsRoute() {
-  useDocumentTitle("Settings | JobsTrackr");
+  useDocumentTitle('Settings | JobsTrackr');
 
   return <SettingsPage />;
 }
