@@ -1,5 +1,5 @@
-import { ComparePage } from '@/features/compare/components/compare-page';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { ComparePage } from '@/components/compare/compare-page';
 
 export function CompareRoute() {
   useDocumentTitle('Compare | JobsTrackr');

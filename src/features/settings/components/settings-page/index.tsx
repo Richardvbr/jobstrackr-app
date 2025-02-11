@@ -1,5 +1,5 @@
-import { Card, ThemeToggle } from "@/components";
-import styles from "./styles.module.scss";
+import { Card, ThemeToggle } from '@/components/shared';
+import styles from './styles.module.scss';
 
 export function SettingsPage() {
   return (

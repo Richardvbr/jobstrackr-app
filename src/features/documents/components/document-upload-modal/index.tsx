@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 
 import type { Application } from '@/features/applications';
 import type { SelectInputItem } from '@/types/elements';
-import { Modal, Input, Button, SelectInput } from '@/components';
+import { Modal, Input, Button, SelectInput } from '@/components/shared';
 import { useDocumentStore, useNewDocumentMutation } from '@/features/documents';
 import styles from './styles.module.scss';
 

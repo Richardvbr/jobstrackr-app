@@ -1,6 +1,6 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 
-import { AppLayout, AuthLayout } from '@/components/layout';
+import { AppLayout, AuthLayout } from '@/components/shared/layout';
 import { SignInRoute } from './sign-in';
 import { SignUpRoute } from './sign-up';
 import { DashboardRoute } from './dashboard';

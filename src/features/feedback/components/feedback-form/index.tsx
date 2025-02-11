@@ -3,7 +3,7 @@ import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
-import { Button, Input, Textarea } from '@/components';
+import { Button, Input, Textarea } from '@/components/shared';
 import styles from './styles.module.scss';
 
 interface FeedbackForm {

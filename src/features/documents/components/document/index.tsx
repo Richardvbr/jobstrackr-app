@@ -5,8 +5,8 @@ import mime from 'mime-types';
 import type { Document } from '@/features/documents';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { capitalizeFirstLetter, truncate } from '@/utils/text';
-import { BsThreeDotsVertical } from '@/components/icons';
-import Menu from '@/components/menu';
+import { BsThreeDotsVertical } from '@/components/shared/icons';
+import Menu from '@/components/shared/menu';
 import styles from './styles.module.scss';
 
 interface DocumentProps {

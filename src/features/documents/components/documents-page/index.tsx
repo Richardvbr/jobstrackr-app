@@ -5,7 +5,7 @@ import {
   DocumentItem,
 } from '@/features/documents';
 import { useApplicationsQuery } from '@/features/applications';
-import { Card, Icons, Button } from '@/components';
+import { Card, Icons, Button } from '@/components/shared';
 import type { Document } from '@/features/documents';
 import styles from './styles.module.scss';
 

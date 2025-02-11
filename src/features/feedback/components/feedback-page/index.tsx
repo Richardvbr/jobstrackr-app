@@ -1,5 +1,5 @@
-import { Card } from "@/components";
-import { FeedbackForm } from "@/features/feedback";
+import { Card } from '@/components/shared';
+import { FeedbackForm } from '@/features/feedback';
 
 export function FeedbackPage() {
   return (
