@@ -14,7 +14,7 @@ export function Applications() {
   const [searchParams] = useSearchParams();
   const action = searchParams.get('action');
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
-  const { data: applications } = useApplicationsQuery();
+  const { data: applications, isLoading } = useApplicationsQuery();
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   if (action === 'new-application') {
@@ -34,7 +34,11 @@ export function Applications() {
         placeholder='Search for an application'
         handleChange={(e) => setSearchQuery(e.target.value)}
       />
-      <ApplicationsTable data={applications ?? []} searchQuery={debouncedSearchQuery} />
+      <ApplicationsTable
+        data={applications ?? []}
+        searchQuery={debouncedSearchQuery}
+        loading={isLoading}
+      />
       <ApplicationModal />
     </Card>
   );
