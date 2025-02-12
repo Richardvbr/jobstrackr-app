@@ -45,7 +45,7 @@ export function useNewApplicationMutation(applicationId: string) {
     mutationKey: [`new-application-${applicationId}`],
     mutationFn: async (application: Application) => {
       const request = await handleRequest<Response<Application>>({
-        url: `${BASE_URL}/applications/${applicationId}`,
+        url: `${BASE_URL}/applications`,
         token,
         method: 'POST',
         body: application,
