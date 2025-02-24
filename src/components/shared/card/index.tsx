@@ -1,7 +1,7 @@
-import cn from "clsx";
-import styles from "./card.module.scss";
+import cn from 'clsx';
+import styles from './card.module.scss';
 
-type CardProps = React.ComponentPropsWithoutRef<"div"> & {
+type CardProps = React.ComponentPropsWithoutRef<'div'> & {
   children: React.ReactNode;
   shadow?: boolean;
   className?: string;

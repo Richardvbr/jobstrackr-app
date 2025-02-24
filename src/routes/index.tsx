@@ -45,10 +45,10 @@ export const router = createBrowserRouter([
         path: '/compare',
         element: <CompareRoute />,
       },
-      // {
-      //   path: '/questions',
-      //   element: <QuestionsRoute />,
-      // },
+      {
+        path: '/questions',
+        element: <QuestionsRoute />,
+      },
       {
         path: 'questions/:applicationId',
         element: <QuestionsRoute />,

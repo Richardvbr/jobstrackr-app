@@ -27,7 +27,7 @@ export function DocumentsPage() {
         <Icons.Plus />
         Add a new document
       </Button>
-      <div className={styles.documentSections}>
+      <div className={styles.documentSection}>
         <Card shadow title='All your documents'>
           <div className={styles.documentContainer}>
             {documentsData?.length ? (
@@ -40,24 +40,28 @@ export function DocumentsPage() {
           </div>
         </Card>
         <Card shadow title='Your documents per application'>
-          {groupedDocuments?.length ? (
-            groupedDocuments.map(({ application, documents }) => (
-              <div key={application.id} className={styles.groupedDocuments}>
-                <p
-                  className={styles.applicationName}
-                >{`${application.company} - ${application.position}`}</p>
-                {documents?.length ? (
-                  documents?.map((document: Document) => (
-                    <DocumentItem key={document.id} document={document} />
-                  ))
-                ) : (
-                  <p>No documents for this application</p>
-                )}
-              </div>
-            ))
-          ) : (
-            <p>No documents yet. Documents linked to applications will appear here</p>
-          )}
+          <div>
+            {groupedDocuments?.length ? (
+              groupedDocuments.map(({ application, documents }) => (
+                <div key={application.id} className={styles.groupedDocumentsContainer}>
+                  <p
+                    className={styles.applicationName}
+                  >{`${application.company} - ${application.position}`}</p>
+                  {documents?.length ? (
+                    <div className={styles.groupedDocuments}>
+                      {documents?.map((document: Document) => (
+                        <DocumentItem key={document.id} document={document} />
+                      ))}
+                    </div>
+                  ) : (
+                    <p>No documents for this application</p>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p>No documents yet. Documents linked to applications will appear here</p>
+            )}
+          </div>
         </Card>
       </div>
       <DocumentUploadModal applications={applicationsData ?? []} />

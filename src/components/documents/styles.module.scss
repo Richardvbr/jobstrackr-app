@@ -1,4 +1,4 @@
-.documentSections {
+.documentSection {
   margin-top: 25px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   @include font-semibold;
 }
 
-.groupedDocuments {
+.groupedDocumentsContainer {
   p {
     margin-bottom: 15px;
   }
@@ -23,6 +23,11 @@
   &:not(:last-child) {
     margin-bottom: 35px;
   }
+}
+
+.groupedDocuments {
+  display: flex;
+  gap: 25px;
 }
 
 [data-theme='dark'] {

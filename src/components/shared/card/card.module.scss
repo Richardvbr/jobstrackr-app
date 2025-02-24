@@ -34,12 +34,8 @@
 }
 
 @media screen and (min-width: $breakpoint-m) {
-  .card {
-    max-width: max-content;
-
-    h3 {
-      padding: 20px 30px;
-    }
+  .card h3 {
+    padding: 20px 30px;
   }
 
   .children {
