@@ -14,7 +14,7 @@ export const links: LinkItemProps[] = [
   },
   {
     href: '/questions',
-    label: 'Questions/notes',
+    label: 'Questions',
     Icon: Icons.Question,
   },
   {

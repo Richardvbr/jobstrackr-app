@@ -1,9 +1,9 @@
-import cn from "clsx";
+import cn from 'clsx';
 
-import type { ButtonType, ElementSizes } from "@/types/elements";
-import styles from "./styles.module.scss";
+import type { ButtonType, ElementSizes } from '@/types/elements';
+import styles from './styles.module.scss';
 
-type ButtonProps = React.ComponentPropsWithoutRef<"button"> & {
+type ButtonProps = React.ComponentPropsWithoutRef<'button'> & {
   children: React.ReactNode;
   variant?: ButtonType;
   btnSize?: ElementSizes;
@@ -15,8 +15,8 @@ type ButtonProps = React.ComponentPropsWithoutRef<"button"> & {
 
 export function Button({
   children,
-  variant = "primary",
-  btnSize = "s",
+  variant = 'primary',
+  btnSize = 's',
   fullWidth,
   disabled,
   onClick,

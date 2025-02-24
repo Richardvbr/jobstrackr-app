@@ -17,7 +17,6 @@ export interface AccordionItem {
 export function AccordionItem({
   // id,
   title,
-  description,
   open = true,
   // category = "",
   children,
@@ -25,25 +24,21 @@ export function AccordionItem({
 }: AccordionItem) {
   const headerVariants: Variants = {
     closed: {
-      transition: { duration: 0.3 },
       opacity: 0,
     },
     open: {
-      transition: { duration: 0.3 },
       opacity: 1,
     },
   };
 
   const contentVariants: Variants = {
     closed: {
-      transition: { duration: 0.3 },
-      height: 0,
       opacity: 0,
+      height: 0,
     },
     open: {
-      transition: { duration: 0.3 },
-      height: 'auto',
       opacity: 1,
+      height: 'auto',
     },
   };
 
@@ -57,18 +52,19 @@ export function AccordionItem({
         className={cn(styles.header, open && styles.headerActive)}
         onClick={handleToggle}
         variants={headerVariants}
+        transition={{ duration: 0.3 }}
       >
         <p>{title}</p>
       </motion.header>
       <AnimatePresence>
         {open && (
           <motion.section
-            layout
             className={styles.content}
             variants={contentVariants}
             initial='closed'
             exit='closed'
             animate={open ? 'open' : 'closed'}
+            transition={{ duration: 0.3 }}
           >
             {children}
           </motion.section>
