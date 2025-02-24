@@ -54,24 +54,23 @@ export function AccordionItem({
   return (
     <div className={styles.accordionItem} onClick={handleToggle}>
       <motion.header
-        key='header'
-        variants={headerVariants}
         className={cn(styles.header, open && styles.headerActive)}
         onClick={handleToggle}
+        variants={headerVariants}
       >
         <p>{title}</p>
       </motion.header>
       <AnimatePresence>
         {open && (
           <motion.section
-            key='content'
+            layout
             className={styles.content}
+            variants={contentVariants}
             initial='closed'
             exit='closed'
             animate={open ? 'open' : 'closed'}
-            variants={contentVariants}
           >
-            {description ? <p>{description}</p> : children}
+            {children}
           </motion.section>
         )}
       </AnimatePresence>

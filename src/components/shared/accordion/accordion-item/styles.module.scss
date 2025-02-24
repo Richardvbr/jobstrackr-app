@@ -27,11 +27,6 @@
 
   .content {
     border-left: 4px solid $secondary;
-
-    p {
-      margin: 0;
-      padding: 20px 25px;
-    }
   }
 
   &:hover {
@@ -47,7 +42,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   .accordionItem {
     .header {
       p {
@@ -63,10 +58,7 @@
 
     .content {
       border-left: 4px solid $gray-400;
-
-      p {
-        color: $gray-200;
-      }
+      color: $gray-200;
     }
 
     &:hover {

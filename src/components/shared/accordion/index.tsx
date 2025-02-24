@@ -1,25 +1,30 @@
 import { useState } from 'react';
-import { AccordionItem, type AccordionItem as AccordionItemType } from './accordion-item';
+import { AccordionItem } from './accordion-item';
 
 interface AccordionProps {
-  items: AccordionItemType[];
+  items: any[];
 }
 
 export function Accordion({ items }: AccordionProps) {
-  const [activeItem, setActiveItem] = useState<string>('');
+  const [activeItems, setActiveItems] = useState<string[]>([]);
 
   function handleActiveItem(id: string) {
-    setActiveItem(activeItem === id ? '' : id);
+    if (activeItems?.includes(id)) {
+      return setActiveItems((prevState) => prevState?.filter((item) => item !== id));
+    }
+
+    setActiveItems((prevState) => [...prevState, id as string]);
   }
 
-  return items.map(({ title, description, id }) => (
+  return items.map(({ title, content, id }) => (
     <AccordionItem
       key={id}
       id={id}
       title={title}
-      description={description}
-      open={activeItem === id}
+      open={activeItems?.includes(id)}
       onToggle={() => handleActiveItem(id as string)}
-    />
+    >
+      {content}
+    </AccordionItem>
   ));
 }
