@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useToken } from '@/contexts/AuthContext';
 import { handleRequest } from '@/utils/handleRequest';
 import type { Response } from '@/types/response';
-import { Application } from '@/types/application';
+import type { Application } from '@/types/application';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -45,7 +45,7 @@ export function useNewApplicationMutation(applicationId: string) {
     mutationKey: [`new-application-${applicationId}`],
     mutationFn: async (application: Application) => {
       const request = await handleRequest<Response<Application>>({
-        url: `${BASE_URL}/applications/${applicationId}`,
+        url: `${BASE_URL}/applications`,
         token,
         method: 'POST',
         body: application,

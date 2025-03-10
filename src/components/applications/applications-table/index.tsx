@@ -10,9 +10,10 @@ import styles from './styles.module.scss';
 type ApplicationsTable = {
   data: Application[];
   searchQuery: string;
+  loading: boolean;
 };
 
-export function ApplicationsTable({ data, searchQuery }: ApplicationsTable) {
+export function ApplicationsTable({ data, searchQuery, loading = false }: ApplicationsTable) {
   const [shownResults, setShownResults] = useState<number | string>(data?.length);
 
   const { openModal, setActiveApplication } = useApplicationStore(
@@ -24,12 +25,19 @@ export function ApplicationsTable({ data, searchQuery }: ApplicationsTable) {
 
   const totalResults = data?.length;
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!loading && !totalResults) {
+    return <p>No results found</p>;
+  }
+
   return (
     <section className={styles.wrapper}>
-      <div className={styles.count}>
-        {'Showing'} <strong>{shownResults}</strong> {'of'} <strong>{totalResults}</strong>{' '}
-        {'results'}
-      </div>
+      <p className={styles.count}>
+        Showing <strong>{shownResults}</strong> of <strong>{totalResults}</strong> results
+      </p>
       <div className={styles.table}>
         <Table
           stickyHeader
