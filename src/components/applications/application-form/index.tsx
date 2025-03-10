@@ -68,7 +68,10 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     reset();
     setSubmitLoading(false);
     handleCloseForm(false);
-    queryClient.invalidateQueries({ queryKey: ['get-applications'] });
+
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ['get-applications'] });
+    }, 500);
   }
 
   function handleError(error: unknown) {
