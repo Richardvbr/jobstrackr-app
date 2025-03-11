@@ -106,16 +106,6 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
   };
 
-  async function updateApplication(application: Application) {
-    updateApplicationMutation(application);
-
-    if (updateApplicationError) {
-      throw toast.error('An error occurred when updating the application.');
-    }
-
-    toast.success('Application updated');
-  }
-
   async function addNewApplication(application: Application) {
     newApplicationMutation(application);
 
@@ -126,15 +116,27 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     toast.success('Application added');
   }
 
+  async function updateApplication(application: Application) {
+    updateApplicationMutation(application);
+
+    if (updateApplicationError) {
+      throw toast.error('An error occurred when updating the application.');
+    }
+
+    toast.success('Application updated');
+  }
+
   async function deleteApplication(applicationData: Application) {
     // Prevent deleting demo data
     const { id } = applicationData;
 
-    if (
-      id === '0cfad3f0-0375-426c-b635-86e134993ade' ||
-      id === '07c14adf-33bb-4ecb-9aff-39a5dbe1751c' ||
-      id === '1675cad0-41d4-429a-97a9-c7964ea4692e'
-    ) {
+    const demoIds = [
+      '0cfad3f0-0375-426c-b635-86e134993ade',
+      '07c14adf-33bb-4ecb-9aff-39a5dbe1751c',
+      '1675cad0-41d4-429a-97a9-c7964ea4692e',
+    ];
+
+    if (demoIds.includes(id)) {
       return toast.error('Guest demo data cannot be deleted.');
     }
 
