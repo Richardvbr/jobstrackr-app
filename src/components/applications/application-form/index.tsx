@@ -5,8 +5,7 @@ import { format } from 'date-fns';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { useUser } from '@/contexts/AuthContext';
-
+import { useToken, useUser } from '@/contexts/AuthContext';
 import type { Application } from '@/types/application';
 import { useApplicationStore } from '@/stores/applicationStore';
 import {
@@ -32,6 +31,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const user = useUser();
   const queryClient = useQueryClient();
+  const token = useToken();
 
   const { applicationData, isEditing } = useApplicationStore(
     useShallow((state) => ({
@@ -41,14 +41,15 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   );
 
   const { mutate: updateApplicationMutation, error: updateApplicationError } =
-    useUpdateApplicationMutation(applicationData?.id as string);
+    useUpdateApplicationMutation(applicationData?.id as string, token);
 
   const { mutate: newApplicationMutation, error: newApplicationError } = useNewApplicationMutation(
-    applicationData?.id as string
+    applicationData?.id as string,
+    token
   );
 
   const { mutate: deleteApplicationMutation, error: deleteApplicationError } =
-    useDeleteApplicationMutation(applicationData?.id as string);
+    useDeleteApplicationMutation(applicationData?.id as string, token);
 
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<Application>({

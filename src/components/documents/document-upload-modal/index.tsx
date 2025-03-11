@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
+import { useToken } from '@/contexts/AuthContext';
 import type { Application } from '@/types/application';
 import type { SelectInputItem } from '@/types/elements';
 import { Modal, Input, Button, SelectInput } from '@/components/shared';
@@ -23,6 +24,7 @@ interface AddDocumentForm {
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+  const token = useToken();
   const formMethods = useForm<AddDocumentForm>({
     mode: 'onSubmit',
     reValidateMode: 'onBlur',
@@ -32,7 +34,7 @@ export function DocumentUploadModal({ applications }: DocumentUploadModalProps) 
   const queryClient = useQueryClient();
   const { handleSubmit, reset } = formMethods;
 
-  const { mutate: newDocumentMutation, error: newDocumentError } = useNewDocumentMutation('');
+  const { mutate: newDocumentMutation, error: newDocumentError } = useNewDocumentMutation(token);
 
   const applicationSelect: SelectInputItem = {
     name: 'selectedApplication',

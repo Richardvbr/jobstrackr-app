@@ -1,14 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useToken } from '@/contexts/AuthContext';
 import { handleRequest } from '@/utils/handleRequest';
 import type { Response } from '@/types/response';
 import type { Application } from '@/types/application';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export function useApplicationsQuery() {
-  const token = useToken();
-
+export function useApplicationsQuery(token: string) {
   return useQuery({
     queryKey: ['get-applications'],
     queryFn: async () => {
@@ -22,9 +19,7 @@ export function useApplicationsQuery() {
   });
 }
 
-export function useApplicationQuery(applicationId: string) {
-  const token = useToken();
-
+export function useApplicationQuery(applicationId: string, token: string) {
   return useQuery({
     queryKey: [`get-application-${applicationId}`],
     queryFn: async () => {
@@ -38,9 +33,7 @@ export function useApplicationQuery(applicationId: string) {
   });
 }
 
-export function useNewApplicationMutation(applicationId: string) {
-  const token = useToken();
-
+export function useNewApplicationMutation(applicationId: string, token: string) {
   return useMutation({
     mutationKey: [`new-application-${applicationId}`],
     mutationFn: async (application: Application) => {
@@ -56,9 +49,7 @@ export function useNewApplicationMutation(applicationId: string) {
   });
 }
 
-export function useUpdateApplicationMutation(applicationId: string) {
-  const token = useToken();
-
+export function useUpdateApplicationMutation(applicationId: string, token: string) {
   return useMutation({
     mutationKey: [`update-application-${applicationId}`],
     mutationFn: async (application: Application) => {
@@ -74,9 +65,7 @@ export function useUpdateApplicationMutation(applicationId: string) {
   });
 }
 
-export function useDeleteApplicationMutation(applicationId: string) {
-  const token = useToken();
-
+export function useDeleteApplicationMutation(applicationId: string, token: string) {
   return useMutation({
     mutationKey: [`delete-application-${applicationId}`],
     mutationFn: async () => {

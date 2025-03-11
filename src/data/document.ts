@@ -1,14 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useToken } from '@/contexts/AuthContext';
 import { handleRequest } from '@/utils/handleRequest';
 import type { Response } from '@/types/response';
 import type { Document } from '@/types/document';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export function useDocumentsQuery() {
-  const token = useToken();
-
+export function useDocumentsQuery(token: string) {
   return useQuery({
     queryKey: ['get-documents'],
     queryFn: async () => {
@@ -22,9 +19,7 @@ export function useDocumentsQuery() {
   });
 }
 
-export function useDocumentQuery(documentId: string) {
-  const token = useToken();
-
+export function useDocumentQuery(documentId: string, token: string) {
   return useQuery({
     queryKey: [`get-document-${documentId}`],
     queryFn: async () => {
@@ -38,11 +33,9 @@ export function useDocumentQuery(documentId: string) {
   });
 }
 
-export function useNewDocumentMutation(documentId: string) {
-  const token = useToken();
-
+export function useNewDocumentMutation(token: string) {
   return useMutation({
-    mutationKey: [`new-document-${documentId}`],
+    mutationKey: [`new-document`],
     mutationFn: async (documentbody: any) => {
       const request = await handleRequest<Response<any>>({
         url: `${BASE_URL}/documents`,

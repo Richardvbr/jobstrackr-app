@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useSearchParams } from 'react-router-dom';
 
+import { useToken } from '@/contexts/AuthContext';
 import { useApplicationStore } from '@/stores/applicationStore';
 import { useApplicationsQuery } from '@/data/application';
 import { Icons, Button, Input, Card } from '@/components/shared';
@@ -11,10 +12,12 @@ import styles from './styles.module.scss';
 
 export function Applications() {
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const token = useToken();
+
   const [searchParams] = useSearchParams();
   const action = searchParams.get('action');
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
-  const { data: applications, isLoading } = useApplicationsQuery();
+  const { data: applications, isLoading } = useApplicationsQuery(token);
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   if (action === 'new-application') {

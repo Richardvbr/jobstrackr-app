@@ -1,10 +1,13 @@
 import { useState } from 'react';
+
+import { useToken } from '@/contexts/AuthContext';
 import { useApplicationsQuery } from '@/data/application';
 import { CompareForm } from '../compare-form';
 import { CompareTable } from '../compare-table';
 
 export function ComparePage() {
-  const { data: applications } = useApplicationsQuery();
+  const token = useToken();
+  const { data: applications } = useApplicationsQuery(token);
   const [selectedApplications, setSelectedApplications] = useState<string[]>([]);
   const comparedApplications =
     applications?.filter(({ id }) => selectedApplications.includes(id)) ?? [];

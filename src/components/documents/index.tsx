@@ -1,3 +1,4 @@
+import { useToken } from '@/contexts/AuthContext';
 import { useApplicationsQuery } from '@/data/application';
 import type { Document } from '@/types/document';
 import { useDocumentStore } from '@/stores/documentStore';
@@ -8,9 +9,10 @@ import { DocumentUploadModal } from './document-upload-modal';
 import styles from './styles.module.scss';
 
 export function DocumentsPage() {
+  const token = useToken();
   const { openDocumentModal } = useDocumentStore();
-  const { data: documentsData } = useDocumentsQuery();
-  const { data: applicationsData } = useApplicationsQuery();
+  const { data: documentsData } = useDocumentsQuery(token);
+  const { data: applicationsData } = useApplicationsQuery(token);
 
   // Group documents based on their corresponding application
   const groupedDocuments = applicationsData?.map((application) => ({
