@@ -5,14 +5,9 @@ import { format } from 'date-fns';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { useToken, useUser } from '@/contexts/AuthContext';
-import type { Application } from '@/types/application';
+import { useUser } from '@/contexts/AuthContext';
+import { useApplicationActions } from './actions';
 import { useApplicationStore } from '@/stores/applicationStore';
-import {
-  useDeleteApplicationMutation,
-  useNewApplicationMutation,
-  useUpdateApplicationMutation,
-} from '@/data/application';
 import {
   formItems,
   statusInput,
@@ -21,6 +16,7 @@ import {
   currencyInput,
 } from './formItems';
 import { Input, SelectInput, Button } from '@/components/shared';
+import type { Application } from '@/types/application';
 import styles from './styles.module.scss';
 
 type ApplicationForm = {
@@ -31,7 +27,6 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const user = useUser();
   const queryClient = useQueryClient();
-  const token = useToken();
 
   const { applicationData, isEditing } = useApplicationStore(
     useShallow((state) => ({
@@ -40,16 +35,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }))
   );
 
-  const { mutate: updateApplicationMutation, error: updateApplicationError } =
-    useUpdateApplicationMutation(applicationData?.id as string, token);
-
-  const { mutate: newApplicationMutation, error: newApplicationError } = useNewApplicationMutation(
-    applicationData?.id as string,
-    token
-  );
-
-  const { mutate: deleteApplicationMutation, error: deleteApplicationError } =
-    useDeleteApplicationMutation(applicationData?.id as string, token);
+  const { addNewApplication, updateApplication, deleteApplication } = useApplicationActions();
 
   // If editing, set activeApplication as defaultValues
   const formMethods = useForm<Application>({
@@ -75,18 +61,8 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }, 500);
   }
 
-  function handleError(error: unknown) {
-    console.error('Error submitting form:', error);
-
-    if (error instanceof Error) {
-      toast.error(error.message);
-    } else {
-      toast.error('An unknown error occurred.');
-    }
-  }
-
   // Form submission
-  const onSubmit: SubmitHandler<Application> = async (applicationForm) => {
+  const onSubmit: SubmitHandler<Application> = (applicationForm) => {
     setSubmitLoading(true);
 
     if (!user) {
@@ -94,74 +70,14 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     }
 
     try {
-      if (isEditing) {
-        await updateApplication(applicationForm);
-      } else {
-        await addNewApplication(applicationForm);
-      }
+      isEditing ? updateApplication(applicationForm) : addNewApplication(applicationForm);
     } catch (error) {
-      handleError(error);
+      console.error('Error submitting form:', error);
+      toast.error(error instanceof Error ? error.message : 'An unknown error occurred.');
     } finally {
       handleFormReset();
     }
   };
-
-  async function addNewApplication(application: Application) {
-    newApplicationMutation(application);
-
-    if (newApplicationError) {
-      throw toast.error('An error occurred when updating the application.');
-    }
-
-    toast.success('Application added');
-  }
-
-  async function updateApplication(application: Application) {
-    updateApplicationMutation(application);
-
-    if (updateApplicationError) {
-      throw toast.error('An error occurred when updating the application.');
-    }
-
-    toast.success('Application updated');
-  }
-
-  async function deleteApplication(applicationData: Application) {
-    // Prevent deleting demo data
-    const { id } = applicationData;
-
-    const demoIds = [
-      '0cfad3f0-0375-426c-b635-86e134993ade',
-      '07c14adf-33bb-4ecb-9aff-39a5dbe1751c',
-      '1675cad0-41d4-429a-97a9-c7964ea4692e',
-    ];
-
-    if (demoIds.includes(id)) {
-      return toast.error('Guest demo data cannot be deleted.');
-    }
-
-    const close = confirm(
-      'Are you sure you want to delete this application? This action cannot be undone.'
-    );
-
-    if (!close) {
-      return;
-    }
-
-    try {
-      deleteApplicationMutation();
-
-      if (deleteApplicationError) {
-        throw toast.error('An error occured when deleting the application.');
-      }
-
-      toast.success('Application deleted');
-    } catch (error) {
-      handleError(error);
-    } finally {
-      handleFormReset();
-    }
-  }
 
   return (
     <FormProvider {...formMethods}>
@@ -201,7 +117,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
             <Button
               variant='danger'
               type='button'
-              onClick={() => deleteApplication(applicationData as Application)}
+              onClick={() => deleteApplication(applicationData as Application, handleFormReset)}
             >
               Delete
             </Button>

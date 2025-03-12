@@ -33,9 +33,8 @@ export function useApplicationQuery(applicationId: string, token: string) {
   });
 }
 
-export function useNewApplicationMutation(applicationId: string, token: string) {
+export function useNewApplicationMutation(token: string) {
   return useMutation({
-    mutationKey: [`new-application-${applicationId}`],
     mutationFn: async (application: Application) => {
       const request = await handleRequest<Response<Application>>({
         url: `${BASE_URL}/applications`,
@@ -49,12 +48,11 @@ export function useNewApplicationMutation(applicationId: string, token: string) 
   });
 }
 
-export function useUpdateApplicationMutation(applicationId: string, token: string) {
+export function useUpdateApplicationMutation(token: string) {
   return useMutation({
-    mutationKey: [`update-application-${applicationId}`],
     mutationFn: async (application: Application) => {
       const request = await handleRequest<Response<Application>>({
-        url: `${BASE_URL}/applications/${applicationId}`,
+        url: `${BASE_URL}/applications/${application.id}`,
         token,
         method: 'PUT',
         body: application,
@@ -65,12 +63,11 @@ export function useUpdateApplicationMutation(applicationId: string, token: strin
   });
 }
 
-export function useDeleteApplicationMutation(applicationId: string, token: string) {
+export function useDeleteApplicationMutation(token: string) {
   return useMutation({
-    mutationKey: [`delete-application-${applicationId}`],
-    mutationFn: async () => {
+    mutationFn: async (application: Application) => {
       const request = await handleRequest<Response<Application>>({
-        url: `${BASE_URL}/applications/${applicationId}`,
+        url: `${BASE_URL}/applications/${application.id}`,
         token,
         method: 'DELETE',
       });
