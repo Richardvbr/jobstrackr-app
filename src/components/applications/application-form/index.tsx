@@ -56,6 +56,7 @@ export function ApplicationForm({ handleCloseForm }: ApplicationForm) {
     setSubmitLoading(false);
     handleCloseForm(false);
 
+    // TODO: better way to invalidate query
     setTimeout(() => {
       queryClient.invalidateQueries({ queryKey: ['get-applications'] });
     }, 500);
