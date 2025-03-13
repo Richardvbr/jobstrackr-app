@@ -6,11 +6,11 @@ import toast from 'react-hot-toast';
 import { Button, Input, Textarea } from '@/components/shared';
 import styles from './styles.module.scss';
 
-interface FeedbackForm {
+type FeedbackForm = {
   userName: string;
   userEmail: string;
   userMessage: string;
-}
+};
 
 export function FeedbackForm() {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);

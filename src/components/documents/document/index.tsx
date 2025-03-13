@@ -9,9 +9,9 @@ import { BsThreeDotsVertical } from '@/components/shared/icons';
 import Menu from '@/components/shared/menu';
 import styles from './styles.module.scss';
 
-interface DocumentProps {
+type DocumentProps = {
   document: Document;
-}
+};
 
 export function DocumentItem({ document }: DocumentProps) {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);

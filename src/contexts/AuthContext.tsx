@@ -1,5 +1,5 @@
-import { AuthError, Session, SupabaseClient } from '@supabase/supabase-js';
 import { createContext, PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
+import { AuthError, Session, SupabaseClient } from '@supabase/supabase-js';
 
 export type SessionContext =
   | {
@@ -27,10 +27,10 @@ export type SessionContext =
       supabaseClient: SupabaseClient;
     };
 
-export interface SessionContextProviderProps {
+export type SessionContextProviderProps = {
   supabaseClient: SupabaseClient;
   initialSession?: Session | null;
-}
+};
 
 const SessionContext = createContext<SessionContext>({
   isLoading: true,

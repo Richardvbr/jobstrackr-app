@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import cn from 'clsx';
 import styles from './styles.module.scss';
 
-export interface AccordionItem {
+export type AccordionItem = {
   id?: string;
   title: string;
   description?: string;
@@ -11,7 +11,7 @@ export interface AccordionItem {
   category?: string;
   children?: ReactNode;
   onToggle?: () => void;
-}
+};
 
 // TODO: finish component
 export function AccordionItem({

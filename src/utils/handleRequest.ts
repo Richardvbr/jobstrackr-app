@@ -1,10 +1,10 @@
-interface HandleRequest {
+type HandleRequest = {
   url: string;
   token: string;
   method?: 'POST' | 'GET' | 'PUT' | 'DELETE';
   body?: any;
   headers?: Record<string, string>;
-}
+};
 
 export async function handleRequest<T>({
   url,

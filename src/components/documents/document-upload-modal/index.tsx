@@ -11,16 +11,16 @@ import { useNewDocumentMutation } from '@/data/document';
 import { useDocumentStore } from '@/stores/documentStore';
 import styles from './styles.module.scss';
 
-interface DocumentUploadModalProps {
+type DocumentUploadModalProps = {
   applications: Application[];
-}
+};
 
-interface AddDocumentForm {
+type AddDocumentForm = {
   documentName: string;
   documentDescription?: string;
   file: File[];
   selectedApplication?: string;
-}
+};
 
 export function DocumentUploadModal({ applications }: DocumentUploadModalProps) {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
