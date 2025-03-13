@@ -28,7 +28,7 @@ export function useApplicationQuery(applicationId: string, token: string) {
         token,
       });
 
-      return request?.data || {};
+      return request.data ?? {};
     },
   });
 }
@@ -43,7 +43,7 @@ export function useNewApplicationMutation(token: string) {
         body: application,
       });
 
-      return request?.data;
+      return request.data;
     },
   });
 }
@@ -58,7 +58,7 @@ export function useUpdateApplicationMutation(token: string) {
         body: application,
       });
 
-      return request?.data;
+      return request.data;
     },
   });
 }
@@ -72,7 +72,7 @@ export function useDeleteApplicationMutation(token: string) {
         method: 'DELETE',
       });
 
-      return request?.data;
+      return request.data;
     },
   });
 }

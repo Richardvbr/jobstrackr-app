@@ -14,7 +14,7 @@ export function useDocumentsQuery(token: string) {
         token,
       });
 
-      return request.data || [];
+      return request.data ?? [];
     },
   });
 }
@@ -28,7 +28,7 @@ export function useDocumentQuery(documentId: string, token: string) {
         token,
       });
 
-      return request?.data || {};
+      return request.data ?? {};
     },
   });
 }
@@ -44,7 +44,7 @@ export function useNewDocumentMutation(token: string) {
         body: documentbody,
       });
 
-      return request?.data;
+      return request.data ?? {};
     },
   });
 }

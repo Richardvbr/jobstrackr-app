@@ -1,5 +1,5 @@
-import type { Application } from '@/types/application';
 import { create } from 'zustand';
+import type { Application } from '@/types/application';
 
 type State = {
   applicationModalOpened: 'new' | 'edit' | false;

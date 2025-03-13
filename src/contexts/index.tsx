@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import { supabase } from '@/lib/supabase';
 import { toastOptions } from '@/utils/toast';
 
-export const Providers = ({ children }: PropsWithChildren) => {
+export const ContextProviders = ({ children }: PropsWithChildren) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
