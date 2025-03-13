@@ -20,6 +20,7 @@ export function Applications() {
   const action = searchParams.get('action');
 
   if (action === 'new-application') {
+    console.log('open modal');
     openModal();
   }
 
