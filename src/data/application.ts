@@ -14,7 +14,7 @@ export function useApplicationsQuery(token: string) {
         token,
       });
 
-      return request?.data;
+      return request.data ?? [];
     },
   });
 }
@@ -28,7 +28,7 @@ export function useApplicationQuery(applicationId: string, token: string) {
         token,
       });
 
-      return request?.data;
+      return request?.data || {};
     },
   });
 }

@@ -12,13 +12,12 @@ import styles from './styles.module.scss';
 
 export function Applications() {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const token = useToken();
-
   const [searchParams] = useSearchParams();
-  const action = searchParams.get('action');
+  const token = useToken();
   const openModal = useApplicationStore((state) => state.openNewApplicationModal);
   const { data: applications, isLoading } = useApplicationsQuery(token);
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const action = searchParams.get('action');
 
   if (action === 'new-application') {
     openModal();
