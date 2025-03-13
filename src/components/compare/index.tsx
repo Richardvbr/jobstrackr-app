@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { useToken } from '@/contexts/AuthContext';
 import { useApplicationsQuery } from '@/data/application';
-import { CompareForm } from '../compare-form';
-import { CompareTable } from '../compare-table';
+import { CompareForm } from './compare-form';
+import { CompareTable } from './compare-table';
 
 export function ComparePage() {
   const token = useToken();

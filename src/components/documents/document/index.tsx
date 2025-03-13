@@ -25,6 +25,8 @@ export function DocumentItem({ document }: DocumentProps) {
     import.meta.env.VITE_SUPABASE_URL
   }/storage/v1/object/public/documents/${filePath}?download=${title}.${fileExtension}`;
 
+  // TODO: delete document
+
   return (
     <div className={styles.document}>
       <div className={styles.heading}>
@@ -48,6 +50,7 @@ export function DocumentItem({ document }: DocumentProps) {
         <a href={fileUrl} download onClick={() => setMenuOpen(false)}>
           Download file
         </a>
+        <span onClick={() => setMenuOpen(false)}>Delete file</span>
       </Menu>
     </div>
   );

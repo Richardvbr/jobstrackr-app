@@ -35,13 +35,13 @@ export function FeedbackForm() {
       )
       .then(() => {
         toast.success('Feedback sent!');
-        reset();
       })
       .catch((error) => {
         console.error(error);
         throw toast.error('An error occurred while submitting the form');
       })
       .finally(() => {
+        reset();
         setSubmitLoading(false);
       });
   };
